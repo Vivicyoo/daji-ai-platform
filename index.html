@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>大集AI - 全球贸易智能创作平台</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --primary: #d4282f;
+    --primary-dark: #a81e24;
+    --primary-light: #e8454c;
+    --accent: #ff7a45;
+    --accent-light: #ff9a6b;
+    --bg-dark: #16161f;
+    --bg-darker: #0e0e14;
+    --bg-light: #f7f8fa;
+    --text-dark: #1a1a2e;
+    --text-gray: #5a6478;
+    --text-light: #8a94a8;
+    --border: #e6e8ee;
+    --card-shadow: 0 4px 24px rgba(212, 40, 47, 0.06);
+    --card-shadow-hover: 0 12px 40px rgba(212, 40, 47, 0.12);
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+    color: var(--text-dark);
+    background: #fff;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  a { text-decoration: none; color: inherit; }
+  .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+  .svg-icon { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+
+  /* ===== Navigation ===== */
+  .navbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    transition: all 0.3s;
+  }
+  .nav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 72px; max-width: 1280px; margin: 0 auto; padding: 0 32px;
+  }
+  .logo { display: flex; align-items: center; gap: 10px; font-size: 22px; font-weight: 800; color: var(--primary); }
+  .logo-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    display: flex; align-items: center; justify-content: center;
+    color: #fff;
+  }
+  .logo-icon .svg-icon { width: 22px; height: 22px; stroke-width: 2; }
+  .nav-links { display: flex; gap: 36px; align-items: center; }
+  .nav-links a { font-size: 15px; color: var(--text-gray); font-weight: 500; transition: color 0.2s; position: relative; }
+  .nav-links a:hover, .nav-links a.active { color: var(--primary); }
+  .nav-links a.active::after {
+    content: ''; position: absolute; bottom: -26px; left: 50%; transform: translateX(-50%);
+    width: 24px; height: 3px; background: var(--primary); border-radius: 2px;
+  }
+  .nav-actions { display: flex; gap: 12px; align-items: center; }
+  .lang-switcher { position: relative; }
+  .lang-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 10px 16px; border-radius: 8px; font-size: 14px; font-weight: 600;
+    cursor: pointer; transition: all 0.25s; border: 1.5px solid var(--border);
+    background: #fff; color: var(--text-gray); white-space: nowrap;
+  }
+  .lang-btn:hover { border-color: var(--primary); color: var(--primary); }
+  .lang-btn .svg-icon { width: 16px; height: 16px; }
+  .lang-btn .lang-arrow { width: 12px; height: 12px; transition: transform 0.25s; }
+  .lang-switcher.open .lang-btn .lang-arrow { transform: rotate(180deg); }
+  .lang-dropdown {
+    position: absolute; top: calc(100% + 8px); right: 0;
+    background: #fff; border-radius: 12px; border: 1px solid var(--border);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.12); padding: 8px; min-width: 180px;
+    opacity: 0; visibility: hidden; transform: translateY(-8px); transition: all 0.25s; z-index: 1001;
+  }
+  .lang-switcher.open .lang-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+  .lang-option {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 500;
+    cursor: pointer; transition: all 0.2s; color: var(--text-gray);
+  }
+  .lang-option:hover { background: rgba(212,40,47,0.06); color: var(--primary); }
+  .lang-option.active { background: rgba(212,40,47,0.1); color: var(--primary); font-weight: 600; }
+  .lang-option .lang-check { width: 16px; height: 16px; margin-left: auto; opacity: 0; }
+  .lang-option.active .lang-check { opacity: 1; }
+  .lang-flag { font-size: 18px; width: 24px; text-align: center; }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    padding: 10px 22px; border-radius: 8px; font-size: 14px; font-weight: 600;
+    cursor: pointer; transition: all 0.25s; border: none; white-space: nowrap;
+  }
+  .btn .svg-icon { width: 16px; height: 16px; }
+  .btn-outline { background: transparent; color: var(--primary); border: 1.5px solid var(--primary); }
+  .btn-outline:hover { background: var(--primary); color: #fff; }
+  .btn-primary { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: #fff; box-shadow: 0 4px 16px rgba(212,40,47,0.3); }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(212,40,47,0.4); }
+  .btn-large { padding: 14px 32px; font-size: 16px; border-radius: 10px; }
+
+  /* ===== Hero ===== */
+  .hero {
+    padding: 160px 0 100px; position: relative; overflow: hidden;
+    background: linear-gradient(180deg, #fef5f5 0%, #fff 100%);
+  }
+  .hero::before {
+    content: ''; position: absolute; top: -200px; right: -200px;
+    width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(212,40,47,0.08) 0%, transparent 70%);
+    animation: float1 12s ease-in-out infinite;
+  }
+  .hero::after {
+    content: ''; position: absolute; bottom: -150px; left: -150px;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,122,69,0.08) 0%, transparent 70%);
+    animation: float2 15s ease-in-out infinite;
+  }
+  @keyframes float1 {
+    0%,100% { transform: translate(0,0) scale(1); }
+    50% { transform: translate(-40px,30px) scale(1.1); }
+  }
+  @keyframes float2 {
+    0%,100% { transform: translate(0,0) scale(1); }
+    50% { transform: translate(50px,-30px) scale(1.08); }
+  }
+  .hero-inner { position: relative; z-index: 1; text-align: center; max-width: 900px; margin: 0 auto; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 20px; border-radius: 100px;
+    background: rgba(212,40,47,0.08); color: var(--primary);
+    font-size: 14px; font-weight: 600; margin-bottom: 28px;
+  }
+  .hero-badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--primary); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+  .hero h1 {
+    font-size: 56px; font-weight: 900; line-height: 1.15; margin-bottom: 24px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 40%, var(--accent) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .hero p { font-size: 19px; color: var(--text-gray); margin-bottom: 40px; max-width: 680px; margin-left: auto; margin-right: auto; }
+  .hero-cta { display: flex; gap: 16px; justify-content: center; margin-bottom: 60px; }
+  .hero-stats { display: flex; justify-content: center; gap: 64px; }
+  .stat-item { text-align: center; }
+  .stat-num { font-size: 36px; font-weight: 800; color: var(--primary); }
+  .stat-num span { font-size: 20px; }
+  .stat-label { font-size: 14px; color: var(--text-light); margin-top: 4px; }
+
+  /* ===== 集宝AI助手 Section ===== */
+  .jibao-section { padding: 100px 0; background: #fff; position: relative; overflow: hidden; }
+  .jibao-section::before {
+    content: ''; position: absolute; left: -100px; top: 50%; transform: translateY(-50%);
+    width: 300px; height: 300px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(212,40,47,0.04) 0%, transparent 70%);
+  }
+  .jibao-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; align-items: center; }
+  .jibao-content .section-tag { background: rgba(212,40,47,0.08); color: var(--primary); }
+  .jibao-content h2 { font-size: 38px; font-weight: 800; margin-bottom: 16px; line-height: 1.25; }
+  .jibao-content h2 em { font-style: normal; color: var(--primary); }
+  .jibao-content > p { font-size: 17px; color: var(--text-gray); margin-bottom: 32px; line-height: 1.8; }
+  .jibao-avatar-row { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; }
+  .jibao-avatar-img {
+    width: 64px; height: 64px; border-radius: 50%; object-fit: cover;
+    border: 3px solid #fff; box-shadow: 0 4px 16px rgba(212,40,47,0.2);
+  }
+  .jibao-avatar-info h4 { font-size: 18px; font-weight: 700; color: var(--text-dark); }
+  .jibao-avatar-info p { font-size: 13px; color: var(--text-light); margin: 0; }
+  .jibao-features { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 36px; }
+  .jibao-feature {
+    display: flex; gap: 12px; align-items: flex-start; padding: 16px;
+    border-radius: 12px; background: var(--bg-light); transition: all 0.25s;
+  }
+  .jibao-feature:hover { background: #fff; box-shadow: var(--card-shadow); transform: translateY(-2px); }
+  .jibao-feature-icon {
+    width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(212,40,47,0.08); color: var(--primary);
+  }
+  .jibao-feature-icon .svg-icon { width: 20px; height: 20px; }
+  .jibao-feature h4 { font-size: 15px; font-weight: 700; margin-bottom: 3px; }
+  .jibao-feature p { font-size: 13px; color: var(--text-gray); line-height: 1.5; margin: 0; }
+
+  .jibao-visual { position: relative; }
+  .jibao-browser-frame {
+    background: #fff; border-radius: 16px; box-shadow: 0 24px 60px rgba(212,40,47,0.15);
+    overflow: hidden; border: 1px solid var(--border);
+  }
+  .jibao-browser-bar {
+    background: var(--bg-light); padding: 12px 16px; display: flex; align-items: center; gap: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .browser-dot { width: 12px; height: 12px; border-radius: 50%; }
+  .browser-dot.red { background: #ff5f57; }
+  .browser-dot.yellow { background: #febc2e; }
+  .browser-dot.green { background: #28c840; }
+  .browser-url {
+    flex: 1; margin-left: 12px; background: #fff; border-radius: 6px; padding: 5px 14px;
+    font-size: 12px; color: var(--text-light); border: 1px solid var(--border);
+  }
+  .jibao-carousel {
+    position: relative; width: 100%; height: 420px; overflow: hidden;
+    background: var(--bg-light);
+  }
+  .jibao-slide {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    opacity: 0; transition: opacity 0.6s ease; padding: 16px;
+  }
+  .jibao-slide.active { opacity: 1; z-index: 1; }
+  .jibao-slide img {
+    max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+  .jibao-slide-label {
+    position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
+    background: rgba(26,26,46,0.75); color: #fff; padding: 5px 16px; border-radius: 100px;
+    font-size: 12px; font-weight: 600; z-index: 2; backdrop-filter: blur(4px);
+  }
+  .carousel-arrow {
+    position: absolute; top: 50%; transform: translateY(-50%); z-index: 3;
+    width: 36px; height: 36px; border-radius: 50%; border: none; cursor: pointer;
+    background: rgba(255,255,255,0.9); color: var(--primary); display: flex;
+    align-items: center; justify-content: center; box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+    transition: all 0.2s; opacity: 0;
+  }
+  .jibao-carousel:hover .carousel-arrow { opacity: 1; }
+  .carousel-arrow:hover { background: var(--primary); color: #fff; }
+  .carousel-arrow.prev { left: 12px; }
+  .carousel-arrow.next { right: 12px; }
+  .carousel-arrow .svg-icon { width: 18px; height: 18px; }
+  .carousel-dots {
+    position: absolute; bottom: 12px; right: 16px; z-index: 3; display: flex; gap: 6px;
+  }
+  .carousel-dot {
+    width: 8px; height: 8px; border-radius: 50%; border: none; cursor: pointer;
+    background: rgba(255,255,255,0.5); transition: all 0.3s; padding: 0;
+  }
+  .carousel-dot.active { background: var(--primary); width: 24px; border-radius: 4px; }
+  .jibao-float {
+    position: absolute; top: -16px; right: 24px;
+    background: var(--primary); color: #fff; padding: 10px 20px; border-radius: 100px;
+    font-size: 13px; font-weight: 700; box-shadow: 0 8px 24px rgba(212,40,47,0.35);
+    animation: float 3s ease-in-out infinite; display: flex; align-items: center; gap: 6px;
+  }
+  .jibao-float .svg-icon { width: 14px; height: 14px; }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+
+  /* ===== Section Common ===== */
+  .section { padding: 100px 0; }
+  .section-title { font-size: 38px; font-weight: 800; color: var(--text-dark); margin-bottom: 16px; position: relative; display: inline-block; }
+  .section-title::after {
+    content: ''; position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%);
+    width: 60px; height: 4px; border-radius: 2px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+  }
+  .section-header { display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 60px; }
+  .section-tag {
+    display: inline-block; padding: 6px 16px; border-radius: 6px;
+    background: rgba(212,40,47,0.08); color: var(--primary);
+    font-size: 13px; font-weight: 700; letter-spacing: 1px; margin-bottom: 16px;
+  }
+  .section-desc { font-size: 17px; color: var(--text-gray); max-width: 600px; margin: 0 auto; }
+
+  /* ===== Feature Tabs ===== */
+  .features-section { background: var(--bg-light); }
+  .tab-nav {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
+    margin-bottom: 48px;
+  }
+  .tab-btn {
+    padding: 10px 24px; border-radius: 100px; border: 1.5px solid var(--border);
+    background: #fff; color: var(--text-gray); font-size: 14px; font-weight: 600;
+    cursor: pointer; transition: all 0.25s; display: flex; align-items: center; gap: 8px;
+  }
+  .tab-btn .svg-icon { width: 16px; height: 16px; }
+  .tab-btn:hover { border-color: var(--primary); color: var(--primary); }
+  .tab-btn.active {
+    background: var(--primary); color: #fff; border-color: var(--primary);
+    box-shadow: 0 4px 16px rgba(212,40,47,0.25);
+  }
+  .tab-count {
+    font-size: 11px; background: rgba(255,255,255,0.2); padding: 2px 8px; border-radius: 100px;
+  }
+  .tab-btn:not(.active) .tab-count { background: rgba(212,40,47,0.08); color: var(--text-light); }
+
+  .tab-panel { display: none; animation: fadeIn 0.4s ease; }
+  .tab-panel.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+  .feature-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+  }
+  .feature-card {
+    background: #fff; border-radius: 16px;
+    border: 1px solid var(--border); transition: all 0.3s;
+    position: relative; overflow: hidden; display: flex; flex-direction: column;
+  }
+  .feature-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    transform: scaleX(0); transition: transform 0.3s; transform-origin: left; z-index: 2;
+  }
+  .feature-card:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(212,40,47,0.15), 0 8px 20px rgba(0,0,0,0.06); border-color: transparent; }
+  .feature-card:hover::before { transform: scaleX(1); }
+  .feature-card:hover .feature-thumb { transform: scale(1.05); }
+  .feature-thumb {
+    width: 100%; height: 160px; object-fit: cover; display: block;
+    border-bottom: 1px solid var(--border); background: var(--bg-light);
+    transition: transform 0.4s ease;
+  }
+  .feature-thumb-placeholder {
+    display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, rgba(212,40,47,0.06) 0%, rgba(255,122,69,0.06) 100%);
+    color: var(--primary);
+  }
+  .feature-card-body { padding: 22px 24px 24px; flex: 1; display: flex; flex-direction: column; }
+  .feature-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 14px; background: rgba(212,40,47,0.08); color: var(--primary);
+  }
+  .feature-icon .svg-icon { width: 22px; height: 22px; }
+  .feature-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; color: var(--text-dark); }
+  .feature-card p { font-size: 13.5px; color: var(--text-gray); line-height: 1.7; margin-bottom: 14px; flex: 1; }
+  .feature-output {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 5px 12px; border-radius: 6px;
+    background: rgba(255,122,69,0.1); color: var(--accent);
+    font-size: 12px; font-weight: 600; align-self: flex-start;
+  }
+  .feature-output .svg-icon { width: 12px; height: 12px; }
+  .feature-badge {
+    position: absolute; top: 12px; right: 12px; z-index: 2;
+    font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 100px;
+    backdrop-filter: blur(4px);
+  }
+  .badge-new { background: rgba(255,122,69,0.12); color: var(--accent); }
+  .badge-hot { background: rgba(212,40,47,0.1); color: var(--primary); }
+
+  /* ===== Scene Showcase Section ===== */
+  .scene-section {
+    background: linear-gradient(135deg, var(--bg-darker) 0%, var(--bg-dark) 100%);
+    color: #fff; position: relative; overflow: hidden;
+  }
+  .scene-section::before {
+    content: ''; position: absolute; top: -100px; right: -100px;
+    width: 400px; height: 400px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(212,40,47,0.15) 0%, transparent 70%);
+  }
+  .scene-section .section-tag { background: rgba(255,255,255,0.1); color: var(--accent-light); }
+  .scene-section .section-title { color: #fff; }
+  .scene-section .section-desc { color: rgba(255,255,255,0.6); }
+
+  .scene-tabs {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-bottom: 48px;
+  }
+  .scene-tab {
+    padding: 12px 24px; border-radius: 100px; border: 1.5px solid rgba(255,255,255,0.15);
+    background: transparent; color: rgba(255,255,255,0.6); font-size: 14px; font-weight: 600;
+    cursor: pointer; transition: all 0.25s; display: flex; align-items: center; gap: 8px;
+  }
+  .scene-tab .svg-icon { width: 16px; height: 16px; }
+  .scene-tab:hover { border-color: rgba(255,255,255,0.4); color: #fff; }
+  .scene-tab.active {
+    background: var(--primary); color: #fff; border-color: var(--primary);
+    box-shadow: 0 4px 20px rgba(212,40,47,0.4);
+  }
+
+  .scene-panel { display: none; animation: fadeIn 0.4s ease; }
+  .scene-panel.active { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+
+  .scene-visual { position: relative; min-height: 380px; display: flex; align-items: center; justify-content: center; }
+  .scene-mockup {
+    width: 100%; max-width: 480px; background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 28px;
+    backdrop-filter: blur(10px); position: relative;
+  }
+  .scene-mockup-title {
+    font-size: 14px; font-weight: 700; color: var(--accent-light); margin-bottom: 16px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .scene-mockup-title .svg-icon { width: 16px; height: 16px; }
+  .mockup-row { display: flex; gap: 12px; margin-bottom: 12px; align-items: center; }
+  .mockup-label { font-size: 12px; color: rgba(255,255,255,0.45); width: 70px; flex-shrink: 0; }
+  .mockup-value {
+    flex: 1; height: 30px; background: rgba(255,255,255,0.06); border-radius: 6px;
+    display: flex; align-items: center; padding: 0 10px; font-size: 12px; color: rgba(255,255,255,0.75);
+  }
+  .mockup-value.accent { background: rgba(212,40,47,0.2); color: #ff9a9e; }
+  .mockup-bar {
+    height: 8px; border-radius: 4px; background: rgba(255,255,255,0.06); overflow: hidden; margin-top: 4px;
+  }
+  .mockup-bar-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--primary), var(--accent)); }
+
+  .scene-content h3 { font-size: 28px; font-weight: 800; margin-bottom: 16px; line-height: 1.3; }
+  .scene-content h3 em { font-style: normal; color: var(--accent-light); }
+  .scene-content > p { font-size: 16px; color: rgba(255,255,255,0.6); margin-bottom: 28px; line-height: 1.8; }
+  .scene-points { display: flex; flex-direction: column; gap: 16px; margin-bottom: 32px; }
+  .scene-point { display: flex; gap: 14px; align-items: flex-start; }
+  .scene-point-icon {
+    width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0;
+    background: rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center;
+    color: var(--accent-light);
+  }
+  .scene-point-icon .svg-icon { width: 18px; height: 18px; }
+  .scene-point h4 { font-size: 15px; font-weight: 700; margin-bottom: 3px; }
+  .scene-point p { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.6; margin: 0; }
+
+  /* ===== Workflow Section ===== */
+  .workflow-section { background: #fff; }
+  .workflow-steps {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+    position: relative;
+  }
+  .workflow-steps::before {
+    content: ''; position: absolute; top: 44px; left: 12%; right: 12%; height: 2px;
+    background: linear-gradient(90deg, var(--primary), var(--accent)); opacity: 0.15;
+  }
+  .workflow-step { text-align: center; position: relative; }
+  .step-num {
+    width: 88px; height: 88px; border-radius: 50%; margin: 0 auto 20px;
+    background: #fff; border: 2px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--primary); position: relative; z-index: 1; transition: all 0.3s;
+  }
+  .step-num .svg-icon { width: 36px; height: 36px; }
+  .workflow-step:hover .step-num {
+    border-color: var(--primary); background: var(--primary); color: #fff;
+    box-shadow: 0 8px 24px rgba(212,40,47,0.3); transform: scale(1.08);
+  }
+  .workflow-step h4 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+  .workflow-step p { font-size: 14px; color: var(--text-gray); line-height: 1.6; }
+
+  /* ===== CTA Section ===== */
+  .cta-section {
+    padding: 80px 0; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    text-align: center; color: #fff;
+  }
+  .cta-section h2 { font-size: 36px; font-weight: 800; margin-bottom: 16px; }
+  .cta-section p { font-size: 18px; opacity: 0.9; margin-bottom: 32px; }
+  .cta-section .btn { background: #fff; color: var(--primary); }
+  .cta-section .btn:hover { background: var(--bg-dark); color: #fff; }
+
+  /* ===== Footer ===== */
+  .footer { background: var(--bg-darker); color: rgba(255,255,255,0.55); padding: 60px 0 30px; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+  .footer-brand .logo { color: #fff; margin-bottom: 16px; }
+  .footer-brand p { font-size: 14px; line-height: 1.8; max-width: 300px; }
+  .footer-col h5 { color: #fff; font-size: 15px; font-weight: 700; margin-bottom: 18px; }
+  .footer-col a { display: block; font-size: 14px; margin-bottom: 10px; transition: color 0.2s; }
+  .footer-col a:hover { color: var(--accent-light); }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 1024px) {
+    .hero h1 { font-size: 42px; }
+    .jibao-grid, .scene-panel.active { grid-template-columns: 1fr; gap: 40px; }
+    .jibao-visual, .scene-visual { display: flex; justify-content: center; }
+    .workflow-steps { grid-template-columns: repeat(2, 1fr); }
+    .workflow-steps::before { display: none; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .jibao-features { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hero { padding: 130px 0 70px; }
+    .hero h1 { font-size: 32px; }
+    .hero p { font-size: 16px; }
+    .hero-stats { flex-wrap: wrap; gap: 32px; }
+    .section { padding: 60px 0; }
+    .section-title, .jibao-content h2 { font-size: 28px; }
+    .feature-grid { grid-template-columns: 1fr; }
+    .workflow-steps { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+    .scene-tab { padding: 10px 18px; font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== SVG Icon Definitions ===== -->
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-logo" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></symbol>
+  <symbol id="i-title" viewBox="0 0 24 24"><path d="M4 7V5h16v2"/><path d="M12 5v14"/><path d="M9 19h6"/></symbol>
+  <symbol id="i-translate" viewBox="0 0 24 24"><path d="M4 5h7"/><path d="M9 3v2c0 4.418-2.239 8-5 8"/><path d="M5 9c0 2.144 2.952 3.908 6.7 4"/><path d="m12 20 4-9 4 9"/><path d="M13.5 17h5"/></symbol>
+  <symbol id="i-image-translate" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/><path d="M14 4l1.5 3L19 8.5 17.5 11.5 14 13l-1.5-3L11 8.5 12.5 5.5z" fill="currentColor" stroke="none" opacity="0.3"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></symbol>
+  <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-white-bg" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/><path d="M9 3v18"/><path d="M15 3v18" opacity="0.4"/><circle cx="12" cy="12" r="3" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-sharpen" viewBox="0 0 24 24"><path d="M12 3l1.9 5.8L20 10l-5 4.3L16.5 21 12 17.8 7.5 21 9 14.3 4 10l6.1-1.2z"/><path d="M17 3l1 2 2 1-2 1-1 2-1-2-2-1 2-1z"/></symbol>
+  <symbol id="i-scene" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 3-3 6 6"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 3v4h-4"/></symbol>
+  <symbol id="i-replace-bg" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 12h8"/><path d="M12 8v8"/><path d="M3 9l4-4 4 4"/><path d="M21 9l-4-4-4 4" opacity="0.5"/></symbol>
+  <symbol id="i-tryon" viewBox="0 0 24 24"><circle cx="12" cy="6" r="3"/><path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><path d="M9 11l-2 5"/><path d="M15 11l2 5"/></symbol>
+  <symbol id="i-recolor" viewBox="0 0 24 24"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></symbol>
+  <symbol id="i-detail" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><path d="M11 8v6"/><path d="M8 11h6"/></symbol>
+  <symbol id="i-ruler" viewBox="0 0 24 24"><path d="M21.3 8.7 8.7 21.3a1 1 0 0 1-1.4 0l-4.6-4.6a1 1 0 0 1 0-1.4L15.3 2.7a1 1 0 0 1 1.4 0l4.6 4.6a1 1 0 0 1 0 1.4z"/><path d="m7.5 10.5 2 2"/><path d="m10.5 7.5 2 2"/><path d="m13.5 4.5 2 2"/><path d="m4.5 13.5 2 2"/></symbol>
+  <symbol id="i-selling-point" viewBox="0 0 24 24"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8l-6.2 4.5 2.4-7.4L2 9.4h7.6z"/><path d="M20 15v6"/><path d="M20 21v.01"/></symbol>
+  <symbol id="i-video-dub" viewBox="0 0 24 24"><rect x="2" y="5" width="14" height="14" rx="2"/><path d="m22 8-6 4 6 4V8z"/><circle cx="9" cy="12" r="2.5"/><path d="M9 9.5v.01"/><path d="M7 13c.5.8 1.2 1.2 2 1.2s1.5-.4 2-1.2"/></symbol>
+  <symbol id="i-audio-translate" viewBox="0 0 24 24"><path d="M3 10v4"/><path d="M7 7v10"/><path d="M11 4v16"/><path d="M15 8v8"/><path d="M19 11v2"/><path d="m22 9-3 3-3-3"/></symbol>
+  <symbol id="i-product-video" viewBox="0 0 24 24"><path d="m22 8-6 4 6 4V8z"/><rect x="2" y="6" width="14" height="12" rx="2"/><path d="M6 12h4"/><path d="M8 10v4"/></symbol>
+  <symbol id="i-opportunity" viewBox="0 0 24 24"><rect x="2" y="7" width="14" height="14" rx="2"/><path d="M16 11h4l2 3v3h-6z"/><circle cx="9" cy="14" r="2.5"/><path d="M9 11.5v.01"/><path d="M7 15c.5.8 1.2 1.2 2 1.2s1.5-.4 2-1.2"/><path d="M16 3v4"/></symbol>
+  <symbol id="i-analysis" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m7 14 4-4 4 4 5-5"/><path d="M16 5h5v5"/></symbol>
+  <symbol id="i-overseas" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><circle cx="18" cy="6" r="2" fill="currentColor" stroke="none"/><path d="M18 8v2"/></symbol>
+  <symbol id="i-sourcing" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/><path d="m9 16 2 2 4-4"/></symbol>
+  <symbol id="i-customs" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13l2 2 4-4"/><path d="M9 17h6"/></symbol>
+  <symbol id="i-card" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/><circle cx="7" cy="15" r="1.5" fill="currentColor" stroke="none"/><path d="M12 14h5"/></symbol>
+  <symbol id="i-robot" viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M12 4v4"/><circle cx="12" cy="3" r="1"/><circle cx="9" cy="14" r="1.5" fill="currentColor" stroke="none"/><circle cx="15" cy="14" r="1.5" fill="currentColor" stroke="none"/><path d="M9 18h6"/><path d="M2 14v2"/><path d="M22 14v2"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 10h.01"/><path d="M12 10h.01"/><path d="M16 10h.01"/></symbol>
+  <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 16V9"/><path d="M12 16V5"/><path d="M17 16v-4"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-register" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6"/><path d="M22 11h-6"/></symbol>
+  <symbol id="i-select" viewBox="0 0 24 24"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="m6 12 6 3 6-3"/><path d="m6 17 6 3 6-3"/><path d="m9 7 2 2 4-4"/></symbol>
+  <symbol id="i-upload" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m17 8-5-5-5 5"/><path d="M12 3v12"/></symbol>
+  <symbol id="i-generate" viewBox="0 0 24 24"><path d="M12 2v4"/><path d="m16.2 7.8 2.9-2.9"/><path d="M18 12h4"/><path d="m16.2 16.2 2.9 2.9"/><path d="M12 18v4"/><path d="m4.9 19.1 2.9-2.9"/><path d="M2 12h4"/><path d="m4.9 4.9 2.9 2.9"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+  <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></symbol>
+  <symbol id="i-sparkles" viewBox="0 0 24 24"><path d="M12 3l1.9 5.8L20 10l-6.1 1.2L12 17l-1.9-5.8L4 10l6.1-1.2z"/><path d="M19 3v4"/><path d="M17 5h4"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></symbol>
+  <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></symbol>
+  <symbol id="i-video" viewBox="0 0 24 24"><path d="m22 8-6 4 6 4V8z"/><rect x="2" y="6" width="14" height="12" rx="2"/></symbol>
+  <symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></symbol>
+  <symbol id="i-ship" viewBox="0 0 24 24"><path d="M2 21c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1 .6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M19.38 20A11.6 11.6 0 0 0 21 14l-9-4-9 4c0 2.9.94 5.34 2.81 7.76"/><path d="M19 13V7a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v6"/><path d="M12 10v4"/><path d="M12 2v3"/></symbol>
+</svg>
+
+<!-- Navigation -->
+<div id="top"></div>
+<nav class="navbar">
+  <div class="nav-inner">
+    <div class="logo">
+      <div class="logo-icon"><svg class="svg-icon"><use href="#i-logo"/></svg></div>
+      <span>大集AI</span>
+    </div>
+    <div class="nav-links">
+      <a href="#top" class="active">首页</a>
+      <a href="#jibao">集宝AI助手</a>
+      <a href="#features">AI工具</a>
+      <a href="#scenes">应用场景</a>
+      <a href="#workflow">使用流程</a>
+    </div>
+    <div class="nav-actions">
+      <div class="lang-switcher" id="langSwitcher">
+        <button class="lang-btn" id="langBtn">
+          <svg class="svg-icon"><use href="#i-globe"/></svg>
+          <span id="langCurrent">中文</span>
+          <svg class="svg-icon lang-arrow"><use href="#i-chevron-down"/></svg>
+        </button>
+        <div class="lang-dropdown" id="langDropdown">
+          <div class="lang-option active" data-lang="zh"><span class="lang-flag">🇨🇳</span>中文<svg class="svg-icon lang-check"><use href="#i-check"/></svg></div>
+          <div class="lang-option" data-lang="en"><span class="lang-flag">🇺🇸</span>English<svg class="svg-icon lang-check"><use href="#i-check"/></svg></div>
+          <div class="lang-option" data-lang="ar"><span class="lang-flag">🇸🇦</span>العربية<svg class="svg-icon lang-check"><use href="#i-check"/></svg></div>
+          <div class="lang-option" data-lang="th"><span class="lang-flag">🇹🇭</span>ไทย<svg class="svg-icon lang-check"><use href="#i-check"/></svg></div>
+          <div class="lang-option" data-lang="id"><span class="lang-flag">🇮🇩</span>Bahasa Indonesia<svg class="svg-icon lang-check"><use href="#i-check"/></svg></div>
+          <div class="lang-option" data-lang="vi"><span class="lang-flag">🇻🇳</span>Tiếng Việt<svg class="svg-icon lang-check"><use href="#i-check"/></svg></div>
+          <div class="lang-option" data-lang="ko"><span class="lang-flag">🇰🇷</span>한국어<svg class="svg-icon lang-check"><use href="#i-check"/></svg></div>
+          <div class="lang-option" data-lang="ms"><span class="lang-flag">🇲🇾</span>Bahasa Melayu<svg class="svg-icon lang-check"><use href="#i-check"/></svg></div>
+        </div>
+      </div>
+      <a href="https://www.chinamarket.cn/?loginType=1" target="_blank" class="btn btn-primary">免费体验</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-badge"><span class="dot"></span>共赴集宝AI智创，做您的数字化贸易伙伴</div>
+      <h1>AI驱动出海贸易<br>让每一件大集商品走向世界</h1>
+      <p>集宝AI助手 + 全链路AI工具矩阵，覆盖商品创作、智能翻译、商机经营、贸易赋能全场景，助力商户降本增效、开拓全球市场。</p>
+      <div class="hero-cta">
+        <a href="https://www.chinamarket.cn/?loginType=1" target="_blank" class="btn btn-primary btn-large">立即开始 <svg class="svg-icon"><use href="#i-arrow-right"/></svg></a>
+        <button class="btn btn-outline btn-large">查看演示</button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num">24<span>+</span></div>
+          <div class="stat-label">AI核心工具</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">10<span>+</span></div>
+          <div class="stat-label">通用语种</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">60<span>%</span></div>
+          <div class="stat-label">运营效率提升</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">200<span>+</span></div>
+          <div class="stat-label">覆盖国家地区</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 集宝AI助手 -->
+<section class="jibao-section" id="jibao">
+  <div class="container">
+    <div class="jibao-grid">
+      <div class="jibao-content">
+        <div class="section-tag">JIVO AI ASSISTANT</div>
+        <h2>集宝AI助手<br>你的<em>专属贸易智能顾问</em></h2>
+        <div class="jibao-avatar-row">
+          <img src="jibao_avatar.png" alt="集宝AI助手" class="jibao-avatar-img">
+          <div class="jibao-avatar-info">
+            <h4>Hi! 我是集宝</h4>
+            <p>你的大集AI助手 · 7×24小时在线</p>
+          </div>
+        </div>
+        <p>基于商贸大模型深度训练，集宝AI助手深度理解贸易场景，一句话即可调用全平台AI能力，从市场分析、商机挖掘到内容生成，全程智能辅助。</p>
+        <div class="jibao-features">
+          <div class="jibao-feature">
+            <div class="jibao-feature-icon"><svg class="svg-icon"><use href="#i-chat"/></svg></div>
+            <div>
+              <h4>智能对话交互</h4>
+              <p>自然语言提问，AI理解贸易意图，精准返回结果</p>
+            </div>
+          </div>
+          <div class="jibao-feature">
+            <div class="jibao-feature-icon"><svg class="svg-icon"><use href="#i-link"/></svg></div>
+            <div>
+              <h4>工具一键调用</h4>
+              <p>对话中直接唤起翻译、制图、视频等23项AI工具</p>
+            </div>
+          </div>
+          <div class="jibao-feature">
+            <div class="jibao-feature-icon"><svg class="svg-icon"><use href="#i-chart"/></svg></div>
+            <div>
+              <h4>市场数据分析</h4>
+              <p>实时贸易数据洞察，目标市场推荐与竞争分析</p>
+            </div>
+          </div>
+          <div class="jibao-feature">
+            <div class="jibao-feature-icon"><svg class="svg-icon"><use href="#i-target"/></svg></div>
+            <div>
+              <h4>商机智能匹配</h4>
+              <p>基于商品特征自动匹配潜在采购商，生成跟进建议</p>
+            </div>
+          </div>
+        </div>
+        <a href="https://www.chinamarket.cn/?loginType=1" target="_blank" class="btn btn-primary btn-large">体验集宝AI助手 <svg class="svg-icon"><use href="#i-arrow-right"/></svg></a>
+      </div>
+
+      <div class="jibao-visual">
+        <div class="jibao-float"><svg class="svg-icon"><use href="#i-sparkles"/></svg> 集宝AI助手</div>
+        <div class="jibao-browser-frame">
+          <div class="jibao-browser-bar">
+            <span class="browser-dot red"></span>
+            <span class="browser-dot yellow"></span>
+            <span class="browser-dot green"></span>
+            <span class="browser-url" id="carouselUrl">集宝AI助手 · 智能对话交互</span>
+          </div>
+          <div class="jibao-carousel" id="jibaoCarousel">
+            <div class="jibao-slide active">
+              <img src="jibao_new1.png" alt="集宝AI助手对话界面">
+              <span class="jibao-slide-label">智能对话 · 一句话调用全平台AI能力</span>
+            </div>
+            <div class="jibao-slide">
+              <img src="jibao_ui2.png" alt="集宝AI助手平台侧边栏">
+              <span class="jibao-slide-label">平台集成 · 大集平台侧边栏随时唤起</span>
+            </div>
+            <div class="jibao-slide">
+              <img src="jibao_new5.png" alt="集宝AI助手入驻咨询">
+              <span class="jibao-slide-label">入驻咨询 · 智能解答平台政策与条件</span>
+            </div>
+            <div class="jibao-slide">
+              <img src="jibao_new6.png" alt="集宝AI助手商品图生成">
+              <span class="jibao-slide-label">AI创作 · 商品图生成与编辑一站式完成</span>
+            </div>
+            <button class="carousel-arrow prev" aria-label="上一张"><svg class="svg-icon"><use href="#i-arrow-left"/></svg></button>
+            <button class="carousel-arrow next" aria-label="下一张"><svg class="svg-icon"><use href="#i-arrow-right"/></svg></button>
+            <div class="carousel-dots">
+              <button class="carousel-dot active" data-index="0" aria-label="第1张"></button>
+              <button class="carousel-dot" data-index="1" aria-label="第2张"></button>
+              <button class="carousel-dot" data-index="2" aria-label="第3张"></button>
+              <button class="carousel-dot" data-index="3" aria-label="第4张"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="section features-section" id="features">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">AI TOOL MATRIX</div>
+      <h2 class="section-title">全链路AI工具矩阵</h2>
+      <p class="section-desc">4大分类24项AI能力，从商品创作到贸易赋能，一站式覆盖经营全流程</p>
+    </div>
+
+    <div class="tab-nav" id="tabNav">
+      <button class="tab-btn active" data-tab="all"><svg class="svg-icon"><use href="#i-grid"/></svg>全部 <span class="tab-count">24</span></button>
+      <button class="tab-btn" data-tab="content"><svg class="svg-icon"><use href="#i-image"/></svg>内容创作 <span class="tab-count">11</span></button>
+      <button class="tab-btn" data-tab="translate"><svg class="svg-icon"><use href="#i-translate"/></svg>智能翻译 <span class="tab-count">5</span></button>
+      <button class="tab-btn" data-tab="business"><svg class="svg-icon"><use href="#i-briefcase"/></svg>商机经营 <span class="tab-count">4</span></button>
+      <button class="tab-btn" data-tab="global"><svg class="svg-icon"><use href="#i-ship"/></svg>贸易赋能 <span class="tab-count">4</span></button>
+    </div>
+
+    <!-- 全部 -->
+    <div class="tab-panel active" id="panel-all">
+      <div class="feature-grid" id="grid-all"></div>
+    </div>
+
+    <!-- 内容创作 -->
+    <div class="tab-panel" id="panel-content">
+      <div class="feature-grid" id="grid-content"></div>
+    </div>
+
+    <!-- 智能翻译 -->
+    <div class="tab-panel" id="panel-translate">
+      <div class="feature-grid" id="grid-translate"></div>
+    </div>
+
+    <!-- 商机经营 -->
+    <div class="tab-panel" id="panel-business">
+      <div class="feature-grid" id="grid-business"></div>
+    </div>
+
+    <!-- 贸易赋能 -->
+    <div class="tab-panel" id="panel-global">
+      <div class="feature-grid" id="grid-global"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Scene Showcase -->
+<section class="section scene-section" id="scenes">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">APPLICATION SCENARIOS</div>
+      <h2 class="section-title">五大核心应用场景</h2>
+      <p class="section-desc">从获客到成交，从内容到通关，AI深度嵌入贸易经营每个关键环节</p>
+    </div>
+
+    <div class="scene-tabs" id="sceneTabs">
+      <button class="scene-tab active" data-scene="overseas"><svg class="svg-icon"><use href="#i-overseas"/></svg> AI海外获客</button>
+      <button class="scene-tab" data-scene="opportunity"><svg class="svg-icon"><use href="#i-opportunity"/></svg> AI商机探查</button>
+      <button class="scene-tab" data-scene="customs"><svg class="svg-icon"><use href="#i-customs"/></svg> AI智能报关</button>
+      <button class="scene-tab" data-scene="card"><svg class="svg-icon"><use href="#i-card"/></svg> 大集AI名片</button>
+      <button class="scene-tab" data-scene="video"><svg class="svg-icon"><use href="#i-product-video"/></svg> AI商品视频</button>
+    </div>
+
+    <!-- AI海外获客 -->
+    <div class="scene-panel active" id="scene-overseas">
+      <div class="scene-visual">
+        <div class="scene-mockup">
+          <div class="scene-mockup-title"><svg class="svg-icon"><use href="#i-overseas"/></svg> AI海外获客 · 潜在买家匹配结果</div>
+          <div class="mockup-row"><div class="mockup-label">目标市场</div><div class="mockup-value accent">美国 · 德国 · 日本</div></div>
+          <div class="mockup-row"><div class="mockup-label">匹配买家</div><div class="mockup-value">128 家潜在采购商</div></div>
+          <div class="mockup-row"><div class="mockup-label">高意向</div><div class="mockup-value">23 家（近30天有采购记录）</div></div>
+          <div class="mockup-row"><div class="mockup-label">企业信息</div><div class="mockup-value">公司规模 · 采购品类 · 信用评级</div></div>
+          <div class="mockup-row"><div class="mockup-label">联系方式</div><div class="mockup-value">邮箱 · 电话 · 采购决策人</div></div>
+          <div class="mockup-row"><div class="mockup-label">跟进草稿</div><div class="mockup-value accent">已生成多语种开发信模板</div></div>
+          <div style="margin-top:16px;"><div class="mockup-label" style="margin-bottom:6px;">匹配精准度</div><div class="mockup-bar"><div class="mockup-bar-fill" style="width:92%"></div></div></div>
+        </div>
+      </div>
+      <div class="scene-content">
+        <h3>AI海外获客<br><em>精准锁定全球潜在买家</em></h3>
+        <p>基于商品特征和目标市场，AI智能匹配海外采购商数据库，一键获取企业信息、联系方式和采购记录，自动生成多语种开发信，让海外拓客从大海捞针变为精准狙击。</p>
+        <div class="scene-points">
+          <div class="scene-point"><div class="scene-point-icon"><svg class="svg-icon"><use href="#i-target"/></svg></div><div><h4>智能买家匹配</h4><p>根据商品品类、价格带、目标市场自动匹配高意向采购商</p></div></div>
+          <div class="scene-point"><div class="scene-point-icon"><svg class="svg-icon"><use href="#i-card"/></svg></div><div><h4>企业资信洞察</h4><p>采购商规模、历史采购记录、信用评级、决策人信息一目了然</p></div></div>
+          <div class="scene-point"><div class="scene-point-icon"><svg class="svg-icon"><use href="#i-translate"/></svg></div><div><h4>自动生成开发信</h4><p>基于买家特征生成个性化多语种开发信，一键导出批量触达</p></div></div>
+        </div>
+        <a href="https://www.chinamarket.cn/?loginType=1" target="_blank" class="btn btn-primary btn-large">立即获客 <svg class="svg-icon"><use href="#i-arrow-right"/></svg></a>
+      </div>
+    </div>
+
+    <!-- AI商机探查 -->
+    <div class="scene-panel" id="scene-opportunity">
+      <div class="scene-visual">
+        <div class="scene-mockup">
+          <div class="scene-mockup-title"><svg class="svg-icon"><use href="#i-opportunity"/></svg> AI商机探查 · 商机智能分析报告</div>
+          <div class="mockup-row"><div class="mockup-label">商机来源</div><div class="mockup-value">采购询盘 · RFQ · 平台线索</div></div>
+          <div class="mockup-row"><div class="mockup-label">待处理</div><div class="mockup-value accent">15 条高价值商机</div></div>
+          <div class="mockup-row"><div class="mockup-label">商机摘要</div><div class="mockup-value">采购品类 · 数量 · 目标价 · 交期</div></div>
+          <div class="mockup-row"><div class="mockup-label">买家画像</div><div class="mockup-value">进口商 · 年采购额 · 历史供应商</div></div>
+          <div class="mockup-row"><div class="mockup-label">匹配商品</div><div class="mockup-value">8 款在售商品匹配度>85%</div></div>
+          <div class="mockup-row"><div class="mockup-label">建议动作</div><div class="mockup-value accent">优先跟进3条 · 报价建议已生成</div></div>
+          <div style="margin-top:16px;"><div class="mockup-label" style="margin-bottom:6px;">商机转化概率</div><div class="mockup-bar"><div class="mockup-bar-fill" style="width:78%"></div></div></div>
+        </div>
+      </div>
+      <div class="scene-content">
+        <h3>AI商机探查<br><em>每条商机都不被错过</em></h3>
+        <p>AI自动解析采购询盘、RFQ和平台线索，智能提取商机关键信息，生成买家画像，匹配在售商品，给出优先级排序和跟进建议，让商机处理从被动响应变为主动经营。</p>
+        <div class="scene-points">
+          <div class="scene-point"><div class="scene-point-icon"><svg class="svg-icon"><use href="#i-upload"/></svg></div><div><h4>多源商机汇聚</h4><p>自动汇聚询盘、RFQ、平台线索等多渠道商机，统一管理</p></div></div>
+          <div class="scene-point"><div class="scene-point-icon"><svg class="svg-icon"><use href="#i-detail"/></svg></div><div><h4>智能信息提取</h4><p>AI解析商机内容，提取采购品类、数量、目标价、交期等关键要素</p></div></div>
+          <div class="scene-point"><div class="scene-point-icon"><svg class="svg-icon"><use href="#i-generate"/></svg></div><div><h4>跟进动作建议</h4><p>基于商机价值和紧急度排序，自动生成报价建议和跟进话术</p></div></div>
+        </div>
+        <a href="https://www.chinamarket.cn/?loginType=1" target="_blank" class="btn btn-primary btn-large">探查商机 <svg class="svg-icon"><use href="#i-arrow-right"/></svg></a>
+      </div>
+    </div>
+
+    <!-- AI智能报关 -->
+    <div class="scene-panel" id="scene-customs">
+      <div class="scene-visual">
+        <div class="scene-mockup">
+          <div class="scene-mockup-title"><svg class="svg-icon"><use href="#i-customs"/></svg> AI智能报关 · 单据识别与填报</div>
+          <div class="mockup-row"><div class="mockup-label">上传单据</div><div class="mockup-value">发票 · 装箱单 · 合同</div></div>
+          <div class="mockup-row"><div class="mockup-label">识别字段</div><div class="mockup-value accent">42 项信息自动提取</div></div>
+          <div class="mockup-row"><div class="mockup-label">商品编码</div><div class="mockup-value">HS Code 智能推荐（置信度96%）</div></div>
+          <div class="mockup-row"><div class="mockup-label">申报要素</div><div class="mockup-value">品名 · 材质 · 用途 · 品牌</div></div>
+          <div class="mockup-row"><div class="mockup-label">智能校验</div><div class="mockup-value">逻辑校验 · 监管条件 · 税率核算</div></div>
+          <div class="mockup-row"><div class="mockup-label">填报结果</div><div class="mockup-value accent">报关单已自动填充 · 待确认提交</div></div>
+          <div style="margin-top:16px;"><div class="mockup-label" style="margin-bottom:6px;">填报效率提升</div><div class="mockup-bar"><div class="mockup-bar-fill" style="width:85%"></div></div></div>
+        </div>
+      </div>
+      <div class="scene-content">
+        <h3>AI智能报关<br><em>单据识别到填报一键完成</em></h3>
+        <p>上传发票、装箱单等单据，AI自动识别商品信息、推荐HS编码、填充申报要素，智能校验逻辑和监管条件，报关单一键生成，将传统数小时的报关工作压缩到分钟级。</p>
+        <div class="scene-points">
+          <div class="scene-point"><div class="scene-point-icon"><svg class="svg-icon"><use href="#i-image-translate"/></svg></div><div><h4>单据智能识别</h4><p>OCR识别发票、装箱单、合同等单据，自动提取42+申报字段</p></div></div>
+          <div class="scene-point"><div class="scene-point-icon"><svg class="svg-icon"><use href="#i-ruler"/></svg></div><div><h4>HS编码推荐</h4><p>基于商品描述智能推荐HS编码，附申报要素和监管条件</p></div></div>
+          <div class="scene-point"><div class="scene-point-icon"><svg class="svg-icon"><use href="#i-select"/></svg></div><div><h4>智能校验填报</h4><p>逻辑校验、税率核算、监管条件提醒，报关单自动填充待确认</p></div></div>
+        </div>
+        <a href="https://www.chinamarket.cn/?loginType=1" target="_blank" class="btn btn-primary btn-large">智能报关 <svg class="svg-icon"><use href="#i-arrow-right"/></svg></a>
+      </div>
+    </div>
+
+    <!-- 大集AI名片 -->
+    <div class="scene-panel" id="scene-card">
+      <div class="scene-visual">
+        <div class="scene-mockup">
+          <div class="scene-mockup-title"><svg class="svg-icon"><use href="#i-card"/></svg> 大集AI名片 · 扫码即见企业全貌</div>
+          <div class="mockup-row"><div class="mockup-label">企业信息</div><div class="mockup-value">公司简介 · 工商信息 · 资质认证</div></div>
+          <div class="mockup-row"><div class="mockup-label">资信档案</div><div class="mockup-value accent">经营年限 · 信用评级 · 认证标识</div></div>
+          <div class="mockup-row"><div class="mockup-label">产品展示</div><div class="mockup-value">商品库 · 多语言介绍 · 视频讲解</div></div>
+          <div class="mockup-row"><div class="mockup-label">智能沟通</div><div class="mockup-value">10+语种实时翻译对话</div></div>
+          <div class="mockup-row"><div class="mockup-label">访客追踪</div><div class="mockup-value">扫码来源 · 浏览行为 · 关注产品</div></div>
+          <div class="mockup-row"><div class="mockup-label">分享方式</div><div class="mockup-value accent">二维码 · 链接 · 社媒一键分享</div></div>
+          <div style="margin-top:16px;"><div class="mockup-label" style="margin-bottom:6px;">采购商信任度提升</div><div class="mockup-bar"><div class="mockup-bar-fill" style="width:88%"></div></div></div>
+        </div>
+      </div>
+      <div class="scene-content">
+        <h3>大集AI名片<br><em>一张会说话的数字贸易门户</em></h3>
+        <p>不再是一张静态名片，而是企业的数字贸易门户。扫码即可查看企业资信、产品展示、多语言介绍，内置AI翻译实时沟通，访客行为数据追踪，让每一次交换名片都成为商机的开始。</p>
+        <div class="scene-points">
+          <div class="scene-point"><div class="scene-point-icon"><svg class="svg-icon"><use href="#i-briefcase"/></svg></div><div><h4>企业资信档案</h4><p>工商信息、经营资质、认证证书、信用评级，建立采购商第一印象信任</p></div></div>
+          <div class="scene-point"><div class="scene-point-icon"><svg class="svg-icon"><use href="#i-sourcing"/></svg></div><div><h4>产品智能展示</h4><p>关联商品库，多语言产品介绍、视频讲解，采购商扫码即看全品类</p></div></div>
+          <div class="scene-point"><div class="scene-point-icon"><svg class="svg-icon"><use href="#i-analysis"/></svg></div><div><h4>访客数据追踪</h4><p>记录扫码来源、浏览行为、关注产品，智能分析客户意向辅助精准跟进</p></div></div>
+        </div>
+        <a href="https://www.chinamarket.cn/?loginType=1" target="_blank" class="btn btn-primary btn-large">生成AI名片 <svg class="svg-icon"><use href="#i-arrow-right"/></svg></a>
+      </div>
+    </div>
+
+    <!-- AI商品视频 -->
+    <div class="scene-panel" id="scene-video">
+      <div class="scene-visual">
+        <div class="scene-mockup">
+          <div class="scene-mockup-title"><svg class="svg-icon"><use href="#i-product-video"/></svg> AI商品视频 · 10秒生成带货短片</div>
+          <div class="mockup-row"><div class="mockup-label">输入素材</div><div class="mockup-value">商品图片 · 卖点文字 · 参考视频</div></div>
+          <div class="mockup-row"><div class="mockup-label">视频时长</div><div class="mockup-value accent">15s / 30s / 60s 可选</div></div>
+          <div class="mockup-row"><div class="mockup-label">智能运镜</div><div class="mockup-value">推近 · 旋转 · 场景切换 · 特写</div></div>
+          <div class="mockup-row"><div class="mockup-label">自动配乐</div><div class="mockup-value">风格匹配 · 节奏卡点 · 版权免费</div></div>
+          <div class="mockup-row"><div class="mockup-label">字幕配音</div><div class="mockup-value">10+语种 · 智能配音 · 字幕同步</div></div>
+          <div class="mockup-row"><div class="mockup-label">输出格式</div><div class="mockup-value accent">竖版/横版 · 1080P · 一键分发</div></div>
+          <div style="margin-top:16px;"><div class="mockup-label" style="margin-bottom:6px;">制作效率提升</div><div class="mockup-bar"><div class="mockup-bar-fill" style="width:95%"></div></div></div>
+        </div>
+      </div>
+      <div class="scene-content">
+        <h3>AI商品视频<br><em>10秒产出专业级带货短片</em></h3>
+        <p>只需几张商品图片和卖点文字，AI自动生成商品展示视频。智能运镜、自动配乐、多语种配音字幕，竖版横版一键切换，让没有视频制作能力的商户也能批量产出专业带货内容。</p>
+        <div class="scene-points">
+          <div class="scene-point"><div class="scene-point-icon"><svg class="svg-icon"><use href="#i-video"/></svg></div><div><h4>智能运镜剪辑</h4><p>AI自动设计镜头运动和场景切换，推近、旋转、特写专业运镜效果</p></div></div>
+          <div class="scene-point"><div class="scene-point-icon"><svg class="svg-icon"><use href="#i-audio-translate"/></svg></div><div><h4>自动配乐配音</h4><p>风格匹配背景音乐，10+语种智能配音，字幕自动同步生成</p></div></div>
+          <div class="scene-point"><div class="scene-point-icon"><svg class="svg-icon"><use href="#i-globe"/></svg></div><div><h4>多平台适配</h4><p>竖版适配TikTok/Reels/Shorts，横版适配YouTube/官网，一键分发</p></div></div>
+        </div>
+        <a href="https://www.chinamarket.cn/?loginType=1" target="_blank" class="btn btn-primary btn-large">生成视频 <svg class="svg-icon"><use href="#i-arrow-right"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Workflow -->
+<section class="section workflow-section" id="workflow">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">HOW IT WORKS</div>
+      <h2 class="section-title">四步开启AI贸易之旅</h2>
+      <p class="section-desc">简单易用，零门槛上手，从注册到产出只需几分钟</p>
+    </div>
+    <div class="workflow-steps">
+      <div class="workflow-step">
+        <div class="step-num"><svg class="svg-icon"><use href="#i-register"/></svg></div>
+        <h4>注册登录</h4>
+        <p>手机号一键注册，新用户享免费体验额度，即刻开启AI创作。</p>
+      </div>
+      <div class="workflow-step">
+        <div class="step-num"><svg class="svg-icon"><use href="#i-select"/></svg></div>
+        <h4>选择工具</h4>
+        <p>从24项AI工具中选择所需功能，或直接对话集宝AI助手。</p>
+      </div>
+      <div class="workflow-step">
+        <div class="step-num"><svg class="svg-icon"><use href="#i-upload"/></svg></div>
+        <h4>输入素材</h4>
+        <p>上传商品图片或输入文字描述，AI自动理解需求，无需专业技能。</p>
+      </div>
+      <div class="workflow-step">
+        <div class="step-num"><svg class="svg-icon"><use href="#i-generate"/></svg></div>
+        <h4>一键生成</h4>
+        <p>点击生成，数秒内产出专业级内容，支持多格式下载和一键分发。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <h2>准备好用AI重塑你的贸易业务了吗？</h2>
+    <p>加入10万+商户，体验AI带来的效率革命，让你的商品更快走向全球</p>
+    <a href="https://www.chinamarket.cn/?loginType=1" target="_blank" class="btn btn-large">免费开始使用 <svg class="svg-icon"><use href="#i-arrow-right"/></svg></a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">
+          <div class="logo-icon"><svg class="svg-icon"><use href="#i-logo"/></svg></div>
+          <span>大集AI</span>
+        </div>
+        <p>全球贸易智能创作平台，以AI技术赋能商户，集宝AI助手 + 全链路工具矩阵，让贸易更简单、更高效。</p>
+      </div>
+      <div class="footer-col">
+        <h5>AI工具</h5>
+        <a href="#">内容创作</a>
+        <a href="#">智能翻译</a>
+        <a href="#">商机经营</a>
+        <a href="#">贸易赋能</a>
+        <a href="#">集宝AI助手</a>
+      </div>
+      <div class="footer-col">
+        <h5>应用场景</h5>
+        <a href="#">AI海外获客</a>
+        <a href="#">AI商机探查</a>
+        <a href="#">AI智能报关</a>
+        <a href="#">大集AI名片</a>
+        <a href="#">AI商品视频</a>
+      </div>
+      <div class="footer-col">
+        <h5>关于我们</h5>
+        <a href="#">平台介绍</a>
+        <a href="#">合作伙伴</a>
+        <a href="#">帮助中心</a>
+        <a href="#">联系我们</a>
+        <a href="#">服务协议</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 大集AI 全球贸易智能创作平台. All rights reserved.</span>
+      <span><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">鲁ICP备2024130520号-1</a> · 统一社会信用代码：91371302MADGTNB06K</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Feature card data with category and image
+  const features = [
+    // 内容创作
+    { category: 'content', icon: 'i-title', image: 'images/title_optimize.png', title: '商品标题优化', desc: '根据商品信息和原始标题生成更清晰、完整的标题建议，提升搜索曝光率和点击率。', output: '优化后的商品标题' },
+    { category: 'content', icon: 'i-white-bg', image: 'images/white_bg.png', title: '生成白底图', desc: '去除或替换商品图片背景，生成白色背景商品图，符合电商平台主图规范，一键达标。', output: '白底商品图' },
+    { category: 'content', icon: 'i-sharpen', image: 'images/sharpen.png', title: '变清晰', desc: '提升商品图片的清晰度和可读性，修复模糊、低分辨率图片，让产品细节完美呈现。', output: '清晰化后的商品图片' },
+    { category: 'content', icon: 'i-scene', image: 'images/scene_image.png', title: '生成场景图', desc: '将商品放入指定生活或使用场景中，增强代入感和购买欲望，适用于详情页和社媒推广。', output: '商品场景图' },
+    { category: 'content', icon: 'i-replace-bg', image: 'images/replace_bg.png', title: '商品图换背景', desc: '保留商品主体并替换图片背景，海量场景模板任选，快速生成不同风格的商品展示图。', output: '更换背景后的商品图片' },
+    { category: 'content', icon: 'i-tryon', image: 'images/tryon.png', title: '试穿试用', desc: '生成服饰试穿、配件佩戴或试用效果，让买家直观看到上身效果，降低退货率。', output: '试穿或试用效果图' },
+    { category: 'content', icon: 'i-recolor', image: 'images/recolor.png', title: '商品换色', desc: '保留商品结构并调整指定颜色，一键生成多色款商品图，无需重新拍摄，快速展示全色系。', output: '指定颜色的商品效果图' },
+    { category: 'content', icon: 'i-detail', image: 'images/ai_detail.png', title: 'AI细节图', desc: '生成或强化商品材质、工艺和局部结构展示，突出产品品质和工艺细节，增强买家信任。', output: '商品细节图' },
+    { category: 'content', icon: 'i-ruler', image: 'images/ruler.png', title: '商品标尺图', desc: '为商品图片补充尺寸、比例或标尺信息，让买家直观了解商品大小，减少咨询和误解。', output: '商品标尺图' },
+    { category: 'content', icon: 'i-selling-point', image: 'images/ai_selling_point.png', title: 'AI卖点图', desc: '将商品卖点文字与视觉素材组合，生成吸引眼球的营销卖点图，提升转化率和点击率。', output: '商品卖点图' },
+    { category: 'content', icon: 'i-product-video', image: 'images/ai_product_video.png', title: 'AI商品视频', desc: '根据商品图片和卖点生成商品展示视频，自动运镜、配乐、加字幕，10秒产出专业级带货短片。', output: '商品介绍短视频' },
+    // 智能翻译
+    { category: 'translate', icon: 'i-translate', image: 'images/text_translate.png', title: '文本翻译', desc: '将输入或粘贴的文本翻译为目标语言，支持10+通用语种，专业商贸术语库确保翻译精准。', output: '目标语言译文' },
+    { category: 'translate', icon: 'i-image-translate', image: 'images/image_translate.png', title: '图片翻译', desc: '识别图片文字并翻译为目标语言，保留原图排版布局，适用于产品说明书、包装等场景。', output: '翻译后的图片或文字结果' },
+    { category: 'translate', icon: 'i-globe', image: 'images/multilingual.png', title: '多语言翻译', desc: '将一份商品内容同时转换为多个目标语言版本，一键生成多语种商品文案，快速铺向全球市场。', output: '多语言商品文案或字段' },
+    { category: 'translate', icon: 'i-video-dub', image: 'images/video_dub.png', title: 'AI口播视频转译', desc: '识别人物口播并转换为目标语言版本，智能对口型、多语种配音，让你的产品视频说遍全球。', output: '转译后的视频（含口型、字幕、音频）' },
+    { category: 'translate', icon: 'i-audio-translate', image: 'images/audio_translate.png', title: '视频音频翻译', desc: '识别视频或音频中的语音并翻译，生成多语种字幕和配音，适用于教程、采访、宣传视频等。', output: '翻译后的视频（含译文、字幕、翻译音频）' },
+    // 商机经营
+    { category: 'business', icon: 'i-opportunity', image: 'images/ai_opportunity.png', title: 'AI商机探查', desc: '根据采购商或供应商角色提供可继续处理的商机内容，智能梳理商机要点、相关建议和后续行动。', output: '商机说明、相关内容和后续动作', badge: 'HOT', badgeClass: 'badge-hot' },
+    { category: 'business', icon: 'i-analysis', image: 'images/ai_analysis.png', title: 'AI经营分析', desc: '基于平台经营数据识别变化和优先处理方向，智能生成经营诊断报告，辅助决策优化。', output: '经营结论和行动建议' },
+    { category: 'business', icon: 'i-overseas', image: 'images/ai_overseas.png', title: 'AI海外获客', desc: '根据目标市场和商品方向查找潜在买家线索，智能匹配海外采购商，拓展国际客户资源。', output: '客户线索、企业信息和联系内容草稿', badge: 'HOT', badgeClass: 'badge-hot' },
+    { category: 'business', icon: 'i-sourcing', image: 'images/ai_sourcing.png', title: 'AI选品', desc: '根据采购需求和平台商品供给推荐候选商品，智能匹配供需，提升选品效率和精准度。', output: '候选商品、推荐理由和查看入口' },
+    // 贸易赋能
+    { category: 'global', icon: 'i-customs', image: 'images/ai_customs.png', title: 'AI智能报关', desc: '识别报关单据，自动填报关单，智能校验商品编码和申报要素，大幅提升报关效率和准确率。', output: '已识别填入信息的报关单' },
+    { category: 'global', icon: 'i-upload', image: 'images/smart_publish.png', title: '智能发品', desc: '一键将商品信息、图片、视频等素材发布到电商平台，自动填充商品字段，支持多平台批量发布，大幅提升铺货效率。', output: '已发布商品链接与发布状态' },
+    { category: 'global', icon: 'i-card', image: 'card_placeholder.png', title: '大集AI名片', desc: '一张会说话的智能名片，扫码即见企业资信、产品展示、多语言介绍，让全球采购商一键认识你。', output: '智能电子名片 + 企业主页', badge: 'NEW', badgeClass: 'badge-new' },
+    { category: 'global', icon: 'i-robot', image: 'jibao_placeholder.png', title: '集宝AI助手', desc: '专属贸易智能顾问，自然语言对话即可调用全平台AI能力，市场分析、商机挖掘、内容生成一站式完成。', output: '智能对话 + 工具调用 + 数据分析', badge: 'NEW', badgeClass: 'badge-new' },
+  ];
+
+  // Render feature card HTML
+  function renderFeatureCard(f) {
+    const thumb = f.image
+      ? `<img src="${f.image}" alt="${f.title}" class="feature-thumb" loading="lazy">`
+      : `<div class="feature-thumb feature-thumb-placeholder"><svg class="svg-icon" style="width:48px;height:48px;opacity:0.3"><use href="#${f.icon}"/></svg></div>`;
+    return `
+      <div class="feature-card">
+        ${thumb}
+        <div class="feature-card-body">
+          <div class="feature-icon"><svg class="svg-icon"><use href="#${f.icon}"/></svg></div>
+          ${f.badge ? `<span class="feature-badge ${f.badgeClass}">${f.badge}</span>` : ''}
+          <h3>${f.title}</h3>
+          <p>${f.desc}</p>
+          <span class="feature-output"><svg class="svg-icon"><use href="#i-arrow-right"/></svg>${f.output}</span>
+        </div>
+      </div>
+    `;
+  }
+
+  // Render all grids
+  function renderAllGrids() {
+    document.getElementById('grid-all').innerHTML = features.map(renderFeatureCard).join('');
+    document.getElementById('grid-content').innerHTML = features.filter(f => f.category === 'content').map(renderFeatureCard).join('');
+    document.getElementById('grid-translate').innerHTML = features.filter(f => f.category === 'translate').map(renderFeatureCard).join('');
+    document.getElementById('grid-business').innerHTML = features.filter(f => f.category === 'business').map(renderFeatureCard).join('');
+    document.getElementById('grid-global').innerHTML = features.filter(f => f.category === 'global').map(renderFeatureCard).join('');
+  }
+  renderAllGrids();
+
+  // Feature tab switching
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tabPanels = document.querySelectorAll('.tab-panel');
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.tab;
+      tabBtns.forEach(b => b.classList.remove('active'));
+      tabPanels.forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('panel-' + target).classList.add('active');
+    });
+  });
+
+  // Scene tab switching
+  const sceneTabs = document.querySelectorAll('.scene-tab');
+  const scenePanels = document.querySelectorAll('.scene-panel');
+  sceneTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.scene;
+      sceneTabs.forEach(t => t.classList.remove('active'));
+      scenePanels.forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('scene-' + target).classList.add('active');
+    });
+  });
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // Navbar scroll effect
+  window.addEventListener('scroll', () => {
+    const navbar = document.querySelector('.navbar');
+    if (window.pageYOffset > 50) {
+      navbar.style.boxShadow = '0 2px 20px rgba(212,40,47,0.08)';
+    } else {
+      navbar.style.boxShadow = 'none';
+    }
+  });
+
+  // Navbar tab active follow
+  const navLinks = document.querySelectorAll('.nav-links a');
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.forEach(l => l.classList.remove('active'));
+      link.classList.add('active');
+    });
+  });
+
+  // Language switcher
+  const langSwitcher = document.getElementById('langSwitcher');
+  const langBtn = document.getElementById('langBtn');
+  const langCurrent = document.getElementById('langCurrent');
+  const langOptions = document.querySelectorAll('.lang-option');
+  const langNames = { zh: '中文', en: 'English', ar: 'العربية', th: 'ไทย', id: 'Bahasa Indonesia', vi: 'Tiếng Việt', ko: '한국어', ms: 'Bahasa Melayu' };
+
+  langBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    langSwitcher.classList.toggle('open');
+  });
+
+  langOptions.forEach(option => {
+    option.addEventListener('click', () => {
+      const lang = option.dataset.lang;
+      langOptions.forEach(o => o.classList.remove('active'));
+      option.classList.add('active');
+      langCurrent.textContent = langNames[lang];
+      langSwitcher.classList.remove('open');
+    });
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!langSwitcher.contains(e.target)) {
+      langSwitcher.classList.remove('open');
+    }
+  });
+
+  // Intersection Observer for animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+  document.querySelectorAll('.feature-card, .workflow-step, .jibao-feature').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(24px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+
+  // ===== Jibao Carousel =====
+  (function() {
+    const carousel = document.getElementById('jibaoCarousel');
+    if (!carousel) return;
+    const slides = carousel.querySelectorAll('.jibao-slide');
+    const dots = carousel.querySelectorAll('.carousel-dot');
+    const prevBtn = carousel.querySelector('.carousel-arrow.prev');
+    const nextBtn = carousel.querySelector('.carousel-arrow.next');
+    const urlBar = document.getElementById('carouselUrl');
+    const urls = ['集宝AI助手 · 智能对话交互', '集宝AI助手 · 平台侧边栏集成', '集宝AI助手 · 入驻政策咨询', '集宝AI助手 · 商品图AI创作'];
+    let current = 0;
+    let timer = null;
+
+    function goTo(index) {
+      current = (index + slides.length) % slides.length;
+      slides.forEach((s, i) => s.classList.toggle('active', i === current));
+      dots.forEach((d, i) => d.classList.toggle('active', i === current));
+      if (urlBar) urlBar.textContent = urls[current] || '';
+    }
+    function next() { goTo(current + 1); }
+    function prev() { goTo(current - 1); }
+    function startAuto() { stopAuto(); timer = setInterval(next, 5000); }
+    function stopAuto() { if (timer) { clearInterval(timer); timer = null; } }
+
+    nextBtn.addEventListener('click', () => { next(); startAuto(); });
+    prevBtn.addEventListener('click', () => { prev(); startAuto(); });
+    dots.forEach(dot => {
+      dot.addEventListener('click', () => { goTo(parseInt(dot.dataset.index)); startAuto(); });
+    });
+    carousel.addEventListener('mouseenter', stopAuto);
+    carousel.addEventListener('mouseleave', startAuto);
+    startAuto();
+  })();
+</script>
+
+</body>
+</html>
