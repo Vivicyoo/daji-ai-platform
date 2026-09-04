@@ -306,7 +306,13 @@
   .feature-thumb {
     width: 100%; height: 160px; object-fit: cover; display: block;
     border-bottom: 1px solid var(--border); background: var(--bg-light);
-    transition: transform 0.4s ease;
+    transition: transform 0.4s ease, filter 0.6s ease, opacity 0.6s ease;
+    filter: blur(8px);
+    opacity: 0.7;
+  }
+  .feature-thumb.loaded {
+    filter: blur(0);
+    opacity: 1;
   }
   .feature-thumb-placeholder {
     display: flex; align-items: center; justify-content: center;
@@ -530,7 +536,7 @@
 <nav class="navbar">
   <div class="nav-inner">
     <div class="logo">
-      <div class="logo-icon"><img src="logo.png" alt="中国大集"></div>
+      <div class="logo-icon"><img src="logo.png" alt="中国大集" decoding="async"></div>
       <span>大集AI</span>
     </div>
     <div class="nav-links">
@@ -604,7 +610,7 @@
         <div class="section-tag">JIVO AI ASSISTANT</div>
         <h2>集宝AI助手<br>你的<em>专属贸易智能顾问</em></h2>
         <div class="jibao-avatar-row">
-          <img src="jibao_avatar.png" alt="集宝AI助手" class="jibao-avatar-img">
+          <img src="jibao_avatar.png" alt="集宝AI助手" class="jibao-avatar-img" loading="lazy" decoding="async">
           <div class="jibao-avatar-info">
             <h4>Hi! 我是集宝</h4>
             <p>你的大集AI助手 · 7×24小时在线</p>
@@ -655,19 +661,19 @@
           </div>
           <div class="jibao-carousel" id="jibaoCarousel">
             <div class="jibao-slide active">
-              <img src="jibao_new1.png" alt="集宝AI助手对话界面">
+              <img src="jibao_new1.png" alt="集宝AI助手对话界面" loading="lazy" decoding="async">
               <span class="jibao-slide-label">智能对话 · 一句话调用全平台AI能力</span>
             </div>
             <div class="jibao-slide">
-              <img src="jibao_ui2.png" alt="集宝AI助手平台侧边栏">
+              <img src="jibao_ui2.png" alt="集宝AI助手平台侧边栏" loading="lazy" decoding="async">
               <span class="jibao-slide-label">平台集成 · 大集平台侧边栏随时唤起</span>
             </div>
             <div class="jibao-slide">
-              <img src="jibao_new5.png" alt="集宝AI助手入驻咨询">
+              <img src="jibao_new5.png" alt="集宝AI助手入驻咨询" loading="lazy" decoding="async">
               <span class="jibao-slide-label">入驻咨询 · 智能解答平台政策与条件</span>
             </div>
             <div class="jibao-slide">
-              <img src="jibao_new6.png" alt="集宝AI助手商品图生成">
+              <img src="jibao_new6.png" alt="集宝AI助手商品图生成" loading="lazy" decoding="async">
               <span class="jibao-slide-label">AI创作 · 商品图生成与编辑一站式完成</span>
             </div>
             <button class="carousel-arrow prev" aria-label="上一张"><svg class="svg-icon"><use href="#i-arrow-left"/></svg></button>
@@ -926,7 +932,7 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <div class="logo">
-          <div class="logo-icon"><img src="logo.png" alt="中国大集"></div>
+          <div class="logo-icon"><img src="logo-white.png" alt="中国大集" decoding="async"></div>
           <span>大集AI</span>
         </div>
         <p>全球贸易智能创作平台，以AI技术赋能商户，集宝AI助手 + 全链路工具矩阵，让贸易更简单、更高效。</p>
@@ -949,11 +955,11 @@
       </div>
       <div class="footer-col">
         <h5>关于我们</h5>
-        <a href="https://www.shendushuke.com/" target="_blank" rel="noopener">平台介绍</a>
-        <a href="#">合作伙伴</a>
-        <a href="#">帮助中心</a>
-        <a href="#">联系我们</a>
-        <a href="#">服务协议</a>
+        <a href="https://www.chinamarket.cn/about-us" target="_blank" rel="noopener">平台介绍</a>
+        <a href="https://www.chinamarket.cn/about-us" target="_blank" rel="noopener">合作伙伴</a>
+        <a href="https://www.chinamarket.cn/national-pavilion/overseas" target="_blank" rel="noopener">海外商城</a>
+        <a href="https://www.chinamarket.cn/about-us" target="_blank" rel="noopener">联系我们</a>
+        <a href="https://www.chinamarket.cn/help-center" target="_blank" rel="noopener">帮助中心</a>
       </div>
     </div>
     <div class="footer-bottom">
@@ -999,7 +1005,7 @@
   // Render feature card HTML
   function renderFeatureCard(f) {
     const thumb = f.image
-      ? `<img src="${f.image}" alt="${f.title}" class="feature-thumb" loading="lazy">`
+      ? `<img src="${f.image}" alt="${f.title}" class="feature-thumb" loading="lazy" decoding="async" onload="this.classList.add('loaded')">`
       : `<div class="feature-thumb feature-thumb-placeholder"><svg class="svg-icon" style="width:48px;height:48px;opacity:0.3"><use href="#${f.icon}"/></svg></div>`;
     return `
       <div class="feature-card">
