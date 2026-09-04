@@ -48,12 +48,9 @@
   }
   .logo { display: flex; align-items: center; gap: 10px; font-size: 22px; font-weight: 800; color: var(--primary); }
   .logo-icon {
-    width: 40px; height: 40px; border-radius: 10px;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
-    display: flex; align-items: center; justify-content: center;
-    color: #fff;
+    height: 40px; display: flex; align-items: center; justify-content: center;
   }
-  .logo-icon .svg-icon { width: 22px; height: 22px; stroke-width: 2; }
+  .logo-icon img { height: 36px; width: auto; display: block; }
   .nav-links { display: flex; gap: 36px; align-items: center; }
   .nav-links a { font-size: 15px; color: var(--text-gray); font-weight: 500; transition: color 0.2s; position: relative; }
   .nav-links a:hover, .nav-links a.active { color: var(--primary); }
@@ -533,7 +530,7 @@
 <nav class="navbar">
   <div class="nav-inner">
     <div class="logo">
-      <div class="logo-icon"><svg class="svg-icon"><use href="#i-logo"/></svg></div>
+      <div class="logo-icon"><img src="logo.png" alt="中国大集"></div>
       <span>大集AI</span>
     </div>
     <div class="nav-links">
@@ -929,7 +926,7 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <div class="logo">
-          <div class="logo-icon"><svg class="svg-icon"><use href="#i-logo"/></svg></div>
+          <div class="logo-icon"><img src="logo.png" alt="中国大集"></div>
           <span>大集AI</span>
         </div>
         <p>全球贸易智能创作平台，以AI技术赋能商户，集宝AI助手 + 全链路工具矩阵，让贸易更简单、更高效。</p>
@@ -952,7 +949,7 @@
       </div>
       <div class="footer-col">
         <h5>关于我们</h5>
-        <a href="#">平台介绍</a>
+        <a href="https://www.shendushuke.com/" target="_blank" rel="noopener">平台介绍</a>
         <a href="#">合作伙伴</a>
         <a href="#">帮助中心</a>
         <a href="#">联系我们</a>
