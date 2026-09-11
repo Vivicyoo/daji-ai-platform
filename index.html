@@ -852,9 +852,9 @@
     </div>
     <div class="nav-links">
       <a href="#top" class="active" data-i18n="nav_home">首页</a>
-      <a href="#jibao" data-i18n="nav_jibao">集宝AI助手</a>
       <a href="#aigc" data-i18n="nav_aigc">AIGC创作</a>
       <a href="#features" data-i18n="nav_tools">AI工具</a>
+      <a href="#jibao" data-i18n="nav_jibao">集宝AI助手</a>
       <a href="#scenes" data-i18n="nav_scenes">应用场景</a>
       <a href="#workflow" data-i18n="nav_flow">使用流程</a>
     </div>
@@ -1006,6 +1006,7 @@
           <div class="aigc-feature-item">
             <div class="aigc-feature-dot"></div>
             <div><strong data-i18n="aigc_img6">AI卖点图</strong><span data-i18n="aigc_img6_desc">智能生成卖点信息图，提升转化</span></div>
+            </div>
             <div class="aigc-feature-item">
               <div class="aigc-feature-dot"></div>
               <div><strong data-i18n="aigc_img7">商品智能换色</strong><span data-i18n="aigc_img7_desc">一键更换商品颜色，快速预览多色效果</span></div>
@@ -1035,6 +1036,50 @@
       </div>
     </div>
     
+  </div>
+</section>
+
+<!-- Features -->
+<section class="section features-section" id="features">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">AI TOOL MATRIX</div>
+      <h2 class="section-title" data-i18n="tools_title">全链路AI工具矩阵</h2>
+      <p class="section-desc" data-i18n="tools_subtitle">4大分类24项AI能力，从商品创作到贸易赋能，一站式覆盖经营全流程</p>
+    </div>
+
+    <div class="tab-nav" id="tabNav">
+      <button class="tab-btn active" data-tab="all"><svg class="svg-icon"><use href="#i-grid"/></svg><span data-i18n="tools_all">全部</span> <span class="tab-count">24</span></button>
+      <button class="tab-btn" data-tab="content"><svg class="svg-icon"><use href="#i-image"/></svg><span data-i18n="tools_cat1">内容创作</span> <span class="tab-count">11</span></button>
+      <button class="tab-btn" data-tab="translate"><svg class="svg-icon"><use href="#i-translate"/></svg><span data-i18n="tools_cat2">智能翻译</span> <span class="tab-count">5</span></button>
+      <button class="tab-btn" data-tab="business"><svg class="svg-icon"><use href="#i-briefcase"/></svg><span data-i18n="tools_cat3">商机经营</span> <span class="tab-count">4</span></button>
+      <button class="tab-btn" data-tab="global"><svg class="svg-icon"><use href="#i-ship"/></svg><span data-i18n="tools_cat4">贸易赋能</span> <span class="tab-count">4</span></button>
+    </div>
+
+    <!-- 全部 -->
+    <div class="tab-panel active" id="panel-all">
+      <div class="feature-grid" id="grid-all"></div>
+    </div>
+
+    <!-- 内容创作 -->
+    <div class="tab-panel" id="panel-content">
+      <div class="feature-grid" id="grid-content"></div>
+    </div>
+
+    <!-- 智能翻译 -->
+    <div class="tab-panel" id="panel-translate">
+      <div class="feature-grid" id="grid-translate"></div>
+    </div>
+
+    <!-- 商机经营 -->
+    <div class="tab-panel" id="panel-business">
+      <div class="feature-grid" id="grid-business"></div>
+    </div>
+
+    <!-- 贸易赋能 -->
+    <div class="tab-panel" id="panel-global">
+      <div class="feature-grid" id="grid-global"></div>
+    </div>
   </div>
 </section>
 
@@ -1123,50 +1168,6 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- Features -->
-<section class="section features-section" id="features">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-tag">AI TOOL MATRIX</div>
-      <h2 class="section-title" data-i18n="tools_title">全链路AI工具矩阵</h2>
-      <p class="section-desc" data-i18n="tools_subtitle">4大分类24项AI能力，从商品创作到贸易赋能，一站式覆盖经营全流程</p>
-    </div>
-
-    <div class="tab-nav" id="tabNav">
-      <button class="tab-btn active" data-tab="all"><svg class="svg-icon"><use href="#i-grid"/></svg><span data-i18n="tools_all">全部</span> <span class="tab-count">24</span></button>
-      <button class="tab-btn" data-tab="content"><svg class="svg-icon"><use href="#i-image"/></svg><span data-i18n="tools_cat1">内容创作</span> <span class="tab-count">11</span></button>
-      <button class="tab-btn" data-tab="translate"><svg class="svg-icon"><use href="#i-translate"/></svg><span data-i18n="tools_cat2">智能翻译</span> <span class="tab-count">5</span></button>
-      <button class="tab-btn" data-tab="business"><svg class="svg-icon"><use href="#i-briefcase"/></svg><span data-i18n="tools_cat3">商机经营</span> <span class="tab-count">4</span></button>
-      <button class="tab-btn" data-tab="global"><svg class="svg-icon"><use href="#i-ship"/></svg><span data-i18n="tools_cat4">贸易赋能</span> <span class="tab-count">4</span></button>
-    </div>
-
-    <!-- 全部 -->
-    <div class="tab-panel active" id="panel-all">
-      <div class="feature-grid" id="grid-all"></div>
-    </div>
-
-    <!-- 内容创作 -->
-    <div class="tab-panel" id="panel-content">
-      <div class="feature-grid" id="grid-content"></div>
-    </div>
-
-    <!-- 智能翻译 -->
-    <div class="tab-panel" id="panel-translate">
-      <div class="feature-grid" id="grid-translate"></div>
-    </div>
-
-    <!-- 商机经营 -->
-    <div class="tab-panel" id="panel-business">
-      <div class="feature-grid" id="grid-business"></div>
-    </div>
-
-    <!-- 贸易赋能 -->
-    <div class="tab-panel" id="panel-global">
-      <div class="feature-grid" id="grid-global"></div>
     </div>
   </div>
 </section>
