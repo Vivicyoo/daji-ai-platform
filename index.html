@@ -313,6 +313,9 @@
   .aigc-feature-item strong { display: block; font-size: 14px; font-weight: 700; color: var(--text-dark); margin-bottom: 2px; }
   .aigc-feature-item span { font-size: 12px; color: var(--text-gray); line-height: 1.5; }
   .aigc-cta-row { text-align: center; padding-top: 8px; }
+  .aigc-cta-inline { margin-top: 24px; }
+  .aigc-cta-inline .btn { padding: 12px 28px; font-size: 14px; }
+
   @media (max-width: 900px) { 
     .aigc-showcase { grid-template-columns: 1fr; gap: 28px; }
     .aigc-image-showcase .aigc-showcase-visual { order: -1; }
@@ -603,12 +606,12 @@
   .footer-contact strong { color: rgba(255,255,255,0.8); display: block; margin-bottom: 6px; }
   .footer-qrcodes { min-width: 200px; }
   .qrcode-grid {
-    display: flex; flex-direction: row; gap: 16px; flex-wrap: nowrap;
+    display: flex; flex-direction: row; gap: 16px; flex-wrap: wrap; justify-content: flex-start;
   }
   .qrcode-item { display: flex; flex-direction: column; align-items: center; }
   .qrcode-img {
-    width: 100px; height: 100px; border-radius: 10px;
-    background: #fff; padding: 6px; object-fit: contain;
+    width: 80px; height: 80px; border-radius: 8px;
+    background: #fff; padding: 4px; object-fit: contain;
   }
   .qrcode-item span { font-size: 12px; color: rgba(255,255,255,0.6); margin-top: 6px; display: block; text-align: center; }
   .footer-bottom-links {
@@ -843,8 +846,8 @@
 <nav class="navbar">
   <div class="nav-inner">
     <div class="logo">
-      <div class="logo-icon"><img src="logo.png" alt="中国大集" decoding="async"></div>
-      <img src="https://aka.doubaocdn.com/s/CfKgTvs0W6" alt="AI智创" style="height:28px;width:auto;">
+      <div class="logo-icon"><img src="logo.png" alt="中国大集" decoding="async" loaded="true"></div>
+      <img src="https://aka.doubaocdn.com/s/CfKgTvs0W6" alt="AI智创" style="height:28px;width:auto;" loaded="true">
     </div>
     <div class="nav-links">
       <a href="#top" class="active" data-i18n="nav_home">首页</a>
@@ -1011,12 +1014,6 @@
       </div>
     </div>
     
-    <div class="aigc-cta-row">
-      <a href="https://www.chinamarket.cn/?loginType=1" target="_blank" class="btn btn-primary btn-large">
-        <span data-i18n="aigc_cta">立即体验集集智创台</span>
-        <svg class="svg-icon"><use href="#i-arrow-right"/></svg>
-      </a>
-    </div>
   </div>
 </section>
 
@@ -1327,8 +1324,8 @@
             </div>
           </div>
           <div style="padding: 24px 28px 28px;">
-            <h4 style="font-size: 20px; font-weight: 600; color: #1a1a2e; margin: 0 0 10px;" data-i18n="dh_card_title">全传晓 - AI数字人宣讲</h4>
-            <p style="font-size: 15px; color: #666; margin: 0; line-height: 1.7;" data-i18n="dh_card_desc">深度数科集团董事长，AI数字人技术助力企业品牌智能传播与多语种宣讲，让企业领导者的声音触达全球市场</p>
+            <h4 style="font-size: 20px; font-weight: 600; color: #1a1a2e; margin: 0 0 10px;" data-i18n="dh_card_title">AI数字人智能宣讲</h4>
+            <p style="font-size: 15px; color: #666; margin: 0; line-height: 1.7;" data-i18n="dh_card_desc">AI数字人技术助力企业打造专属数字形象，实现智能宣讲与品牌传播，多语种版本一键生成，让品牌声音触达全球市场</p>
           </div>
         </div>
       </div>
@@ -1386,8 +1383,7 @@
             <span class="dh-card-duration">00:55</span>
           </div>
           <div class="dh-card-body">
-            <!-- 全传晓保留：<h4 data-i18n="kb_name_3" data-name="全传晓">全传晓</h4> -->
-            <h4>AI数字人</h4>
+            <h4 data-i18n="kb_name_3" data-name="全传晓">全传晓</h4>
             <p>深度数科集团董事长</p>
           </div>
         </div>
@@ -1605,8 +1601,8 @@
       <!-- 左列：AI智创说明 -->
       <div class="footer-brand-col">
         <div class="logo">
-          <div class="logo-icon"><img src="logo-white.png" alt="中国大集" decoding="async"></div>
-          <img src="https://aka.doubaocdn.com/s/gVrSWkXXiH" alt="AI智创" style="height:28px;width:auto;">
+          <div class="logo-icon"><img src="logo-white.png" alt="中国大集" decoding="async" loaded="true"></div>
+          <img src="https://aka.doubaocdn.com/s/gVrSWkXXiH" alt="AI智创" style="height:28px;width:auto;" loaded="true">
         </div>
         <p data-i18n="footer_desc">全球贸易智能创作平台，以AI技术赋能商户，集宝AI助手 + 全链路工具矩阵，让贸易更简单、更高效。</p>
       </div>
@@ -1707,6 +1703,9 @@ const i18n = {
         aigc_img4: '商品图换背景', aigc_img4_desc: '智能替换图片背景，适配不同平台和推广场景',
         aigc_img5: 'AI细节图', aigc_img5_desc: '自动生成产品细节放大图，突出工艺和质感',
         aigc_img6: 'AI卖点图', aigc_img6_desc: '智能生成产品卖点信息图，提升详情页转化',
+        aigc_img7: '商品智能换色', aigc_img7_desc: '一键更换商品颜色，快速预览多色效果',
+        aigc_img8: 'AI标尺图', aigc_img8_desc: '自动标注商品尺寸，生成专业标尺图',
+        aigc_cta_simple: '立即体验',
         aigc_img7: '商品换色', aigc_img7_desc: '一键更换产品颜色，快速生成多SKU展示图',
         aigc_img8: '商品标尺图', aigc_img8_desc: '自动添加尺寸标注，让买家直观了解产品大小',
         aigc_vid1: '产品宣传视频', aigc_vid1_desc: '上传产品图+画面描述，AI生成专业产品展示短片',
@@ -2153,8 +2152,8 @@ const i18n = {
         scene3_subtitle: 'Efficient and Compliant Customs Clearance',
         scene4_subtitle: 'Talking Smart Business Card',
         scene5_subtitle: 'Generate Professional Sales Video in 10 Seconds',
-        dh_card_title: 'Quan Chuanxiao - AI Digital Human Presentation',
-        dh_card_desc: 'Chairman of Shendu Shuke Group, AI digital human technology enables intelligent brand communication and multilingual presentations, letting enterprise leaders\' voices reach the global market',
+        dh_card_title: 'AI Digital Human Presentation',
+        dh_card_desc: 'AI digital human technology helps enterprises create exclusive digital avatars for intelligent presentations and brand communication, with one-click multilingual generation',
         kb_pos_1: 'Deputy to the 14th National People\'s Congress, Chairman of Xinminghui Group',
         kb_pos_2: 'Party Secretary and Chairman of Linyi Mall Group',
         kb_pos_3: 'Chairman of Shendu Shuke Group',
@@ -2399,8 +2398,8 @@ const i18n = {
         scene3_subtitle: 'التخليص الجمركي الفعال والمتوافق',
         scene4_subtitle: 'بطاقة عمل ذكية تتحدث',
         scene5_subtitle: 'إنشاء فيديو مبيعات احترافي في 10 ثوانٍ',
-        dh_card_title: 'كوان تشوانشياو - عرض رقمي بشري بالذكاء الاصطناعي',
-        dh_card_desc: 'رئيس مجموعة شيندو شوك، تتيح تقنية البشر الرقمي بالذكاء الاصطناعي التواصل الذكي للعلامة التجارية والعروض متعددة اللغات، مما يسمح لأصوات قادة الشركات بالوصول إلى السوق العالمية',
+        dh_card_title: 'عرض رقمي بشري بالذكاء الاصطناعي',
+        dh_card_desc: 'تساعد تقنية البشر الرقمي بالذكاء الاصطناعي الشركات على إنشاء صور رقمية حصرية للعروض الذكية والتواصل مع العلامة التجارية، مع توليد متعدد اللغات بنقرة واحدة',
         kb_pos_1: 'نائب في المؤتمر الشعبي الوطني الرابع عشر، رئيس مجموعة شينمينغهوي',
         kb_pos_2: 'أمين الحزب ورئيس مجموعة ليني مول',
         kb_pos_3: 'رئيس مجموعة شيندو شوك',
@@ -2643,8 +2642,8 @@ const i18n = {
         scene3_subtitle: '효율적이고 규정 준수하는 통관',
         scene4_subtitle: '말하는 스마트 명함',
         scene5_subtitle: '10초 만에 전문 판매 비디오 생성',
-        dh_card_title: '취안촨샤오 - AI 디지털 휴먼 프레젠테이션',
-        dh_card_desc: '심도수케 그룹 회장, AI 디지털 휴먼 기술로 지능형 브랜드 커뮤니케이션과 다국어 프레젠테이션을 가능하게 하여 기업 리더의 목소리가 글로벌 시장에 도달하도록 합니다',
+        dh_card_title: 'AI 디지털 휴먼 프레젠테이션',
+        dh_card_desc: 'AI 디지털 휴먼 기술로 기업의 독점적인 디지털 아바타를 제작하여 지능형 프레젠테이션과 브랜드 커뮤니케이션을 실현하고, 원클릭 다국어 생성이 가능합니다',
         kb_pos_1: '제14기 전국인민대표대회 대표, 신밍후이 그룹 회장',
         kb_pos_2: '린이 몰 그룹 당서기 및 회장',
         kb_pos_3: '심도수케 그룹 회장',
@@ -3130,7 +3129,7 @@ const i18n = {
         scene3_subtitle: 'Pembersihan Bea Cukai yang Efisien dan Sesuai',
         scene4_subtitle: 'Kartu Bisnis Pintar yang Bisa Berbicara',
         scene5_subtitle: 'Hasilkan Video Penjualan Profesional dalam 10 Detik',
-        dh_card_title: 'Quan Chuanxiao - Presentasi Manusia Digital AI',
+        dh_card_title: 'Presentasi Manusia Digital AI',
         dh_card_desc: 'Ketua Grup Shendu Shuke, teknologi manusia digital AI memungkinkan komunikasi merek cerdas dan presentasi multibahasa, membiarkan suara pemimpin perusahaan menjangkau pasar global',
         kb_pos_1: 'Wakil Kongres Rakyat Nasional ke-14, Ketua Grup Xinminghui',
         kb_pos_2: 'Sekretaris Partai dan Ketua Grup Linyi Mall',
