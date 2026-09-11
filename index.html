@@ -47,9 +47,10 @@
     height: 72px; max-width: 1280px; margin: 0 auto; padding: 0 32px;
   }
   .logo { display: flex; align-items: center; gap: 10px; font-size: 22px; font-weight: 800; color: var(--primary); }
-  img { max-width: 100%; height: auto; display: block; transition: filter 0.6s ease, opacity 0.6s ease; }
-  img:not([loaded]) { filter: blur(10px); opacity: 0.8; }
-  img[loaded] { filter: blur(0); opacity: 1; }
+  img { max-width: 100%; height: auto; display: block; }
+  .progressive-img { transition: filter 0.6s ease, opacity 0.6s ease; }
+  .progressive-img:not([loaded]) { filter: blur(8px); opacity: 0.9; }
+  .progressive-img[loaded] { filter: blur(0); opacity: 1; }
 
   .logo-icon {
     height: 40px; display: flex; align-items: center; justify-content: center;
@@ -928,7 +929,7 @@
     <div class="aigc-showcase aigc-video-showcase">
       <div class="aigc-showcase-visual">
         <div class="aigc-showcase-img-wrap">
-          <img src="images/ai_product_video.jpg" alt="视频创作" loading="lazy" decoding="async" class="aigc-showcase-img">
+          <img src="images/ai_product_video.jpg" alt="视频创作" loading="lazy" decoding="async" class="aigc-showcase-img progressive-img">
           <div class="aigc-showcase-overlay">
             <div class="aigc-play-btn"><svg class="svg-icon"><use href="#i-play"/></svg></div>
           </div>
@@ -1024,7 +1025,7 @@
       </div>
       <div class="aigc-showcase-visual">
         <div class="aigc-showcase-img-wrap">
-          <img src="images/scene_image.jpg" alt="图片创作" loading="lazy" decoding="async" class="aigc-showcase-img">
+          <img src="images/scene_image.jpg" alt="图片创作" loading="lazy" decoding="async" class="aigc-showcase-img progressive-img">
           <div class="aigc-showcase-overlay light"></div>
         </div>
         <div class="aigc-showcase-badge light">
@@ -3763,15 +3764,27 @@ function switchLanguage(lang) {
     `;
   }
 
-  // 图片渐进加载
-  document.querySelectorAll('img').forEach(function(img) {
+  // 图片渐进加载 - 使用MutationObserver监听动态图片
+  function initProgressiveImg(img) {
+    if (!img.classList.contains('progressive-img')) return;
     if (img.complete && img.naturalWidth > 0) {
       img.setAttribute('loaded', 'true');
     } else {
       img.onload = function() { img.setAttribute('loaded', 'true'); };
       img.onerror = function() { img.setAttribute('loaded', 'true'); };
     }
+  }
+  document.querySelectorAll('img.progressive-img').forEach(initProgressiveImg);
+  // 监听动态添加的图片
+  var imgObserver = new MutationObserver(function(mutations) {
+    mutations.forEach(function(m) {
+      m.addedNodes.forEach(function(node) {
+        if (node.tagName === 'IMG') initProgressiveImg(node);
+        if (node.querySelectorAll) node.querySelectorAll('img.progressive-img').forEach(initProgressiveImg);
+      });
+    });
   });
+  imgObserver.observe(document.body, { childList: true, subtree: true });
 
   // AIGC板块tab切换
   document.querySelectorAll('.aigc-mode-tab').forEach(tab => {
