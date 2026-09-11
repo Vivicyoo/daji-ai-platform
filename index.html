@@ -1326,22 +1326,57 @@
         <p class="section-desc" data-i18n="dh_subtitle">AI数字人技术助力企业领导者打造专属数字形象，实现智能宣讲与品牌传播</p>
       </div>
       
-      <div style="max-width: 850px; margin: 0 auto;">
-        <div class="dh-card" style="background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 40px rgba(212,40,47,0.1); border: 1px solid rgba(212,40,47,0.08); transition: transform 0.3s, box-shadow 0.3s;">
-          <div style="position: relative; padding: 14px; background: linear-gradient(135deg, #fff5f5, #fff8f0);">
-            <div style="position: relative; border-radius: 14px; overflow: hidden; aspect-ratio: 16/9; background: #1a1a2e;">
-              <video id="dhSingleVideo" style="width: 100%; height: 100%; object-fit: cover;" muted loop playsinline autoplay>
-                <!-- 全传晓原视频保留：https://static.chinamarket.cn/static/trade-exhibition/ai-daji/video/quan-taiguo.mp4?v=4.1 -->
-                <source src="videos/digital_human_demo.mp4" type="video/mp4">
-              </video>
-              <div class="dh-card-play" onclick="var v=document.getElementById('dhSingleVideo');v.muted=!v.muted;if(v.muted){this.style.display='flex'}else{this.style.display='none'}" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 64px; height: 64px; background: rgba(212,40,47,0.9); border-radius: 50%; display: none; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 20px rgba(212,40,47,0.4); transition: transform 0.3s;">
-                <svg style="width: 26px; height: 26px; fill: white; margin-left: 4px;" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-              </div>
+      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; max-width: 900px; margin: 0 auto;">
+        <!-- 全传晓 -->
+        <div class="dh-card" style="background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 30px rgba(212,40,47,0.1); border: 1px solid rgba(212,40,47,0.08); transition: transform 0.3s, box-shadow 0.3s;">
+          <div class="dh-card-media" style="position: relative; aspect-ratio: 16/9; background: #1a1a2e;">
+            <img src="images/dh_quanchuanxiao.jpg" alt="全传晓" class="dh-card-img" style="width:100%;height:100%;object-fit:cover;" loading="lazy">
+            <div class="dh-card-play" onclick="openDhVideo(this)" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 56px; height: 56px; background: rgba(212,40,47,0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 20px rgba(212,40,47,0.4);">
+              <svg style="width: 22px; height: 22px; fill: white; margin-left: 3px;" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
             </div>
           </div>
-          <div style="padding: 24px 28px 28px;">
-            <h4 style="font-size: 20px; font-weight: 600; color: #1a1a2e; margin: 0 0 10px;" data-i18n="dh_card_title">AI数字人智能宣讲</h4>
-            <p style="font-size: 15px; color: #666; margin: 0; line-height: 1.7;" data-i18n="dh_card_desc">AI数字人技术助力企业打造专属数字形象，实现智能宣讲与品牌传播，多语种版本一键生成，让品牌声音触达全球市场</p>
+          <div class="dh-card-body" style="padding: 18px 20px 20px;">
+            <h4 style="font-size: 17px; font-weight: 600; color: #1a1a2e; margin: 0 0 6px;" data-i18n="kb_name_3" data-name="全传晓">全传晓</h4>
+            <p style="font-size: 13px; color: #888; margin: 0; line-height: 1.5;">深度数科集团董事长</p>
+          </div>
+        </div>
+        <!-- 李辉 -->
+        <div class="dh-card" style="background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 30px rgba(212,40,47,0.1); border: 1px solid rgba(212,40,47,0.08); transition: transform 0.3s, box-shadow 0.3s;">
+          <div class="dh-card-media" style="position: relative; aspect-ratio: 16/9; background: #1a1a2e;">
+            <img src="images/dh_lihui.jpg" alt="李辉" class="dh-card-img" style="width:100%;height:100%;object-fit:cover;" loading="lazy">
+            <div class="dh-card-play" onclick="openDhVideo(this)" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 56px; height: 56px; background: rgba(212,40,47,0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 20px rgba(212,40,47,0.4);">
+              <svg style="width: 22px; height: 22px; fill: white; margin-left: 3px;" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
+          <div class="dh-card-body" style="padding: 18px 20px 20px;">
+            <h4 style="font-size: 17px; font-weight: 600; color: #1a1a2e; margin: 0 0 6px;" data-i18n="kb_name_1" data-name="李辉">李辉</h4>
+            <p style="font-size: 13px; color: #888; margin: 0; line-height: 1.5;" data-i18n="kb_pos_1">第十四届全国人大代表、新明辉集团董事长</p>
+          </div>
+        </div>
+        <!-- 孙思永 -->
+        <div class="dh-card" style="background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 30px rgba(212,40,47,0.1); border: 1px solid rgba(212,40,47,0.08); transition: transform 0.3s, box-shadow 0.3s;">
+          <div class="dh-card-media" style="position: relative; aspect-ratio: 16/9; background: #1a1a2e;">
+            <img src="images/dh_sunsiyong.jpg" alt="孙思永" class="dh-card-img" style="width:100%;height:100%;object-fit:cover;" loading="lazy">
+            <div class="dh-card-play" onclick="openDhVideo(this)" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 56px; height: 56px; background: rgba(212,40,47,0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 20px rgba(212,40,47,0.4);">
+              <svg style="width: 22px; height: 22px; fill: white; margin-left: 3px;" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
+          <div class="dh-card-body" style="padding: 18px 20px 20px;">
+            <h4 style="font-size: 17px; font-weight: 600; color: #1a1a2e; margin: 0 0 6px;" data-i18n="kb_name_2" data-name="孙思永">孙思永</h4>
+            <p style="font-size: 13px; color: #888; margin: 0; line-height: 1.5;" data-i18n="kb_pos_2">临沂商城集团党委书记、董事长</p>
+          </div>
+        </div>
+        <!-- 杨继江 -->
+        <div class="dh-card" style="background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 30px rgba(212,40,47,0.1); border: 1px solid rgba(212,40,47,0.08); transition: transform 0.3s, box-shadow 0.3s;">
+          <div class="dh-card-media" style="position: relative; aspect-ratio: 16/9; background: #1a1a2e;">
+            <img src="images/dh_yangjijiang.jpg" alt="杨继江" class="dh-card-img" style="width:100%;height:100%;object-fit:cover;" loading="lazy">
+            <div class="dh-card-play" onclick="openDhVideo(this)" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 56px; height: 56px; background: rgba(212,40,47,0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 20px rgba(212,40,47,0.4);">
+              <svg style="width: 22px; height: 22px; fill: white; margin-left: 3px;" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
+          <div class="dh-card-body" style="padding: 18px 20px 20px;">
+            <h4 style="font-size: 17px; font-weight: 600; color: #1a1a2e; margin: 0 0 6px;" data-i18n="kb_name_4" data-name="杨继江">杨继江</h4>
+            <p style="font-size: 13px; color: #888; margin: 0; line-height: 1.5;" data-i18n="kb_pos_4">山东中洋实业集团董事长</p>
           </div>
         </div>
       </div>
