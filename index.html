@@ -377,14 +377,9 @@
   .feature-thumb {
     width: 100%; height: 160px; object-fit: cover; display: block;
     border-bottom: 1px solid var(--border); background: var(--bg-light);
-    transition: transform 0.4s ease, filter 0.6s ease, opacity 0.6s ease;
-    filter: blur(8px);
-    opacity: 0.7;
+    transition: transform 0.4s ease;
   }
-  .feature-thumb.loaded {
-    filter: blur(0);
-    opacity: 1;
-  }
+  .feature-thumb:hover { transform: scale(1.05); }
   .feature-thumb-placeholder {
     display: flex; align-items: center; justify-content: center;
     background: linear-gradient(135deg, rgba(212,40,47,0.06) 0%, rgba(255,122,69,0.06) 100%);
@@ -3746,7 +3741,7 @@ function switchLanguage(lang) {
     var title = f['title_' + lang] || f.title;
     var desc = f['desc_' + lang] || f.desc;
     const thumb = f.image
-      ? `<img src="${f.image}" alt="${title}" class="feature-thumb" loading="lazy" decoding="async" onload="this.classList.add('loaded')">`
+      ? `<img src="${f.image}" alt="${title}" class="feature-thumb" loading="lazy" decoding="async" >`
       : `<div class="feature-thumb feature-thumb-placeholder"><svg class="svg-icon" style="width:48px;height:48px;opacity:0.3"><use href="#${f.icon}"/></svg></div>`;
     return `
       <div class="feature-card">
