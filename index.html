@@ -47,6 +47,10 @@
     height: 72px; max-width: 1280px; margin: 0 auto; padding: 0 32px;
   }
   .logo { display: flex; align-items: center; gap: 10px; font-size: 22px; font-weight: 800; color: var(--primary); }
+  img { max-width: 100%; height: auto; display: block; transition: filter 0.6s ease, opacity 0.6s ease; }
+  img:not([loaded]) { filter: blur(10px); opacity: 0.8; }
+  img[loaded] { filter: blur(0); opacity: 1; }
+
   .logo-icon {
     height: 40px; display: flex; align-items: center; justify-content: center;
   }
@@ -285,33 +289,36 @@
 
   /* ===== Feature Tabs ===== */
 
-  /* ===== AIGC Section (集集智创台) ===== */
+  /* ===== AIGC Section (AIGC集集智创台) ===== */
   .aigc-section { background: linear-gradient(180deg, #fff 0%, #fef6f5 50%, #fff 100%); padding: 80px 0; }
-  .aigc-mode-tabs { display: flex; justify-content: center; gap: 12px; margin-bottom: 36px; }
-  .aigc-mode-tab { display: flex; align-items: center; gap: 8px; padding: 12px 28px; border-radius: 30px; border: 1.5px solid rgba(212,40,47,0.15); background: #fff; color: var(--text-gray); font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; }
-  .aigc-mode-tab .svg-icon { width: 18px; height: 18px; }
-  .aigc-mode-tab:hover { border-color: var(--primary); color: var(--primary); }
-  .aigc-mode-tab.active { background: linear-gradient(135deg, var(--primary), var(--accent)); color: #fff; border-color: transparent; box-shadow: 0 8px 24px rgba(212,40,47,0.25); }
-  .aigc-mode-panel { display: none; animation: fadeInUp 0.4s ease; }
-  .aigc-mode-panel.active { display: block; }
-  @keyframes fadeInUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
-  .aigc-tool-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 36px; }
-  .aigc-tool-card { background: #fff; border-radius: 14px; padding: 24px 20px; border: 1px solid rgba(212,40,47,0.08); transition: all 0.3s ease; position: relative; overflow: hidden; }
-  .aigc-tool-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--primary), var(--accent)); transform: scaleX(0); transform-origin: left; transition: transform 0.3s ease; }
-  .aigc-tool-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(212,40,47,0.12); border-color: rgba(212,40,47,0.15); }
-  .aigc-tool-card:hover::before { transform: scaleX(1); }
-  .aigc-tool-card.highlight { background: linear-gradient(135deg, #fff5f4 0%, #fff 100%); border-color: rgba(212,40,47,0.18); }
-  .aigc-tool-card.coming-soon { opacity: 0.7; }
-  .aigc-tool-icon { width: 44px; height: 44px; border-radius: 10px; background: linear-gradient(135deg, rgba(212,40,47,0.08), rgba(255,122,69,0.08)); display: flex; align-items: center; justify-content: center; margin-bottom: 14px; color: var(--primary); }
-  .aigc-tool-icon .svg-icon { width: 22px; height: 22px; }
-  .aigc-tool-card h4 { font-size: 15px; font-weight: 700; color: var(--text-dark); margin-bottom: 6px; }
-  .aigc-tool-card p { font-size: 12.5px; color: var(--text-gray); line-height: 1.65; }
-  .aigc-soon-tag { position: absolute; top: 12px; right: 12px; font-size: 10px; padding: 3px 8px; background: rgba(255,122,69,0.12); color: var(--accent); border-radius: 10px; font-weight: 600; }
+  .aigc-showcase { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; margin-bottom: 56px; }
+  .aigc-showcase:last-of-type { margin-bottom: 40px; }
+  .aigc-showcase-visual { position: relative; }
+  .aigc-showcase-img-wrap { position: relative; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(212,40,47,0.15); aspect-ratio: 4/3; }
+  .aigc-showcase-img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease; }
+  .aigc-showcase-img-wrap:hover .aigc-showcase-img { transform: scale(1.05); }
+  .aigc-showcase-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(212,40,47,0.1), rgba(255,122,69,0.15)); display: flex; align-items: center; justify-content: center; }
+  .aigc-showcase-overlay.light { background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,200,200,0.2)); }
+  .aigc-play-btn { width: 64px; height: 64px; border-radius: 50%; background: rgba(255,255,255,0.95); display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 30px rgba(0,0,0,0.2); transition: all 0.3s ease; }
+  .aigc-play-btn .svg-icon { width: 24px; height: 24px; color: var(--primary); margin-left: 3px; }
+  .aigc-showcase-img-wrap:hover .aigc-play-btn { transform: scale(1.1); background: #fff; }
+  .aigc-showcase-badge { position: absolute; top: 16px; left: 16px; display: flex; align-items: center; gap: 6px; padding: 8px 16px; background: linear-gradient(135deg, var(--primary), var(--accent)); color: #fff; border-radius: 20px; font-size: 13px; font-weight: 600; box-shadow: 0 4px 16px rgba(212,40,47,0.3); }
+  .aigc-showcase-badge .svg-icon { width: 16px; height: 16px; }
+  .aigc-showcase-badge.light { background: rgba(255,255,255,0.95); color: var(--primary); }
+  .aigc-showcase-content h3 { font-size: 28px; font-weight: 800; color: var(--text-dark); margin-bottom: 14px; }
+  .aigc-showcase-desc { font-size: 15px; color: var(--text-gray); line-height: 1.8; margin-bottom: 24px; }
+  .aigc-feature-list { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 20px; }
+  .aigc-feature-item { display: flex; gap: 10px; align-items: flex-start; }
+  .aigc-feature-dot { width: 8px; height: 8px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--accent)); margin-top: 7px; flex-shrink: 0; }
+  .aigc-feature-item strong { display: block; font-size: 14px; font-weight: 700; color: var(--text-dark); margin-bottom: 2px; }
+  .aigc-feature-item span { font-size: 12px; color: var(--text-gray); line-height: 1.5; }
   .aigc-cta-row { text-align: center; padding-top: 8px; }
-  .aigc-cta-note { margin-top: 14px; font-size: 13px; color: var(--text-gray); opacity: 0.8; }
-  @media (max-width: 1024px) { .aigc-tool-grid { grid-template-columns: repeat(3, 1fr); } }
-  @media (max-width: 768px) { .aigc-tool-grid { grid-template-columns: repeat(2, 1fr); } .aigc-mode-tabs { flex-wrap: wrap; } }
-  @media (max-width: 480px) { .aigc-tool-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 900px) { 
+    .aigc-showcase { grid-template-columns: 1fr; gap: 28px; }
+    .aigc-image-showcase .aigc-showcase-visual { order: -1; }
+    .aigc-feature-list { grid-template-columns: 1fr; }
+    .aigc-showcase-content h3 { font-size: 24px; }
+  }
 
   .features-section {
   background:
@@ -820,6 +827,7 @@
   <symbol id="i-select" viewBox="0 0 24 24"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="m6 12 6 3 6-3"/><path d="m6 17 6 3 6-3"/><path d="m9 7 2 2 4-4"/></symbol>
   <symbol id="i-upload" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m17 8-5-5-5 5"/><path d="M12 3v12"/></symbol>
   <symbol id="i-generate" viewBox="0 0 24 24"><path d="M12 2v4"/><path d="m16.2 7.8 2.9-2.9"/><path d="M18 12h4"/><path d="m16.2 16.2 2.9 2.9"/><path d="M12 18v4"/><path d="m4.9 19.1 2.9-2.9"/><path d="M2 12h4"/><path d="m4.9 4.9 2.9 2.9"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></symbol>
   <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
   <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></symbol>
   <symbol id="i-sparkles" viewBox="0 0 24 24"><path d="M12 3l1.9 5.8L20 10l-6.1 1.2L12 17l-1.9-5.8L4 10l6.1-1.2z"/><path d="M19 3v4"/><path d="M17 5h4"/></symbol>
@@ -904,106 +912,101 @@
 </section>
 
 
-<!-- 集集智创台 AIGC -->
+<!-- AIGC集集智创台 -->
 <section class="section aigc-section" id="aigc">
   <div class="container">
     <div class="section-header">
-      <div class="section-tag">JIJI AI CREATION PLATFORM</div>
-      <h2 class="section-title" data-i18n="aigc_title">集集智创台</h2>
-      <p class="section-desc" data-i18n="aigc_subtitle">一站式AIGC内容创作平台，覆盖图片创作与视频创作两大核心能力，后续将集成全链路AI工具矩阵</p>
+      <div class="section-tag">AIGC CREATION PLATFORM</div>
+      <h2 class="section-title" data-i18n="aigc_title">AIGC集集智创台</h2>
+      <p class="section-desc" data-i18n="aigc_subtitle">一站式AIGC内容创作平台，覆盖视频创作与图片创作两大核心能力</p>
     </div>
     
-    <!-- 两大模块切换 -->
-    <div class="aigc-mode-tabs">
-      <button class="aigc-mode-tab active" data-mode="image">
-        <svg class="svg-icon"><use href="#i-scene"/></svg>
-        <span data-i18n="aigc_image_mode">图片创作</span>
-      </button>
-      <button class="aigc-mode-tab" data-mode="video">
-        <svg class="svg-icon"><use href="#i-product-video"/></svg>
-        <span data-i18n="aigc_video_mode">视频创作</span>
-      </button>
-    </div>
-    
-    <!-- 图片创作面板 -->
-    <div class="aigc-mode-panel active" id="aigc-image-panel">
-      <div class="aigc-tool-grid">
-        <div class="aigc-tool-card">
-          <div class="aigc-tool-icon"><svg class="svg-icon"><use href="#i-white-bg"/></svg></div>
-          <h4 data-i18n="aigc_img1">生成白底图</h4>
-          <p data-i18n="aigc_img1_desc">一键去除背景，生成符合平台规范的白底商品图</p>
+    <!-- 视频创作（在前）-->
+    <div class="aigc-showcase aigc-video-showcase">
+      <div class="aigc-showcase-visual">
+        <div class="aigc-showcase-img-wrap">
+          <img src="images/ai_product_video.jpg" alt="视频创作" loading="lazy" decoding="async" class="aigc-showcase-img">
+          <div class="aigc-showcase-overlay">
+            <div class="aigc-play-btn"><svg class="svg-icon"><use href="#i-play"/></svg></div>
+          </div>
         </div>
-        <div class="aigc-tool-card">
-          <div class="aigc-tool-icon"><svg class="svg-icon"><use href="#i-scene"/></svg></div>
-          <h4 data-i18n="aigc_img2">生成场景图</h4>
-          <p data-i18n="aigc_img2_desc">商品融入真实使用场景，增强代入感和购买欲望</p>
+        <div class="aigc-showcase-badge">
+          <svg class="svg-icon"><use href="#i-product-video"/></svg>
+          <span data-i18n="aigc_video_mode">视频创作</span>
         </div>
-        <div class="aigc-tool-card">
-          <div class="aigc-tool-icon"><svg class="svg-icon"><use href="#i-sharpen"/></svg></div>
-          <h4 data-i18n="aigc_img3">图片变清晰</h4>
-          <p data-i18n="aigc_img3_desc">AI修复模糊低分辨率图片，完美呈现产品细节</p>
-        </div>
-        <div class="aigc-tool-card">
-          <div class="aigc-tool-icon"><svg class="svg-icon"><use href="#i-replace-bg"/></svg></div>
-          <h4 data-i18n="aigc_img4">商品图换背景</h4>
-          <p data-i18n="aigc_img4_desc">智能替换图片背景，适配不同平台和推广场景</p>
-        </div>
-        <div class="aigc-tool-card">
-          <div class="aigc-tool-icon"><svg class="svg-icon"><use href="#i-detail"/></svg></div>
-          <h4 data-i18n="aigc_img5">AI细节图</h4>
-          <p data-i18n="aigc_img5_desc">自动生成产品细节放大图，突出工艺和质感</p>
-        </div>
-        <div class="aigc-tool-card">
-          <div class="aigc-tool-icon"><svg class="svg-icon"><use href="#i-selling"/></svg></div>
-          <h4 data-i18n="aigc_img6">AI卖点图</h4>
-          <p data-i18n="aigc_img6_desc">智能生成产品卖点信息图，提升详情页转化</p>
-        </div>
-        <div class="aigc-tool-card">
-          <div class="aigc-tool-icon"><svg class="svg-icon"><use href="#i-color"/></svg></div>
-          <h4 data-i18n="aigc_img7">商品换色</h4>
-          <p data-i18n="aigc_img7_desc">一键更换产品颜色，快速生成多SKU展示图</p>
-        </div>
-        <div class="aigc-tool-card coming-soon">
-          <div class="aigc-tool-icon"><svg class="svg-icon"><use href="#i-ruler"/></svg></div>
-          <h4 data-i18n="aigc_img8">商品标尺图</h4>
-          <p data-i18n="aigc_img8_desc">自动添加尺寸标注，让买家直观了解产品大小</p>
-          <span class="aigc-soon-tag" data-i18n="aigc_soon">即将上线</span>
+      </div>
+      <div class="aigc-showcase-content">
+        <h3 data-i18n="aigc_video_title">AI视频创作</h3>
+        <p class="aigc-showcase-desc" data-i18n="aigc_video_desc">从产品展示到数字人口播，从多语种翻译到首尾帧生成，AI一键生成专业级营销视频</p>
+        <div class="aigc-feature-list">
+          <div class="aigc-feature-item">
+            <div class="aigc-feature-dot"></div>
+            <div><strong data-i18n="aigc_vid1">产品宣传视频</strong><span data-i18n="aigc_vid1_desc">上传产品图+描述，AI生成专业展示短片</span></div>
+          </div>
+          <div class="aigc-feature-item">
+            <div class="aigc-feature-dot"></div>
+            <div><strong data-i18n="aigc_vid2">数字人口播</strong><span data-i18n="aigc_vid2_desc">虚拟形象+文案，一键生成播报视频</span></div>
+          </div>
+          <div class="aigc-feature-item">
+            <div class="aigc-feature-dot"></div>
+            <div><strong data-i18n="aigc_vid3">真人口播视频</strong><span data-i18n="aigc_vid3_desc">真人素材+新文案，智能生成全新内容</span></div>
+          </div>
+          <div class="aigc-feature-item">
+            <div class="aigc-feature-dot"></div>
+            <div><strong data-i18n="aigc_vid4">口播视频翻译</strong><span data-i18n="aigc_vid4_desc">AI口型同步，多语言版本一键生成</span></div>
+          </div>
+          <div class="aigc-feature-item">
+            <div class="aigc-feature-dot"></div>
+            <div><strong data-i18n="aigc_vid5">视频字幕翻译</strong><span data-i18n="aigc_vid5_desc">自动识别语音，生成多语种字幕</span></div>
+          </div>
+          <div class="aigc-feature-item">
+            <div class="aigc-feature-dot"></div>
+            <div><strong data-i18n="aigc_vid6">首尾帧生视频</strong><span data-i18n="aigc_vid6_desc">首尾两张图，AI生成流畅过渡视频</span></div>
+          </div>
         </div>
       </div>
     </div>
     
-    <!-- 视频创作面板 -->
-    <div class="aigc-mode-panel" id="aigc-video-panel">
-      <div class="aigc-tool-grid">
-        <div class="aigc-tool-card highlight">
-          <div class="aigc-tool-icon"><svg class="svg-icon"><use href="#i-product-video"/></svg></div>
-          <h4 data-i18n="aigc_vid1">产品宣传视频</h4>
-          <p data-i18n="aigc_vid1_desc">上传产品图+画面描述，AI生成专业产品展示短片</p>
+    <!-- 图片创作（在后）-->
+    <div class="aigc-showcase aigc-image-showcase">
+      <div class="aigc-showcase-content">
+        <h3 data-i18n="aigc_image_title">AI图片创作</h3>
+        <p class="aigc-showcase-desc" data-i18n="aigc_image_desc">商品视觉素材一站式智能生成，从白底图到场景图，从细节放大到卖点提炼，全面提升商品视觉表现力</p>
+        <div class="aigc-feature-list">
+          <div class="aigc-feature-item">
+            <div class="aigc-feature-dot"></div>
+            <div><strong data-i18n="aigc_img1">生成白底图</strong><span data-i18n="aigc_img1_desc">一键去背景，生成平台规范白底图</span></div>
+          </div>
+          <div class="aigc-feature-item">
+            <div class="aigc-feature-dot"></div>
+            <div><strong data-i18n="aigc_img2">生成场景图</strong><span data-i18n="aigc_img2_desc">商品融入真实场景，增强购买欲望</span></div>
+          </div>
+          <div class="aigc-feature-item">
+            <div class="aigc-feature-dot"></div>
+            <div><strong data-i18n="aigc_img3">图片变清晰</strong><span data-i18n="aigc_img3_desc">AI修复模糊图片，完美呈现细节</span></div>
+          </div>
+          <div class="aigc-feature-item">
+            <div class="aigc-feature-dot"></div>
+            <div><strong data-i18n="aigc_img4">商品图换背景</strong><span data-i18n="aigc_img4_desc">智能替换背景，适配不同平台</span></div>
+          </div>
+          <div class="aigc-feature-item">
+            <div class="aigc-feature-dot"></div>
+            <div><strong data-i18n="aigc_img5">AI细节图</strong><span data-i18n="aigc_img5_desc">自动生成细节放大图，突出工艺</span></div>
+          </div>
+          <div class="aigc-feature-item">
+            <div class="aigc-feature-dot"></div>
+            <div><strong data-i18n="aigc_img6">AI卖点图</strong><span data-i18n="aigc_img6_desc">智能生成卖点信息图，提升转化</span></div>
+          </div>
         </div>
-        <div class="aigc-tool-card highlight">
-          <div class="aigc-tool-icon"><svg class="svg-icon"><use href="#i-digital-human"/></svg></div>
-          <h4 data-i18n="aigc_vid2">数字人口播</h4>
-          <p data-i18n="aigc_vid2_desc">选择虚拟形象+口播文案，一键生成数字人播报视频</p>
+      </div>
+      <div class="aigc-showcase-visual">
+        <div class="aigc-showcase-img-wrap">
+          <img src="images/scene_image.jpg" alt="图片创作" loading="lazy" decoding="async" class="aigc-showcase-img">
+          <div class="aigc-showcase-overlay light"></div>
         </div>
-        <div class="aigc-tool-card highlight">
-          <div class="aigc-tool-icon"><svg class="svg-icon"><use href="#i-real-human"/></svg></div>
-          <h4 data-i18n="aigc_vid3">真人口播视频</h4>
-          <p data-i18n="aigc_vid3_desc">上传真人素材+新文案，智能生成全新口播内容</p>
-        </div>
-        <div class="aigc-tool-card">
-          <div class="aigc-tool-icon"><svg class="svg-icon"><use href="#i-lip-translate"/></svg></div>
-          <h4 data-i18n="aigc_vid4">口播视频翻译</h4>
-          <p data-i18n="aigc_vid4_desc">AI口型同步，一键生成多语言版本口播视频</p>
-        </div>
-        <div class="aigc-tool-card">
-          <div class="aigc-tool-icon"><svg class="svg-icon"><use href="#i-subtitle"/></svg></div>
-          <h4 data-i18n="aigc_vid5">视频字幕翻译</h4>
-          <p data-i18n="aigc_vid5_desc">自动识别视频语音，生成多语种字幕翻译</p>
-        </div>
-        <div class="aigc-tool-card">
-          <div class="aigc-tool-icon"><svg class="svg-icon"><use href="#i-frame"/></svg></div>
-          <h4 data-i18n="aigc_vid6">首尾帧生视频</h4>
-          <p data-i18n="aigc_vid6_desc">上传首尾两张图片，AI智能生成过渡视频</p>
+        <div class="aigc-showcase-badge light">
+          <svg class="svg-icon"><use href="#i-scene"/></svg>
+          <span data-i18n="aigc_image_mode">图片创作</span>
         </div>
       </div>
     </div>
@@ -1013,11 +1016,8 @@
         <span data-i18n="aigc_cta">立即体验集集智创台</span>
         <svg class="svg-icon"><use href="#i-arrow-right"/></svg>
       </a>
-      <p class="aigc-cta-note" data-i18n="aigc_cta_note">更多AI工具能力持续接入中，敬请期待</p>
     </div>
   </div>
-</section>
-
 </section>
 
 <!-- 集宝AI助手 -->
@@ -1318,7 +1318,8 @@
           <div style="position: relative; padding: 14px; background: linear-gradient(135deg, #fff5f5, #fff8f0);">
             <div style="position: relative; border-radius: 14px; overflow: hidden; aspect-ratio: 16/9; background: #1a1a2e;">
               <video id="dhSingleVideo" style="width: 100%; height: 100%; object-fit: cover;" muted loop playsinline autoplay>
-                <source src="https://static.chinamarket.cn/static/trade-exhibition/ai-daji/video/quan-taiguo.mp4?v=4.1" type="video/mp4">
+                <!-- 全传晓原视频保留：https://static.chinamarket.cn/static/trade-exhibition/ai-daji/video/quan-taiguo.mp4?v=4.1 -->
+                <source src="videos/digital_human_demo.mp4" type="video/mp4">
               </video>
               <div class="dh-card-play" onclick="var v=document.getElementById('dhSingleVideo');v.muted=!v.muted;if(v.muted){this.style.display='flex'}else{this.style.display='none'}" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 64px; height: 64px; background: rgba(212,40,47,0.9); border-radius: 50%; display: none; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 20px rgba(212,40,47,0.4); transition: transform 0.3s;">
                 <svg style="width: 26px; height: 26px; fill: white; margin-left: 4px;" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
@@ -1385,7 +1386,8 @@
             <span class="dh-card-duration">00:55</span>
           </div>
           <div class="dh-card-body">
-            <h4 data-i18n="kb_name_3" data-name="全传晓">全传晓</h4>
+            <!-- 全传晓保留：<h4 data-i18n="kb_name_3" data-name="全传晓">全传晓</h4> -->
+            <h4>AI数字人</h4>
             <p>深度数科集团董事长</p>
           </div>
         </div>
@@ -1691,9 +1693,13 @@ const i18n = {
         jibao_feature2_desc: '24项AI工具，对话中直接调用',
         jibao_feature3: '市场数据分析',
         jibao_feature3_desc: '实时洞察全球贸易趋势与商机',
-        aigc_title: '集集智创台',
-        aigc_subtitle: '一站式AIGC内容创作平台，覆盖图片创作与视频创作两大核心能力，后续将集成全链路AI工具矩阵',
+        aigc_title: 'AIGC集集智创台',
+        aigc_subtitle: '一站式AIGC内容创作平台，覆盖视频创作与图片创作两大核心能力',
         aigc_image_mode: '图片创作',
+        aigc_video_title: 'AI视频创作',
+        aigc_video_desc: '从产品展示到数字人口播，从多语种翻译到首尾帧生成，AI一键生成专业级营销视频',
+        aigc_image_title: 'AI图片创作',
+        aigc_image_desc: '商品视觉素材一站式智能生成，从白底图到场景图，从细节放大到卖点提炼，全面提升商品视觉表现力',
         aigc_video_mode: '视频创作',
         aigc_img1: '生成白底图', aigc_img1_desc: '一键去除背景，生成符合平台规范的白底商品图',
         aigc_img2: '生成场景图', aigc_img2_desc: '商品融入真实使用场景，增强代入感和购买欲望',
@@ -1905,8 +1911,8 @@ const i18n = {
         scene3_subtitle: '高效合规通关',
         scene4_subtitle: '会说话的智能名片',
         scene5_subtitle: '10秒生成专业带货视频',
-        dh_card_title: '全传晓 - AI数字人宣讲',
-        dh_card_desc: '深度数科集团董事长，AI数字人技术助力企业品牌智能传播与多语种宣讲，让企业领导者的声音触达全球市场',
+        dh_card_title: 'AI数字人智能宣讲',
+        dh_card_desc: 'AI数字人技术助力企业打造专属数字形象，实现智能宣讲与品牌传播，多语种版本一键生成，让品牌声音触达全球市场',
         kb_pos_1: '第十四届全国人大代表、新明辉集团董事长',
         kb_pos_2: '临沂商城集团党委书记、董事长',
         kb_pos_3: '深度数科集团董事长',
@@ -3737,6 +3743,16 @@ function switchLanguage(lang) {
       </div>
     `;
   }
+
+  // 图片渐进加载
+  document.querySelectorAll('img').forEach(function(img) {
+    if (img.complete && img.naturalWidth > 0) {
+      img.setAttribute('loaded', 'true');
+    } else {
+      img.onload = function() { img.setAttribute('loaded', 'true'); };
+      img.onerror = function() { img.setAttribute('loaded', 'true'); };
+    }
+  });
 
   // AIGC板块tab切换
   document.querySelectorAll('.aigc-mode-tab').forEach(tab => {
