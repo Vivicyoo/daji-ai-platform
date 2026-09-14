@@ -470,7 +470,7 @@
   }
   .scene-mockup::before {
     content: ''; position: absolute; inset: 0; border-radius: 28px; padding: 2px;
-    background: linear-gradient(41deg, #9b4b62 2%, rgba(155,75,98,0) 40%);
+    background: linear-gradient(41deg, #93aaf4 2%, rgba(64,84,146,0) 40%);
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor; mask-composite: exclude;
     pointer-events: none;
@@ -552,13 +552,11 @@
     opacity: 0.6;
   }
   .cta-section::after {
-    content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 0;
-    background:
-      linear-gradient(90deg,
-        rgba(255,255,255,0.04) 0%, transparent 20%,
-        rgba(0,0,0,0.03) 40%, transparent 60%,
-        rgba(255,255,255,0.03) 80%, rgba(0,0,0,0.05) 100%);
+    content: ''; position: absolute; top: -50%; left: -20%; width: 60%; height: 200%;
+    background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.12) 50%, transparent 70%);
+    animation: shimmer 4s ease-in-out infinite; z-index: 0;
   }
+  @keyframes shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(200%); } }
   .cta-section > * { position: relative; z-index: 1; }
   .cta-section h2 { font-size: 36px; font-weight: 800; margin-bottom: 16px; }
   .cta-section p { font-size: 18px; opacity: 0.9; margin-bottom: 32px; }
@@ -633,9 +631,9 @@
   }
   .qrcode-item { display: flex; flex-direction: column; align-items: center; }
     .qrcode-img {
-    width: 110px; height: 110px; border-radius: 12px;
-    background: #fff; padding: 5px; object-fit: contain;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    width: 140px; height: 140px; border-radius: 16px;
+    background: #fff; padding: 14px; object-fit: contain;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
   }
   .qrcode-item span { font-size: 13px; color: rgba(255,255,255,0.7); margin-top: 8px; display: block; text-align: center; }
 
@@ -947,7 +945,7 @@
     <div class="aigc-showcase aigc-video-showcase">
       <div class="aigc-showcase-visual">
         <div class="aigc-showcase-img-wrap">
-          <img src="images/aigc_video_v5.jpg" alt="视频创作" loading="lazy" decoding="async" class="aigc-showcase-img progressive-img">
+          <img src="images/aigc_video_v6.jpg" alt="视频创作" loading="lazy" decoding="async" class="aigc-showcase-img progressive-img">
 
         </div>
         <div class="aigc-showcase-badge">
@@ -1041,7 +1039,7 @@
       </div>
       <div class="aigc-showcase-visual">
         <div class="aigc-showcase-img-wrap">
-          <img src="images/aigc_image_v3.jpg" alt="图片创作" loading="lazy" decoding="async" class="aigc-showcase-img progressive-img">
+          <img src="images/aigc_image_v4.jpg" alt="图片创作" loading="lazy" decoding="async" class="aigc-showcase-img progressive-img">
           <div class="aigc-showcase-overlay light"></div>
         </div>
         <div class="aigc-showcase-badge light">
