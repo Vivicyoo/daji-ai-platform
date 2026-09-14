@@ -462,9 +462,18 @@
 
   .scene-visual { position: relative; min-height: 380px; display: flex; align-items: center; justify-content: center; }
   .scene-mockup {
-    width: 100%; max-width: 480px; background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 28px;
+    width: 100%; max-width: 480px; background: rgba(59, 59, 76, 0.5);
+    border-radius: 28px; padding: 28px;
     backdrop-filter: blur(10px); position: relative;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+  .scene-mockup::before {
+    content: ''; position: absolute; inset: 0; border-radius: 28px; padding: 2px;
+    background: linear-gradient(41deg, #93aaf4 2%, rgba(64,84,146,0) 40%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude;
+    pointer-events: none;
   }
   .scene-mockup-title {
     font-size: 14px; font-weight: 700; color: var(--accent-light); margin-bottom: 16px;
@@ -505,22 +514,21 @@
   }
   .workflow-step { text-align: center; position: relative; padding: 0 12px; }
   .workflow-step:not(:last-child)::after {
-    content: ''; position: absolute; top: 44px; right: -12px; width: 48px; height: 24px;
-    background: linear-gradient(90deg, transparent, rgba(212,40,47,0.3));
-    clip-path: polygon(0 30%, 70% 30%, 70% 0%, 100% 50%, 70% 100%, 70% 70%, 0 70%);
-    z-index: 0;
+    content: ''; position: absolute; top: 36px; right: -20px; width: 40px; height: 40px;
+    background: url('images/step_arrow.png') center/contain no-repeat;
+    z-index: 0; opacity: 0.8;
   }
   .step-num {
     width: 88px; height: 88px; border-radius: 50%; margin: 0 auto 20px;
-    background: linear-gradient(135deg, #ff6b6b 0%, #d4282f 50%, #c41e25 100%);
-    box-shadow: 0 8px 24px rgba(212,40,47,0.3), inset 0 2px 4px rgba(255,255,255,0.3);
+    background: linear-gradient(135deg, #fff5f5 0%, #ffe8e8 100%);
+    box-shadow: 0 8px 24px rgba(212,40,47,0.2);
     display: flex; align-items: center; justify-content: center;
-    color: #fff; position: relative; z-index: 1; transition: all 0.3s;
+    position: relative; z-index: 1; transition: all 0.3s; overflow: hidden;
   }
-  .step-num .svg-icon { width: 36px; height: 36px; }
+  .step-num img { width: 52px; height: 52px; object-fit: contain; }
   .workflow-step:hover .step-num {
     transform: scale(1.08);
-    box-shadow: 0 12px 32px rgba(212,40,47,0.45), inset 0 2px 4px rgba(255,255,255,0.3);
+    box-shadow: 0 12px 32px rgba(212,40,47,0.35);
   }
   .workflow-step h4 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
   .workflow-step p { font-size: 14px; color: var(--text-gray); line-height: 1.6; }
@@ -1096,28 +1104,28 @@
         </div>
         <p data-i18n="jibao_desc">基于商贸大模型深度训练，集宝AI助手深度理解贸易场景，一句话即可调用全平台AI能力，从市场分析、商机挖掘到内容生成，全程智能辅助。</p>
         <div class="jibao-features">
-          <div class="jibao-feature">
+          <div class="jibao-feature active" data-index="0">
             <div class="jibao-feature-icon"><svg class="svg-icon"><use href="#i-chat"/></svg></div>
             <div>
               <h4 data-i18n="jibao_feature1">智能对话交互</h4>
               <p data-i18n="jibao_feature1_desc">自然语言提问，AI理解贸易意图，精准返回结果</p>
             </div>
           </div>
-          <div class="jibao-feature">
+          <div class="jibao-feature" data-index="1">
             <div class="jibao-feature-icon"><svg class="svg-icon"><use href="#i-link"/></svg></div>
             <div>
               <h4 data-i18n="jibao_feature2">工具一键调用</h4>
-              <p data-i18n="jibao_feature2_desc">对话中直接唤起翻译、制图、视频等23项AI工具</p>
+              <p data-i18n="jibao_feature2_desc">对话中直接唤起翻译、制图、视频等26项AI工具</p>
             </div>
           </div>
-          <div class="jibao-feature">
+          <div class="jibao-feature" data-index="2">
             <div class="jibao-feature-icon"><svg class="svg-icon"><use href="#i-chart"/></svg></div>
             <div>
               <h4 data-i18n="jibao_feature3">市场数据分析</h4>
               <p data-i18n="jibao_feature3_desc">实时贸易数据洞察，目标市场推荐与竞争分析</p>
             </div>
           </div>
-          <div class="jibao-feature">
+          <div class="jibao-feature" data-index="3">
             <div class="jibao-feature-icon"><svg class="svg-icon"><use href="#i-target"/></svg></div>
             <div>
               <h4 data-i18n="jibao_feature4">商机智能匹配</h4>
@@ -1616,22 +1624,22 @@
     </div>
     <div class="workflow-steps">
       <div class="workflow-step">
-        <div class="step-num"><svg class="svg-icon"><use href="#i-register"/></svg></div>
+        <div class="step-num"><img src="images/step_register.png" alt="注册登录"></div>
         <h4 data-i18n="flow1_title">注册登录</h4>
         <p data-i18n="flow1_desc">手机号一键注册，新用户享免费体验额度，即刻开启AI创作。</p>
       </div>
       <div class="workflow-step">
-        <div class="step-num"><svg class="svg-icon"><use href="#i-select"/></svg></div>
+        <div class="step-num"><img src="images/step_select.png" alt="选择工具"></div>
         <h4 data-i18n="flow2_title">选择工具</h4>
         <p data-i18n="flow2_desc">从26项AI工具中选择所需功能，或直接对话集宝AI助手。</p>
       </div>
       <div class="workflow-step">
-        <div class="step-num"><svg class="svg-icon"><use href="#i-upload"/></svg></div>
+        <div class="step-num"><img src="images/step_input.png" alt="输入素材"></div>
         <h4 data-i18n="flow3_title">输入素材</h4>
         <p data-i18n="flow3_desc">上传商品图片或输入文字描述，AI自动理解需求，无需专业技能。</p>
       </div>
       <div class="workflow-step">
-        <div class="step-num"><svg class="svg-icon"><use href="#i-generate"/></svg></div>
+        <div class="step-num"><img src="images/step_generate.png" alt="一键生成"></div>
         <h4 data-i18n="flow4_title">一键生成</h4>
         <p data-i18n="flow4_desc">点击生成，数秒内产出专业级内容，支持多格式下载和一键分发。</p>
       </div>
@@ -4248,6 +4256,7 @@ function switchLanguage(lang) {
       slides.forEach((s, i) => s.classList.toggle('active', i === current));
       dots.forEach((d, i) => d.classList.toggle('active', i === current));
       if (urlBar) urlBar.textContent = urls[current] || '';
+      document.querySelectorAll('.jibao-feature').forEach((f, i) => f.classList.toggle('active', i === current));
     }
     // 暴露到全局供语言切换使用
     window.jibaoUpdateUrl = function() {
