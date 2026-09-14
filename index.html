@@ -463,6 +463,7 @@
   .scene-visual { position: relative; min-height: 380px; display: flex; align-items: center; justify-content: center; }
   .scene-mockup {
     width: 100%; max-width: 480px; background: rgba(59, 59, 76, 0.5);
+    box-sizing: border-box;
     border-radius: 28px; padding: 28px;
     backdrop-filter: blur(10px); position: relative;
     border: 2px solid transparent;
@@ -472,17 +473,20 @@
   .scene-mockup::before {
     content: ''; position: absolute; inset: 0; border-radius: 28px;
     padding: 2px;
-    background: linear-gradient(90deg, #93aaf4, #c5d4ff, #6b8cff, #c5d4ff, #93aaf4);
-    background-size: 300% 100%;
-    animation: borderFlow 6s linear infinite;
+    background: linear-gradient(41deg, #93aaf4 0%, #93aaf4 8%, #40549200 35%, #40549200 100%);
+    background-size: 250% 250%;
+    animation: borderGradientFlow 8s ease-in-out infinite;
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor; mask-composite: exclude;
     pointer-events: none; z-index: 1;
   }
   .scene-mockup > * { position: relative; z-index: 2; }
-  @keyframes borderFlow {
-    0% { background-position: 0% 50%; }
-    100% { background-position: 300% 50%; }
+  @keyframes borderGradientFlow {
+    0% { background-position: 0% 0%; }
+    25% { background-position: 100% 0%; }
+    50% { background-position: 100% 100%; }
+    75% { background-position: 0% 100%; }
+    100% { background-position: 0% 0%; }
   }
   .scene-mockup-title {
     font-size: 14px; font-weight: 700; color: var(--accent-light); margin-bottom: 16px;
@@ -4379,7 +4383,7 @@ function switchLanguage(lang) {
       offCtx.drawImage(img, 0, 0);
       var imageData = offCtx.getImageData(0, 0, img.width, img.height);
       var data = imageData.data;
-      var step = 4;
+      var step = 5;
       dots = [];
       
       for (var y = 0; y < img.height; y += step) {
@@ -4388,11 +4392,7 @@ function switchLanguage(lang) {
           var r = data[i], g = data[i+1], b = data[i+2], a = data[i+3];
           if (a < 30 || (r > 245 && g > 245 && b > 245)) continue;
           
-          // 保留彩色方块原色，轻微提亮
-          r = Math.min(255, r * 1.1 + 10);
-          g = Math.min(255, g * 1.1 + 10);
-          b = Math.min(255, b * 1.1 + 10);
-          
+          // 保留彩色方块原色，不提亮
           var px = mapInfo.x + (x / img.width) * mapInfo.w;
           var py = mapInfo.y + (y / img.height) * mapInfo.h;
           var seed = ((x * 7 + y * 13) % 100) / 100;
@@ -4446,8 +4446,8 @@ function switchLanguage(lang) {
     for (var i = 0; i < dots.length; i++) {
       var dot = dots[i];
       var breathe = Math.sin(t * 1.5 + dot.phase) * 0.15 + 0.85;
-      var baseSize = 2.2;
-      var baseAlpha = 0.8;
+      var baseSize = 0.8;
+      var baseAlpha = 0.75;
       
       var mouseFactor = 1;
       var mouseAlpha = 1;
@@ -4455,17 +4455,13 @@ function switchLanguage(lang) {
         var dx = dot.x - mouse.x;
         var dy = dot.y - mouse.y;
         var dist = Math.sqrt(dx * dx + dy * dy);
-        var influence = Math.max(0, 1 - dist / 80);
-        mouseFactor = 1 + influence * 1.3;
-        mouseAlpha = 1 + influence * 0.3;
+        var influence = Math.max(0, 1 - dist / 50);
+        mouseFactor = 1 + influence * 1.2;
+        mouseAlpha = 1 + influence * 0.25;
       }
       
       var size = baseSize * breathe * mouseFactor;
       var alpha = Math.min(1, baseAlpha * (0.7 + breathe * 0.3) * mouseAlpha);
-      
-      // 外发光
-      ctx.fillStyle = 'rgba(' + dot.r + ',' + dot.g + ',' + dot.b + ',' + (alpha * 0.15) + ')';
-      ctx.fillRect(dot.x - size * 1.8, dot.y - size * 1.8, size * 3.6, size * 3.6);
       
       // 核心方块
       ctx.fillStyle = 'rgba(' + dot.r + ',' + dot.g + ',' + dot.b + ',' + alpha + ')';
