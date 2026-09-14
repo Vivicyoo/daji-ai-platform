@@ -467,13 +467,23 @@
     backdrop-filter: blur(10px); position: relative;
     border: 2px solid transparent;
     background-clip: padding-box;
+    overflow: hidden;
   }
   .scene-mockup::before {
-    content: ''; position: absolute; inset: 0; border-radius: 28px; padding: 2px;
-    background: linear-gradient(41deg, #93aaf4 2%, rgba(64,84,146,0) 40%);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor; mask-composite: exclude;
-    pointer-events: none;
+    content: ''; position: absolute; inset: -2px; border-radius: 28px;
+    background: conic-gradient(from 0deg, #93aaf4 0%, transparent 25%, transparent 75%, #93aaf4 100%);
+    animation: borderRotate 4s linear infinite;
+    z-index: 0;
+  }
+  .scene-mockup::after {
+    content: ''; position: absolute; inset: 2px; border-radius: 26px;
+    background: rgba(59, 59, 76, 0.95);
+    z-index: 0;
+  }
+  .scene-mockup > * { position: relative; z-index: 1; }
+  @keyframes borderRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(-360deg); }
   }
   .scene-mockup-title {
     font-size: 14px; font-weight: 700; color: var(--accent-light); margin-bottom: 16px;
@@ -632,9 +642,10 @@
   .qrcode-item { display: flex; flex-direction: column; align-items: center; }
     .qrcode-img {
     width: 120px; height: 120px; border-radius: 12px;
-    background: #fff; padding: 5px; object-fit: contain;
+    background: #fff; padding: 5px; object-fit: cover;
     box-shadow: 0 6px 24px rgba(0,0,0,0.35), 0 2px 8px rgba(0,0,0,0.2);
     transition: transform 0.3s, box-shadow 0.3s;
+    display: block;
   }
   .qrcode-img:hover {
     transform: translateY(-3px);
@@ -656,14 +667,14 @@
 
 
   .footer-three-col {
-    display: grid; grid-template-columns: 1fr 1.5fr 1.2fr; gap: 48px;
+    display: grid; grid-template-columns: 1fr 1.3fr 1.2fr; gap: 36px;
     margin-bottom: 36px; padding-bottom: 0; border-bottom: none;
     align-items: start;
   }
   .footer-brand-col .logo { margin-bottom: 16px; }
   .footer-brand-col p { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.8; }
   .footer-nav-col h5 { margin-bottom: 20px; }
-  .footer-nav-groups { display: flex; gap: 32px; }
+  .footer-nav-groups { display: flex; gap: 20px; }
   .footer-nav-group { flex: 1; }
   .footer-nav-group h6 { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.7); margin-bottom: 12px; }
   .footer-nav-group a { display: block; font-size: 13px; color: rgba(255,255,255,0.45); margin-bottom: 8px; transition: color 0.2s; }
@@ -950,7 +961,7 @@
     <div class="aigc-showcase aigc-video-showcase">
       <div class="aigc-showcase-visual">
         <div class="aigc-showcase-img-wrap">
-          <img src="images/aigc_video_v3.jpg" alt="视频创作" loading="lazy" decoding="async" class="aigc-showcase-img progressive-img">
+          <img src="images/aigc_video_v7.jpg" alt="视频创作" loading="lazy" decoding="async" class="aigc-showcase-img progressive-img">
 
         </div>
         <div class="aigc-showcase-badge">
@@ -4659,7 +4670,7 @@ function switchLanguage(lang) {
 
   .footer-brand-col p { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.8; }
   .footer-nav-col h5 { margin-bottom: 20px; }
-  .footer-nav-groups { display: flex; gap: 32px; }
+  .footer-nav-groups { display: flex; gap: 20px; }
   .footer-nav-group { flex: 1; }
   .footer-nav-group h6 { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.7); margin-bottom: 12px; }
   .footer-nav-group a { display: block; font-size: 13px; color: rgba(255,255,255,0.45); margin-bottom: 8px; transition: color 0.2s; }
