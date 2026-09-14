@@ -4383,7 +4383,7 @@ function switchLanguage(lang) {
       offCtx.drawImage(img, 0, 0);
       var imageData = offCtx.getImageData(0, 0, img.width, img.height);
       var data = imageData.data;
-      var step = 5;
+      var step = 4;
       dots = [];
       
       for (var y = 0; y < img.height; y += step) {
@@ -4446,8 +4446,8 @@ function switchLanguage(lang) {
     for (var i = 0; i < dots.length; i++) {
       var dot = dots[i];
       var breathe = Math.sin(t * 1.5 + dot.phase) * 0.15 + 0.85;
-      var baseSize = 0.8;
-      var baseAlpha = 0.75;
+      var baseSize = 1.0;
+      var baseAlpha = 0.8;
       
       var mouseFactor = 1;
       var mouseAlpha = 1;
