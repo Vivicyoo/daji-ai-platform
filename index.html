@@ -4380,24 +4380,19 @@ function switchLanguage(lang) {
       offCtx.drawImage(img, 0, 0);
       var imageData = offCtx.getImageData(0, 0, img.width, img.height);
       var data = imageData.data;
-      var step = 5;
+      var step = 4;
       dots = [];
       
       for (var y = 0; y < img.height; y += step) {
         for (var x = 0; x < img.width; x += step) {
           var i = (y * img.width + x) * 4;
           var r = data[i], g = data[i+1], b = data[i+2], a = data[i+3];
-          if (a < 30 || (r > 240 && g > 240 && b > 240)) continue;
+          if (a < 30 || (r > 245 && g > 245 && b > 245)) continue;
           
-          var brightness = (r + g + b) / 3;
-          if (brightness < 180) {
-            r = Math.min(255, r * 1.25 + 25);
-            g = g * 0.75 + 15;
-            b = b * 0.65 + 10;
-          }
-          r = Math.min(255, r * 0.82 + 255 * 0.18);
-          g = Math.min(255, g * 0.82 + 255 * 0.18);
-          b = Math.min(255, b * 0.82 + 255 * 0.18);
+          // 保留彩色方块原色，轻微提亮
+          r = Math.min(255, r * 1.1 + 10);
+          g = Math.min(255, g * 1.1 + 10);
+          b = Math.min(255, b * 1.1 + 10);
           
           var px = mapInfo.x + (x / img.width) * mapInfo.w;
           var py = mapInfo.y + (y / img.height) * mapInfo.h;
@@ -4427,7 +4422,7 @@ function switchLanguage(lang) {
       if (!animFrame) animate();
     };
     img.onerror = function() { console.log('Image load FAILED'); };
-    img.src = 'data:image/png;base64,' + window._mapBase64;
+    img.src = 'images/world_map_color.png';
   }
   
   function animate() {
@@ -4448,12 +4443,12 @@ function switchLanguage(lang) {
       ctx.stroke();
     }
     
-    // 2. 绘制点状世界地图
+    // 2. 绘制方块世界地图
     for (var i = 0; i < dots.length; i++) {
       var dot = dots[i];
       var breathe = Math.sin(t * 1.5 + dot.phase) * 0.15 + 0.85;
-      var baseRadius = 1.0;
-      var baseAlpha = 0.75;
+      var baseSize = 2.2;
+      var baseAlpha = 0.8;
       
       var mouseFactor = 1;
       var mouseAlpha = 1;
@@ -4462,22 +4457,20 @@ function switchLanguage(lang) {
         var dy = dot.y - mouse.y;
         var dist = Math.sqrt(dx * dx + dy * dy);
         var influence = Math.max(0, 1 - dist / 80);
-        mouseFactor = 1 + influence * 1.2;
+        mouseFactor = 1 + influence * 1.3;
         mouseAlpha = 1 + influence * 0.3;
       }
       
-      var radius = baseRadius * breathe * mouseFactor;
+      var size = baseSize * breathe * mouseFactor;
       var alpha = Math.min(1, baseAlpha * (0.7 + breathe * 0.3) * mouseAlpha);
       
-      ctx.beginPath();
-      ctx.arc(dot.x, dot.y, radius * 2.2, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(' + dot.r + ',' + dot.g + ',' + dot.b + ',' + (alpha * 0.1) + ')';
-      ctx.fill();
+      // 外发光
+      ctx.fillStyle = 'rgba(' + dot.r + ',' + dot.g + ',' + dot.b + ',' + (alpha * 0.15) + ')';
+      ctx.fillRect(dot.x - size * 1.8, dot.y - size * 1.8, size * 3.6, size * 3.6);
       
-      ctx.beginPath();
-      ctx.arc(dot.x, dot.y, radius, 0, Math.PI * 2);
+      // 核心方块
       ctx.fillStyle = 'rgba(' + dot.r + ',' + dot.g + ',' + dot.b + ',' + alpha + ')';
-      ctx.fill();
+      ctx.fillRect(dot.x - size / 2, dot.y - size / 2, size, size);
     }
     
     // 3. 绘制城市节点（脉冲发光）
