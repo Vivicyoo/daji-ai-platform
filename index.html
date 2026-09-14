@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>大集AI - 全球贸易智能创作平台</title>
+<title>大集AI - 大集AI数贸智创平台</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   :root {
@@ -470,20 +470,19 @@
     overflow: hidden;
   }
   .scene-mockup::before {
-    content: ''; position: absolute; inset: -50%; border-radius: 28px;
-    background: conic-gradient(from 0deg, #93aaf4 0%, #c5d4ff 25%, #93aaf4 50%, #c5d4ff 75%, #93aaf4 100%);
-    animation: borderRotate 6s linear infinite;
-    z-index: 0;
+    content: ''; position: absolute; inset: 0; border-radius: 28px;
+    padding: 2px;
+    background: linear-gradient(90deg, #93aaf4, #c5d4ff, #6b8cff, #c5d4ff, #93aaf4);
+    background-size: 300% 100%;
+    animation: borderFlow 6s linear infinite;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude;
+    pointer-events: none; z-index: 1;
   }
-  .scene-mockup::after {
-    content: ''; position: absolute; inset: 2px; border-radius: 26px;
-    background: rgba(59, 59, 76, 0.95);
-    z-index: 0;
-  }
-  .scene-mockup > * { position: relative; z-index: 1; }
-  @keyframes borderRotate {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(-360deg); }
+  .scene-mockup > * { position: relative; z-index: 2; }
+  @keyframes borderFlow {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 300% 50%; }
   }
   .scene-mockup-title {
     font-size: 14px; font-weight: 700; color: var(--accent-light); margin-bottom: 16px;
@@ -1813,7 +1812,6 @@ const i18n = {
         aigc_soon: '即将上线',
         aigc_cta: '立即体验集集智创台',
         aigc_cta_note: '更多AI工具能力持续接入中，敬请期待',
-        nav_aigc: '集集智创',
         aigc_text_title: '智能文本生成',
         aigc_text_desc: '商品标题、卖点描述、开发信、营销文案，AI一键生成多语种专业内容',
         aigc_agent_title: 'AI Agent协作',
@@ -2084,6 +2082,7 @@ const i18n = {
         nav_tools: 'AI Tools',
         nav_scenes: 'Scenarios',
         nav_digital: 'Digital Human',
+        nav_aigc: 'AIGC Creation',
         hero_title_line1: 'AI-Driven Global Trade',
         hero_title_line2: 'Bringing Every Daji Product to the World',
         hero_desc: 'Full-chain AI tool matrix covering product creation, smart translation, business operations, and trade empowerment, helping merchants expand globally efficiently',
@@ -2366,6 +2365,7 @@ const i18n = {
         nav_tools: 'أدوات الذكاء الاصطناعي',
         nav_scenes: 'سيناريوهات التطبيق',
         nav_digital: 'الرقمية البشرية',
+        nav_aigc: 'إنشاء AIGC',
         hero_title_line1: 'التجارة العالمية المدفوعة بالذكاء الاصطناعي',
         hero_title_line2: 'جعل كل منتج داجي يصل إلى العالم',
         hero_desc: 'مصفوفة أدوات الذكاء الاصطناعي كاملة السلسلة، تغطي إنشاء المنتجات والترجمة الذكية وإدارة الأعمال وتمكين التجارة، تساعد التجار على التوسع العالمي بكفاءة',
@@ -2648,6 +2648,7 @@ const i18n = {
         nav_tools: 'AI 도구',
         nav_scenes: '적용 시나리오',
         nav_digital: '디지털 휴먼',
+        nav_aigc: 'AIGC 창작',
         hero_title_line1: 'AI 기반 해외 무역',
         hero_title_line2: '모든 Daji 제품을 세계로',
         hero_desc: '상품 창작, 스마트 번역, 비즈니스 운영, 무역 역량 강화를 커버하는 풀체인 AI 도구 매트릭스로 상인의 효율적인 해외 진출 지원',
@@ -2930,6 +2931,7 @@ const i18n = {
         nav_tools: 'เครื่องมือ AI',
         nav_scenes: 'สถานการณ์การใช้งาน',
         nav_digital: 'ดิจิทัลฮิวแมน',
+        nav_aigc: 'สร้าง AIGC',
         hero_title_line1: 'การค้าโลกขับเคลื่อนด้วย AI',
         hero_title_line2: 'นำสินค้า Daji ทุกชิ้นสู่โลก',
         hero_desc: 'เมทริกซ์เครื่องมือ AI ครบวงจร ครอบคลุมการสร้างสินค้า การแปลอัจฉริยะ การดำเนินงานธุรกิจ และการขับเคลื่อนการค้า ช่วยให้ผู้ค้าขยายสู่ตลาดโลกอย่างมีประสิทธิภาพ',
@@ -3212,6 +3214,7 @@ const i18n = {
         nav_tools: 'AI Alat',
         nav_scenes: 'Scenarios',
         nav_digital: 'Manusia Digital',
+        nav_aigc: 'Kreasi AIGC',
         hero_title_line1: 'AI-Driven Global Perdagangan',
         hero_title_line2: 'Bringing Every Daji Produk to the World',
         hero_desc: 'Full-chain AI tool matrix covering product creation, smart translation, business operations, and trade empowerment, helping merchants expand globally efficiently',
@@ -3494,6 +3497,7 @@ const i18n = {
         nav_tools: 'AI Công cụ',
         nav_scenes: 'Scenarios',
         nav_digital: 'Người kỹ thuật số',
+        nav_aigc: 'Sáng tạo AIGC',
         hero_title_line1: 'AI-Driven Toàn cầu Thương mại',
         hero_title_line2: 'Bringing Every Daji Sản phẩm to the World',
         hero_desc: 'Full-chain AI tool matrix covering product creation, smart translation, business operations, and trade empowerment, helping merchants expand globally efficiently',
@@ -3776,6 +3780,7 @@ const i18n = {
         nav_tools: 'AI Alat',
         nav_scenes: 'Scenarios',
         nav_digital: 'Manusia Digital',
+        nav_aigc: 'Kreasi AIGC',
         hero_title_line1: 'AI-Driven Global Perdagangan',
         hero_title_line2: 'Bringing Every Daji Produk to the World',
         hero_desc: 'Full-chain AI tool matrix covering product creation, smart translation, business operations, and trade empowerment, helping merchants expand globally efficiently',
