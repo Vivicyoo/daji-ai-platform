@@ -471,7 +471,7 @@
   }
   .scene-mockup::before {
     content: ''; position: absolute; inset: -50%; border-radius: 28px;
-    background: conic-gradient(from 0deg, transparent 0%, transparent 80%, #93aaf4 90%, #c5d4ff 95%, transparent 100%);
+    background: conic-gradient(from 0deg, #93aaf4 0%, #c5d4ff 25%, #93aaf4 50%, #c5d4ff 75%, #93aaf4 100%);
     animation: borderRotate 6s linear infinite;
     z-index: 0;
   }
@@ -891,7 +891,7 @@
       <a href="#features" data-i18n="nav_tools">AI工具</a>
       <a href="#jibao" data-i18n="nav_jibao">集宝AI助手</a>
       <a href="#scenes" data-i18n="nav_scenes">应用场景</a>
-      <a href="#workflow" data-i18n="nav_flow">使用流程</a>
+      <a href="#digital-human" data-i18n="nav_digital">数字人案例</a>
     </div>
     <div class="nav-actions">
       <div class="lang-switcher" id="langSwitcher">
@@ -967,10 +967,7 @@
           <img src="images/aigc_video_v3.jpg" alt="视频创作" loading="lazy" decoding="async" class="aigc-showcase-img progressive-img">
 
         </div>
-        <div class="aigc-showcase-badge">
-          <svg class="svg-icon"><use href="#i-product-video"/></svg>
-          <span data-i18n="aigc_video_mode">视频创作</span>
-        </div>
+
       </div>
       <div class="aigc-showcase-content">
         <h3 data-i18n="aigc_video_title">AI视频创作</h3>
@@ -1061,10 +1058,7 @@
           <img src="images/aigc_image_v3.jpg" alt="图片创作" loading="lazy" decoding="async" class="aigc-showcase-img progressive-img">
           <div class="aigc-showcase-overlay light"></div>
         </div>
-        <div class="aigc-showcase-badge light">
-          <svg class="svg-icon"><use href="#i-scene"/></svg>
-          <span data-i18n="aigc_image_mode">图片创作</span>
-        </div>
+
       </div>
     </div>
     
@@ -1355,7 +1349,7 @@
 </section>
 
 <!-- Digital Human Cases -->
-<section class="digital-human-section" style="padding: 80px 0; background: linear-gradient(135deg, #fef5f5 0%, #fff5f0 50%, #fef0f0 100%); position: relative; overflow: hidden;">
+<section class="digital-human-section" id="digital-human" style="padding: 80px 0; background: linear-gradient(135deg, #fef5f5 0%, #fff5f0 50%, #fef0f0 100%); position: relative; overflow: hidden;">
     <div style="position: absolute; top: -100px; right: -100px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(212,40,47,0.08) 0%, transparent 70%); border-radius: 50%;"></div>
     <div class="container" style="max-width: 1216px; margin: 0 auto; padding: 0 24px;">
       <div class="section-header" style="text-align: center; margin-bottom: 50px;">
@@ -1794,7 +1788,7 @@ const i18n = {
         nav_jibao: '集宝AI助手',
         nav_tools: 'AI工具',
         nav_scenes: '应用场景',
-        nav_flow: '使用流程',
+        nav_digital: '数字人案例',
         hero_title_line1: 'AI驱动出海贸易',
         hero_title_line2: '让每一件大集商品走向世界',
         hero_desc: '全链路AI工具矩阵，覆盖商品创作、智能翻译、商机经营、贸易赋能，助力商户高效出海',
@@ -2089,7 +2083,7 @@ const i18n = {
         nav_jibao: 'JIVO AI Assistant',
         nav_tools: 'AI Tools',
         nav_scenes: 'Scenarios',
-        nav_flow: 'How it Works',
+        nav_digital: 'Digital Human',
         hero_title_line1: 'AI-Driven Global Trade',
         hero_title_line2: 'Bringing Every Daji Product to the World',
         hero_desc: 'Full-chain AI tool matrix covering product creation, smart translation, business operations, and trade empowerment, helping merchants expand globally efficiently',
@@ -2371,7 +2365,7 @@ const i18n = {
         nav_jibao: 'مساعد جيفو الذكي',
         nav_tools: 'أدوات الذكاء الاصطناعي',
         nav_scenes: 'سيناريوهات التطبيق',
-        nav_flow: 'كيفية الاستخدام',
+        nav_digital: 'الرقمية البشرية',
         hero_title_line1: 'التجارة العالمية المدفوعة بالذكاء الاصطناعي',
         hero_title_line2: 'جعل كل منتج داجي يصل إلى العالم',
         hero_desc: 'مصفوفة أدوات الذكاء الاصطناعي كاملة السلسلة، تغطي إنشاء المنتجات والترجمة الذكية وإدارة الأعمال وتمكين التجارة، تساعد التجار على التوسع العالمي بكفاءة',
@@ -2653,7 +2647,7 @@ const i18n = {
         nav_jibao: 'JIVO AI 어시스턴트',
         nav_tools: 'AI 도구',
         nav_scenes: '적용 시나리오',
-        nav_flow: '프로세스',
+        nav_digital: '디지털 휴먼',
         hero_title_line1: 'AI 기반 해외 무역',
         hero_title_line2: '모든 Daji 제품을 세계로',
         hero_desc: '상품 창작, 스마트 번역, 비즈니스 운영, 무역 역량 강화를 커버하는 풀체인 AI 도구 매트릭스로 상인의 효율적인 해외 진출 지원',
@@ -2935,7 +2929,7 @@ const i18n = {
         nav_jibao: 'ผู้ช่วย AI JIVO',
         nav_tools: 'เครื่องมือ AI',
         nav_scenes: 'สถานการณ์การใช้งาน',
-        nav_flow: 'ขั้นตอนการใช้งาน',
+        nav_digital: 'ดิจิทัลฮิวแมน',
         hero_title_line1: 'การค้าโลกขับเคลื่อนด้วย AI',
         hero_title_line2: 'นำสินค้า Daji ทุกชิ้นสู่โลก',
         hero_desc: 'เมทริกซ์เครื่องมือ AI ครบวงจร ครอบคลุมการสร้างสินค้า การแปลอัจฉริยะ การดำเนินงานธุรกิจ และการขับเคลื่อนการค้า ช่วยให้ผู้ค้าขยายสู่ตลาดโลกอย่างมีประสิทธิภาพ',
@@ -3217,7 +3211,7 @@ const i18n = {
         nav_jibao: 'JIVO AI Asisten',
         nav_tools: 'AI Alat',
         nav_scenes: 'Scenarios',
-        nav_flow: 'How it Works',
+        nav_digital: 'Manusia Digital',
         hero_title_line1: 'AI-Driven Global Perdagangan',
         hero_title_line2: 'Bringing Every Daji Produk to the World',
         hero_desc: 'Full-chain AI tool matrix covering product creation, smart translation, business operations, and trade empowerment, helping merchants expand globally efficiently',
@@ -3499,7 +3493,7 @@ const i18n = {
         nav_jibao: 'JIVO AI Trợ lý',
         nav_tools: 'AI Công cụ',
         nav_scenes: 'Scenarios',
-        nav_flow: 'How it Works',
+        nav_digital: 'Người kỹ thuật số',
         hero_title_line1: 'AI-Driven Toàn cầu Thương mại',
         hero_title_line2: 'Bringing Every Daji Sản phẩm to the World',
         hero_desc: 'Full-chain AI tool matrix covering product creation, smart translation, business operations, and trade empowerment, helping merchants expand globally efficiently',
@@ -3781,7 +3775,7 @@ const i18n = {
         nav_jibao: 'JIVO AI Penolong',
         nav_tools: 'AI Alat',
         nav_scenes: 'Scenarios',
-        nav_flow: 'How it Works',
+        nav_digital: 'Manusia Digital',
         hero_title_line1: 'AI-Driven Global Perdagangan',
         hero_title_line2: 'Bringing Every Daji Produk to the World',
         hero_desc: 'Full-chain AI tool matrix covering product creation, smart translation, business operations, and trade empowerment, helping merchants expand globally efficiently',
