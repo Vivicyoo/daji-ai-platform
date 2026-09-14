@@ -295,7 +295,8 @@
   .aigc-showcase { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; margin-bottom: 56px; }
   .aigc-showcase:last-of-type { margin-bottom: 40px; }
   .aigc-showcase-visual { position: relative; }
-  .aigc-showcase-img-wrap { position: relative; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(212,40,47,0.15); aspect-ratio: 4/3; }
+  .aigc-showcase-img-wrap { position: relative; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(212,40,47,0.18), 0 0 0 1px rgba(212,40,47,0.08); aspect-ratio: 16/10; }
+  .aigc-showcase-img-wrap::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(212,40,47,0.08), transparent 50%); z-index: 1; pointer-events: none; }
   .aigc-showcase-img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease; }
   .aigc-showcase-img-wrap:hover .aigc-showcase-img { transform: scale(1.05); }
   .aigc-showcase-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(212,40,47,0.1), rgba(255,122,69,0.15)); display: flex; align-items: center; justify-content: center; }
@@ -303,13 +304,14 @@
   .aigc-play-btn { width: 64px; height: 64px; border-radius: 50%; background: rgba(255,255,255,0.95); display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 30px rgba(0,0,0,0.2); transition: all 0.3s ease; }
   .aigc-play-btn .svg-icon { width: 24px; height: 24px; color: var(--primary); margin-left: 3px; }
   .aigc-showcase-img-wrap:hover .aigc-play-btn { transform: scale(1.1); background: #fff; }
-  .aigc-showcase-badge { position: absolute; top: 16px; left: 16px; display: flex; align-items: center; gap: 6px; padding: 8px 16px; background: linear-gradient(135deg, var(--primary), var(--accent)); color: #fff; border-radius: 20px; font-size: 13px; font-weight: 600; box-shadow: 0 4px 16px rgba(212,40,47,0.3); }
+  .aigc-showcase-badge { position: absolute; top: 16px; left: 16px; display: flex; align-items: center; gap: 6px; padding: 8px 18px; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); color: var(--primary); border-radius: 20px; font-size: 13px; font-weight: 700; box-shadow: 0 4px 20px rgba(0,0,0,0.15); z-index: 2; }
   .aigc-showcase-badge .svg-icon { width: 16px; height: 16px; }
   .aigc-showcase-badge.light { background: rgba(255,255,255,0.95); color: var(--primary); }
-  .aigc-showcase-content h3 { font-size: 28px; font-weight: 800; color: var(--text-dark); margin-bottom: 14px; }
+  .aigc-showcase-content h3 { font-size: 30px; font-weight: 800; color: var(--text-dark); margin-bottom: 14px; background: linear-gradient(135deg, var(--text-dark), var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
   .aigc-showcase-desc { font-size: 15px; color: var(--text-gray); line-height: 1.8; margin-bottom: 24px; }
   .aigc-feature-list { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 20px; }
-  .aigc-feature-item { display: flex; gap: 10px; align-items: flex-start; }
+  .aigc-feature-item { display: flex; gap: 10px; align-items: flex-start; padding: 10px 12px; background: rgba(255,255,255,0.7); border-radius: 12px; transition: all 0.3s ease; border: 1px solid rgba(212,40,47,0.06); }
+  .aigc-feature-item:hover { background: #fff; box-shadow: 0 4px 16px rgba(212,40,47,0.1); transform: translateY(-2px); }
   .aigc-feature-dot { width: 8px; height: 8px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--accent)); margin-top: 7px; flex-shrink: 0; }
   .aigc-feature-item strong { display: block; font-size: 14px; font-weight: 700; color: var(--text-dark); margin-bottom: 2px; }
   .aigc-feature-item span { font-size: 12px; color: var(--text-gray); line-height: 1.5; }
@@ -603,8 +605,9 @@
   }
   .qrcode-item { display: flex; flex-direction: column; align-items: center; }
     .qrcode-img {
-    width: 96px; height: 96px; border-radius: 10px;
-    background: #fff; padding: 6px; object-fit: contain;
+    width: 110px; height: 110px; border-radius: 12px;
+    background: #fff; padding: 5px; object-fit: contain;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
   }
   .qrcode-item span { font-size: 13px; color: rgba(255,255,255,0.7); margin-top: 8px; display: block; text-align: center; }
 
@@ -916,10 +919,8 @@
     <div class="aigc-showcase aigc-video-showcase">
       <div class="aigc-showcase-visual">
         <div class="aigc-showcase-img-wrap">
-          <img src="images/aigc_video_v2.jpg" alt="视频创作" loading="lazy" decoding="async" class="aigc-showcase-img progressive-img">
-          <div class="aigc-showcase-overlay">
-            <div class="aigc-play-btn"><svg class="svg-icon"><use href="#i-play"/></svg></div>
-          </div>
+          <img src="images/aigc_video_v3.jpg" alt="视频创作" loading="lazy" decoding="async" class="aigc-showcase-img progressive-img">
+
         </div>
         <div class="aigc-showcase-badge">
           <svg class="svg-icon"><use href="#i-product-video"/></svg>
@@ -1012,7 +1013,7 @@
       </div>
       <div class="aigc-showcase-visual">
         <div class="aigc-showcase-img-wrap">
-          <img src="images/aigc_image_v2.jpg" alt="图片创作" loading="lazy" decoding="async" class="aigc-showcase-img progressive-img">
+          <img src="images/aigc_image_v3.jpg" alt="图片创作" loading="lazy" decoding="async" class="aigc-showcase-img progressive-img">
           <div class="aigc-showcase-overlay light"></div>
         </div>
         <div class="aigc-showcase-badge light">
