@@ -631,9 +631,14 @@
   }
   .qrcode-item { display: flex; flex-direction: column; align-items: center; }
     .qrcode-img {
-    width: 140px; height: 140px; border-radius: 16px;
-    background: #fff; padding: 14px; object-fit: contain;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    width: 120px; height: 120px; border-radius: 12px;
+    background: #fff; padding: 5px; object-fit: contain;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.35), 0 2px 8px rgba(0,0,0,0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .qrcode-img:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 32px rgba(0,0,0,0.45), 0 4px 12px rgba(0,0,0,0.25);
   }
   .qrcode-item span { font-size: 13px; color: rgba(255,255,255,0.7); margin-top: 8px; display: block; text-align: center; }
 
@@ -945,7 +950,7 @@
     <div class="aigc-showcase aigc-video-showcase">
       <div class="aigc-showcase-visual">
         <div class="aigc-showcase-img-wrap">
-          <img src="images/aigc_video_v6.jpg" alt="视频创作" loading="lazy" decoding="async" class="aigc-showcase-img progressive-img">
+          <img src="images/aigc_video_v3.jpg" alt="视频创作" loading="lazy" decoding="async" class="aigc-showcase-img progressive-img">
 
         </div>
         <div class="aigc-showcase-badge">
@@ -1039,7 +1044,7 @@
       </div>
       <div class="aigc-showcase-visual">
         <div class="aigc-showcase-img-wrap">
-          <img src="images/aigc_image_v4.jpg" alt="图片创作" loading="lazy" decoding="async" class="aigc-showcase-img progressive-img">
+          <img src="images/aigc_image_v3.jpg" alt="图片创作" loading="lazy" decoding="async" class="aigc-showcase-img progressive-img">
           <div class="aigc-showcase-overlay light"></div>
         </div>
         <div class="aigc-showcase-badge light">
