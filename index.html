@@ -871,6 +871,29 @@
   }
 
 </style>
+
+<style>
+/* 渐进式图片加载 */
+.progressive-img {
+  filter: blur(12px);
+  opacity: 0.6;
+  transform: scale(1.02);
+  transition: filter 0.8s ease, opacity 0.6s ease, transform 0.8s ease;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer-loading 1.5s infinite;
+}
+.progressive-img.loaded {
+  filter: blur(0);
+  opacity: 1;
+  transform: scale(1);
+  animation: none;
+}
+@keyframes shimmer-loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+</style>
 </head>
 <body>
 
@@ -926,8 +949,8 @@
 <nav class="navbar">
   <div class="nav-inner">
     <div class="logo">
-      <div class="logo-icon"><img src="images/logo_top_new.png" alt="中国大集" decoding="async" fetchpriority="high"></div>
-      <img src="images/ai_logo_red.png" alt="AI智创" style="height:28px;width:auto;" fetchpriority="high">
+      <div class="logo-icon"><img class="progressive-img" src="images/logo_top_new.png" alt="中国大集" decoding="async" fetchpriority="high" onload="this.classList.add('loaded')"></div>
+      <img class="progressive-img" src="images/ai_logo_red.png" alt="AI智创" style="height:28px;width:auto;" fetchpriority="high" onload="this.classList.add('loaded')">
     </div>
     <div class="nav-links">
       <a href="#top" class="active" data-i18n="nav_home">首页</a>
@@ -1167,7 +1190,7 @@
         <div class="section-tag">JIVO AI ASSISTANT</div>
         <h2><span data-i18n="jibao_title_line1">集宝AI助手</span><br><span data-i18n="jibao_title_line2">你的</span><em data-i18n="jibao_title_line3">专属贸易智能顾问</em></h2>
         <div class="jibao-avatar-row">
-          <img src="jibao_avatar.png" alt="集宝AI助手" class="jibao-avatar-img" loading="lazy" decoding="async">
+          <img src="jibao_avatar.png" alt="集宝AI助手" class="progressive-img jibao-avatar-img" loading="lazy" decoding="async" onload="this.classList.add('loaded')">
           <div class="jibao-avatar-info">
             <h4 data-i18n="jibao_hello">Hi! 我是集宝</h4>
             <p data-i18n="jibao_online">你的大集AI助手 · 7×24小时在线</p>
@@ -1218,19 +1241,19 @@
           </div>
           <div class="jibao-carousel" id="jibaoCarousel">
             <div class="jibao-slide active">
-              <img src="jibao_chat_v2.jpg" alt="集宝AI助手对话界面" loading="lazy" decoding="async">
+              <img class="progressive-img" src="jibao_chat_v2.jpg" alt="集宝AI助手对话界面" loading="lazy" decoding="async" onload="this.classList.add('loaded')">
               <span class="jibao-slide-label" data-i18n="jibao_slide1">智能对话 · 一句话调用全平台AI能力</span>
             </div>
             <div class="jibao-slide">
-              <img src="jibao_ui2.png" alt="集宝AI助手平台侧边栏" loading="lazy" decoding="async">
+              <img class="progressive-img" src="jibao_ui2.png" alt="集宝AI助手平台侧边栏" loading="lazy" decoding="async" onload="this.classList.add('loaded')">
               <span class="jibao-slide-label" data-i18n="jibao_slide2">平台集成 · 大集平台侧边栏随时唤起</span>
             </div>
             <div class="jibao-slide">
-              <img src="jibao_new5.png" alt="集宝AI助手入驻咨询" loading="lazy" decoding="async">
+              <img class="progressive-img" src="jibao_new5.png" alt="集宝AI助手入驻咨询" loading="lazy" decoding="async" onload="this.classList.add('loaded')">
               <span class="jibao-slide-label" data-i18n="jibao_slide3">入驻咨询 · 智能解答平台政策与条件</span>
             </div>
             <div class="jibao-slide">
-              <img src="jibao_new6.png" alt="集宝AI助手商品图生成" loading="lazy" decoding="async">
+              <img class="progressive-img" src="jibao_new6.png" alt="集宝AI助手商品图生成" loading="lazy" decoding="async" onload="this.classList.add('loaded')">
               <span class="jibao-slide-label" data-i18n="jibao_slide4">AI创作 · 商品图生成与编辑一站式完成</span>
             </div>
             <button class="carousel-arrow prev" aria-label="上一张"><svg class="svg-icon"><use href="#i-arrow-left"/></svg></button>
@@ -1510,7 +1533,7 @@
           <div class="dh-carousel-track" id="mlTrack" style="display: flex; gap: 20px; animation: scrollLeft 40s linear infinite; width: max-content;">
         <div class="dh-card">
           <div class="dh-card-media">
-            <img src="images/dh_lihui.jpg" alt="李辉" class="dh-card-img" loading="lazy">
+            <img src="images/dh_lihui.jpg" alt="李辉" class="progressive-img dh-card-img" loading="lazy" onload="this.classList.add('loaded')">
             <div class="dh-card-play" onclick="openDhVideo(this)"><svg class="svg-icon" style="width:22px;height:22px"><use href="#i-video"/></svg></div>
             <span class="dh-card-duration">00:36</span>
           </div>
@@ -1521,7 +1544,7 @@
         </div>
         <div class="dh-card">
           <div class="dh-card-media">
-            <img src="images/dh_sunsiyong.jpg" alt="孙思永" class="dh-card-img" loading="lazy">
+            <img src="images/dh_sunsiyong.jpg" alt="孙思永" class="progressive-img dh-card-img" loading="lazy" onload="this.classList.add('loaded')">
             <div class="dh-card-play" onclick="openDhVideo(this)"><svg class="svg-icon" style="width:22px;height:22px"><use href="#i-video"/></svg></div>
             <span class="dh-card-duration">00:45</span>
           </div>
@@ -1532,7 +1555,7 @@
         </div>
         <div class="dh-card" style="display:none" data-hidden="quan-chuanxiao">
           <div class="dh-card-media">
-            <img src="images/dh_quanchuanxiao.jpg" alt="全传晓" class="dh-card-img" loading="lazy">
+            <img src="images/dh_quanchuanxiao.jpg" alt="全传晓" class="progressive-img dh-card-img" loading="lazy" onload="this.classList.add('loaded')">
             <div class="dh-card-play" onclick="openDhVideo(this)"><svg class="svg-icon" style="width:22px;height:22px"><use href="#i-video"/></svg></div>
             <span class="dh-card-duration">00:55</span>
           </div>
@@ -1543,7 +1566,7 @@
         </div>
         <div class="dh-card">
           <div class="dh-card-media">
-            <img src="images/dh_yangjijiang.jpg" alt="杨继江" class="dh-card-img" loading="lazy">
+            <img src="images/dh_yangjijiang.jpg" alt="杨继江" class="progressive-img dh-card-img" loading="lazy" onload="this.classList.add('loaded')">
             <div class="dh-card-play" onclick="openDhVideo(this)"><svg class="svg-icon" style="width:22px;height:22px"><use href="#i-video"/></svg></div>
             <span class="dh-card-duration">00:35</span>
           </div>
@@ -1554,7 +1577,7 @@
         </div>
         <div class="dh-card">
           <div class="dh-card-media">
-            <img src="images/dh_huashuyong.jpg" alt="化书勇" class="dh-card-img" loading="lazy">
+            <img src="images/dh_huashuyong.jpg" alt="化书勇" class="progressive-img dh-card-img" loading="lazy" onload="this.classList.add('loaded')">
             <div class="dh-card-play" onclick="openDhVideo(this)"><svg class="svg-icon" style="width:22px;height:22px"><use href="#i-video"/></svg></div>
             <span class="dh-card-duration">03:02</span>
           </div>
@@ -1565,7 +1588,7 @@
         </div>
         <div class="dh-card">
           <div class="dh-card-media">
-            <img src="images/dh_guanzhaojun.jpg" alt="管照军" class="dh-card-img" loading="lazy">
+            <img src="images/dh_guanzhaojun.jpg" alt="管照军" class="progressive-img dh-card-img" loading="lazy" onload="this.classList.add('loaded')">
             <div class="dh-card-play" onclick="openDhVideo(this)"><svg class="svg-icon" style="width:22px;height:22px"><use href="#i-video"/></svg></div>
             <span class="dh-card-duration">01:10</span>
           </div>
@@ -1576,7 +1599,7 @@
         </div>
         <div class="dh-card">
           <div class="dh-card-media">
-            <img src="https://static.chinamarket.cn/static/trade-exhibition/ai-daji/video-bg/geng-yan-zhou-big.png?v=4" alt="耿延周" class="dh-card-img" loading="lazy">
+            <img src="https://static.chinamarket.cn/static/trade-exhibition/ai-daji/video-bg/geng-yan-zhou-big.png?v=4" alt="耿延周" class="progressive-img dh-card-img" loading="lazy" onload="this.classList.add('loaded')">
             <div class="dh-card-play" onclick="openDhVideo(this)"><svg class="svg-icon" style="width:22px;height:22px"><use href="#i-video"/></svg></div>
           </div>
           <div class="dh-card-body">
@@ -1586,7 +1609,7 @@
         </div>
         <div class="dh-card">
           <div class="dh-card-media">
-            <img src="https://static.chinamarket.cn/static/trade-exhibition/ai-daji/video-bg/ma-jia-lin-big.png?v=4" alt="马加林" class="dh-card-img" loading="lazy">
+            <img src="https://static.chinamarket.cn/static/trade-exhibition/ai-daji/video-bg/ma-jia-lin-big.png?v=4" alt="马加林" class="progressive-img dh-card-img" loading="lazy" onload="this.classList.add('loaded')">
             <div class="dh-card-play" onclick="openDhVideo(this)"><svg class="svg-icon" style="width:22px;height:22px"><use href="#i-video"/></svg></div>
           </div>
           <div class="dh-card-body">
@@ -1596,7 +1619,7 @@
         </div>
         <div class="dh-card">
           <div class="dh-card-media">
-            <img src="https://static.chinamarket.cn/static/trade-exhibition/ai-daji/video-bg/zhao-qing-chao-big.png?v=4" alt="赵庆超" class="dh-card-img" loading="lazy">
+            <img src="https://static.chinamarket.cn/static/trade-exhibition/ai-daji/video-bg/zhao-qing-chao-big.png?v=4" alt="赵庆超" class="progressive-img dh-card-img" loading="lazy" onload="this.classList.add('loaded')">
             <div class="dh-card-play" onclick="openDhVideo(this)"><svg class="svg-icon" style="width:22px;height:22px"><use href="#i-video"/></svg></div>
           </div>
           <div class="dh-card-body">
@@ -1606,7 +1629,7 @@
         </div>
         <div class="dh-card">
           <div class="dh-card-media">
-            <img src="https://static.chinamarket.cn/static/trade-exhibition/ai-daji/video-bg/lin-chun-fa-big.png?v=4" alt="林春法" class="dh-card-img" loading="lazy">
+            <img src="https://static.chinamarket.cn/static/trade-exhibition/ai-daji/video-bg/lin-chun-fa-big.png?v=4" alt="林春法" class="progressive-img dh-card-img" loading="lazy" onload="this.classList.add('loaded')">
             <div class="dh-card-play" onclick="openDhVideo(this)"><svg class="svg-icon" style="width:22px;height:22px"><use href="#i-video"/></svg></div>
           </div>
           <div class="dh-card-body">
@@ -1616,7 +1639,7 @@
         </div>
         <div class="dh-card">
           <div class="dh-card-media">
-            <img src="https://static.chinamarket.cn/static/trade-exhibition/ai-daji/video-bg/song-jian-big.png?v=4" alt="宋健" class="dh-card-img" loading="lazy">
+            <img src="https://static.chinamarket.cn/static/trade-exhibition/ai-daji/video-bg/song-jian-big.png?v=4" alt="宋健" class="progressive-img dh-card-img" loading="lazy" onload="this.classList.add('loaded')">
             <div class="dh-card-play" onclick="openDhVideo(this)"><svg class="svg-icon" style="width:22px;height:22px"><use href="#i-video"/></svg></div>
           </div>
           <div class="dh-card-body">
@@ -1626,7 +1649,7 @@
         </div>
         <div class="dh-card">
           <div class="dh-card-media">
-            <img src="https://static.chinamarket.cn/static/trade-exhibition/ai-daji/video-bg/zhou-ping-ru-big.png?v=4" alt="周平如" class="dh-card-img" loading="lazy">
+            <img src="https://static.chinamarket.cn/static/trade-exhibition/ai-daji/video-bg/zhou-ping-ru-big.png?v=4" alt="周平如" class="progressive-img dh-card-img" loading="lazy" onload="this.classList.add('loaded')">
             <div class="dh-card-play" onclick="openDhVideo(this)"><svg class="svg-icon" style="width:22px;height:22px"><use href="#i-video"/></svg></div>
           </div>
           <div class="dh-card-body">
@@ -1636,7 +1659,7 @@
         </div>
         <div class="dh-card">
           <div class="dh-card-media">
-            <img src="images/dh_lihui.jpg" alt="李辉" class="dh-card-img" loading="lazy">
+            <img src="images/dh_lihui.jpg" alt="李辉" class="progressive-img dh-card-img" loading="lazy" onload="this.classList.add('loaded')">
             <div class="dh-card-play" onclick="openDhVideo(this)"><svg class="svg-icon" style="width:22px;height:22px"><use href="#i-video"/></svg></div>
             <span class="dh-card-duration">00:36</span>
           </div>
@@ -1647,7 +1670,7 @@
         </div>
         <div class="dh-card">
           <div class="dh-card-media">
-            <img src="images/dh_sunsiyong.jpg" alt="孙思永" class="dh-card-img" loading="lazy">
+            <img src="images/dh_sunsiyong.jpg" alt="孙思永" class="progressive-img dh-card-img" loading="lazy" onload="this.classList.add('loaded')">
             <div class="dh-card-play" onclick="openDhVideo(this)"><svg class="svg-icon" style="width:22px;height:22px"><use href="#i-video"/></svg></div>
             <span class="dh-card-duration">00:45</span>
           </div>
@@ -1658,7 +1681,7 @@
         </div>
         <div class="dh-card" style="display:none" data-hidden="quan-chuanxiao">
           <div class="dh-card-media">
-            <img src="images/dh_quanchuanxiao.jpg" alt="全传晓" class="dh-card-img" loading="lazy">
+            <img src="images/dh_quanchuanxiao.jpg" alt="全传晓" class="progressive-img dh-card-img" loading="lazy" onload="this.classList.add('loaded')">
             <div class="dh-card-play" onclick="openDhVideo(this)"><svg class="svg-icon" style="width:22px;height:22px"><use href="#i-video"/></svg></div>
             <span class="dh-card-duration">00:55</span>
           </div>
@@ -1669,7 +1692,7 @@
         </div>
         <div class="dh-card">
           <div class="dh-card-media">
-            <img src="images/dh_yangjijiang.jpg" alt="杨继江" class="dh-card-img" loading="lazy">
+            <img src="images/dh_yangjijiang.jpg" alt="杨继江" class="progressive-img dh-card-img" loading="lazy" onload="this.classList.add('loaded')">
             <div class="dh-card-play" onclick="openDhVideo(this)"><svg class="svg-icon" style="width:22px;height:22px"><use href="#i-video"/></svg></div>
             <span class="dh-card-duration">00:35</span>
           </div>
@@ -1680,7 +1703,7 @@
         </div>
         <div class="dh-card">
           <div class="dh-card-media">
-            <img src="images/dh_huashuyong.jpg" alt="化书勇" class="dh-card-img" loading="lazy">
+            <img src="images/dh_huashuyong.jpg" alt="化书勇" class="progressive-img dh-card-img" loading="lazy" onload="this.classList.add('loaded')">
             <div class="dh-card-play" onclick="openDhVideo(this)"><svg class="svg-icon" style="width:22px;height:22px"><use href="#i-video"/></svg></div>
             <span class="dh-card-duration">03:02</span>
           </div>
@@ -1691,7 +1714,7 @@
         </div>
         <div class="dh-card">
           <div class="dh-card-media">
-            <img src="images/dh_guanzhaojun.jpg" alt="管照军" class="dh-card-img" loading="lazy">
+            <img src="images/dh_guanzhaojun.jpg" alt="管照军" class="progressive-img dh-card-img" loading="lazy" onload="this.classList.add('loaded')">
             <div class="dh-card-play" onclick="openDhVideo(this)"><svg class="svg-icon" style="width:22px;height:22px"><use href="#i-video"/></svg></div>
             <span class="dh-card-duration">01:10</span>
           </div>
@@ -1716,22 +1739,22 @@
     </div>
     <div class="workflow-steps">
       <div class="workflow-step">
-        <div class="step-num"><img loading="lazy" src="images/step_register.png" alt="注册登录"></div>
+        <div class="step-num"><img class="progressive-img" loading="lazy" src="images/step_register.png" alt="注册登录" onload="this.classList.add('loaded')"></div>
         <h4 data-i18n="flow1_title">注册登录</h4>
         <p data-i18n="flow1_desc">手机号一键注册，新用户享免费体验额度，即刻开启AI创作。</p>
       </div>
       <div class="workflow-step">
-        <div class="step-num"><img loading="lazy" src="images/step_select.png" alt="选择工具"></div>
+        <div class="step-num"><img class="progressive-img" loading="lazy" src="images/step_select.png" alt="选择工具" onload="this.classList.add('loaded')"></div>
         <h4 data-i18n="flow2_title">选择工具</h4>
         <p data-i18n="flow2_desc">从26项AI工具中选择所需功能，或直接对话集宝AI助手。</p>
       </div>
       <div class="workflow-step">
-        <div class="step-num"><img loading="lazy" src="images/step_input.png" alt="输入素材"></div>
+        <div class="step-num"><img class="progressive-img" loading="lazy" src="images/step_input.png" alt="输入素材" onload="this.classList.add('loaded')"></div>
         <h4 data-i18n="flow3_title">输入素材</h4>
         <p data-i18n="flow3_desc">上传商品图片或输入文字描述，AI自动理解需求，无需专业技能。</p>
       </div>
       <div class="workflow-step">
-        <div class="step-num"><img loading="lazy" src="images/step_generate.png" alt="一键生成"></div>
+        <div class="step-num"><img class="progressive-img" loading="lazy" src="images/step_generate.png" alt="一键生成" onload="this.classList.add('loaded')"></div>
         <h4 data-i18n="flow4_title">一键生成</h4>
         <p data-i18n="flow4_desc">点击生成，数秒内产出专业级内容，支持多格式下载和一键分发。</p>
       </div>
@@ -1755,8 +1778,8 @@
       <!-- 左列：AI智创说明 -->
       <div class="footer-brand-col">
         <div class="logo">
-          <div class="logo-icon"><img loading="lazy" src="images/logo_bottom_new2.png" alt="中国大集" decoding="async" loaded="true" style="height:36px;width:auto;display:block;flex-shrink:0;min-width:154px;"></div>
-          <img src="images/ai_logo_white_v3.png" alt="AI智创" style="height:28px;width:auto;" loading="lazy">
+          <div class="logo-icon"><img class="progressive-img" loading="lazy" src="images/logo_bottom_new2.png" alt="中国大集" decoding="async" loaded="true" style="height:36px;width:auto;display:block;flex-shrink:0;min-width:154px;" onload="this.classList.add('loaded')"></div>
+          <img class="progressive-img" src="images/ai_logo_white_v3.png" alt="AI智创" style="height:28px;width:auto;" loading="lazy" onload="this.classList.add('loaded')">
         </div>
         <p data-i18n="footer_desc">中国大集AI数贸智创平台，以AI技术赋能商户，集宝AI助手 + 全链路工具矩阵，让贸易更简单、更高效。</p>
       </div>
@@ -1799,10 +1822,10 @@
         </div>
         <h5 style="margin-top:28px;" data-i18n="footer_follow_title">关注我们</h5>
         <div class="qrcode-grid">
-          <div class="qrcode-item"><div class="qrcode-card"><img loading="lazy" src="images/qr_wechat.jpg" alt="公众号" class="qrcode-img"></div><span data-i18n="qr_wechat">公众号</span></div>
-          <div class="qrcode-item"><div class="qrcode-card"><img loading="lazy" src="images/qr_douyin.jpg" alt="抖音" class="qrcode-img"></div><span data-i18n="qr_douyin">抖音</span></div>
-          <div class="qrcode-item"><div class="qrcode-card"><img loading="lazy" src="images/qr_tiktok.jpg" alt="TikTok" class="qrcode-img"></div><span data-i18n="qr_tiktok">TikTok</span></div>
-          <div class="qrcode-item"><div class="qrcode-card"><img loading="lazy" src="images/qr_video.jpg" alt="视频号" class="qrcode-img"></div><span data-i18n="qr_channels">视频号</span></div>
+          <div class="qrcode-item"><div class="qrcode-card"><img loading="lazy" src="images/qr_wechat.jpg" alt="公众号" class="progressive-img qrcode-img" onload="this.classList.add('loaded')"></div><span data-i18n="qr_wechat">公众号</span></div>
+          <div class="qrcode-item"><div class="qrcode-card"><img loading="lazy" src="images/qr_douyin.jpg" alt="抖音" class="progressive-img qrcode-img" onload="this.classList.add('loaded')"></div><span data-i18n="qr_douyin">抖音</span></div>
+          <div class="qrcode-item"><div class="qrcode-card"><img loading="lazy" src="images/qr_tiktok.jpg" alt="TikTok" class="progressive-img qrcode-img" onload="this.classList.add('loaded')"></div><span data-i18n="qr_tiktok">TikTok</span></div>
+          <div class="qrcode-item"><div class="qrcode-card"><img loading="lazy" src="images/qr_video.jpg" alt="视频号" class="progressive-img qrcode-img" onload="this.classList.add('loaded')"></div><span data-i18n="qr_channels">视频号</span></div>
         </div>
       </div>
     </div>
@@ -4249,7 +4272,7 @@ function switchLanguage(lang) {
     var title = f['title_' + lang] || f.title;
     var desc = f['desc_' + lang] || f.desc;
     const thumb = f.image
-      ? `<img src="${f.image}" alt="${title}" class="feature-thumb" loading="lazy" decoding="async" >`
+      ? `<img src="${f.image}" alt="${title}" class="progressive-img feature-thumb" loading="lazy" decoding="async"  onload="this.classList.add('loaded')">`
       : `<div class="feature-thumb feature-thumb-placeholder"><svg class="svg-icon" style="width:48px;height:48px;opacity:0.3"><use href="#${f.icon}"/></svg></div>`;
     return `
       <div class="feature-card">
@@ -5319,5 +5342,29 @@ function mlScroll(dir) {
 
 </script>
 
+
+<script>
+// 处理已从缓存加载完成的图片
+function checkCachedImages() {
+  document.querySelectorAll('img.progressive-img').forEach(function(img) {
+    if (img.complete && img.naturalWidth > 0) {
+      img.classList.add('loaded');
+    }
+  });
+}
+if (document.readyState === 'complete') {
+  checkCachedImages();
+} else {
+  window.addEventListener('load', checkCachedImages);
+}
+// 定期检查（处理懒加载图片进入视口后的情况）
+setInterval(function() {
+  document.querySelectorAll('img.progressive-img:not(.loaded)').forEach(function(img) {
+    if (img.complete && img.naturalWidth > 0) {
+      img.classList.add('loaded');
+    }
+  });
+}, 500);
+</script>
 </body>
 </html>
