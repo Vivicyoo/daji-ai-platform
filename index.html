@@ -4146,8 +4146,14 @@ function switchLanguage(lang) {
 
   // Render all grids
   function renderAllGrids() {
-    document.getElementById('grid-all').innerHTML = [...features].reverse().map(renderFeatureCard).join('');
-    document.getElementById('grid-content').innerHTML = features.filter(f => f.category === 'content').map(renderFeatureCard).join('');
+    var priorityTitles = ['产品宣传视频', '真人口播视频', '数字人口播'];
+    function sortPriority(arr) {
+      var p = arr.filter(f => priorityTitles.includes(f.title));
+      var o = arr.filter(f => !priorityTitles.includes(f.title));
+      return [...p, ...o];
+    }
+    document.getElementById('grid-all').innerHTML = sortPriority([...features].reverse()).map(renderFeatureCard).join('');
+    document.getElementById('grid-content').innerHTML = sortPriority(features.filter(f => f.category === 'content')).map(renderFeatureCard).join('');
     document.getElementById('grid-translate').innerHTML = features.filter(f => f.category === 'translate').map(renderFeatureCard).join('');
     document.getElementById('grid-business').innerHTML = features.filter(f => f.category === 'business').map(renderFeatureCard).join('');
     document.getElementById('grid-global').innerHTML = features.filter(f => f.category === 'global').map(renderFeatureCard).join('');
