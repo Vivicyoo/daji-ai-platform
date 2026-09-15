@@ -870,6 +870,10 @@
     aspect-ratio: 16/9;
   }
 
+
+  /* Logo去底色 */
+  .logo img { mix-blend-mode: multiply; }
+  footer .logo img { mix-blend-mode: screen; }
 </style>
 
 <style>
@@ -1436,14 +1440,9 @@
         <!-- 案例1：企业智能宣讲 -->
         <div class="dh-video-card" style="background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 30px rgba(212,40,47,0.1); border: 1px solid rgba(212,40,47,0.08); transition: transform 0.3s, box-shadow 0.3s;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 16px 48px rgba(212,40,47,0.18)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
           <div style="position: relative; aspect-ratio: 16/9; background: #1a1a2e;">
-            <div class="dh-video-wrapper" style="position:relative;width:100%;height:100%;cursor:pointer;" onclick="this.querySelector('video').play();this.querySelector('.dh-play-btn').style.display='none';">
-              <video preload="none" poster="images/digital_human_speaking.jpg" style="width: 100%; height: 100%; object-fit: cover;" muted loop playsinline>
+            <video preload="auto" style="width: 100%; height: 100%; object-fit: cover;" muted loop playsinline autoplay>
                 <source src="videos/digital_human_demo.mp4" type="video/mp4">
               </video>
-              <div class="dh-play-btn" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:56px;height:56px;background:rgba(212,40,47,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(212,40,47,0.4);">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
-              </div>
-            </div>
             <div style="position: absolute; bottom: 12px; left: 12px; background: rgba(212,40,47,0.9); color: #fff; font-size: 11px; padding: 4px 10px; border-radius: 20px; font-weight: 600;" data-i18n="dh_badge">AI数字人</div>
           </div>
           <div style="padding: 18px 20px 20px;">
@@ -1454,14 +1453,9 @@
         <!-- 案例2：商务男性宣讲 -->
         <div class="dh-video-card" style="background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 30px rgba(212,40,47,0.1); border: 1px solid rgba(212,40,47,0.08); transition: transform 0.3s, box-shadow 0.3s;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 16px 48px rgba(212,40,47,0.18)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
           <div style="position: relative; aspect-ratio: 16/9; background: #1a1a2e;">
-            <div class="dh-video-wrapper" style="position:relative;width:100%;height:100%;cursor:pointer;" onclick="this.querySelector('video').play();this.querySelector('.dh-play-btn').style.display='none';">
-              <video preload="none" poster="images/digital_human_speaking.jpg" style="width: 100%; height: 100%; object-fit: cover;" muted loop playsinline>
+            <video preload="auto" style="width: 100%; height: 100%; object-fit: cover;" muted loop playsinline autoplay>
                 <source src="videos/digital_human_2.mp4" type="video/mp4">
               </video>
-              <div class="dh-play-btn" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:56px;height:56px;background:rgba(212,40,47,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(212,40,47,0.4);">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
-              </div>
-            </div>
             <div style="position: absolute; bottom: 12px; left: 12px; background: rgba(255,122,69,0.9); color: #fff; font-size: 11px; padding: 4px 10px; border-radius: 20px; font-weight: 600;" data-i18n="dh_badge">AI数字人</div>
           </div>
           <div style="padding: 18px 20px 20px;">
@@ -1472,14 +1466,9 @@
         <!-- 案例3：商务女性宣讲 -->
         <div class="dh-video-card" style="background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 30px rgba(212,40,47,0.1); border: 1px solid rgba(212,40,47,0.08); transition: transform 0.3s, box-shadow 0.3s;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 16px 48px rgba(212,40,47,0.18)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
           <div style="position: relative; aspect-ratio: 16/9; background: #1a1a2e;">
-            <div class="dh-video-wrapper" style="position:relative;width:100%;height:100%;cursor:pointer;" onclick="this.querySelector('video').play();this.querySelector('.dh-play-btn').style.display='none';">
-              <video preload="none" poster="images/digital_human_speaking.jpg" style="width: 100%; height: 100%; object-fit: cover;" muted loop playsinline>
+            <video preload="auto" style="width: 100%; height: 100%; object-fit: cover;" muted loop playsinline autoplay>
                 <source src="videos/digital_human_3.mp4" type="video/mp4">
               </video>
-              <div class="dh-play-btn" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:56px;height:56px;background:rgba(212,40,47,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(212,40,47,0.4);">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
-              </div>
-            </div>
             <div style="position: absolute; bottom: 12px; left: 12px; background: rgba(212,40,47,0.9); color: #fff; font-size: 11px; padding: 4px 10px; border-radius: 20px; font-weight: 600;" data-i18n="dh_badge">AI数字人</div>
           </div>
           <div style="padding: 18px 20px 20px;">
@@ -1490,14 +1479,9 @@
         <!-- 案例4：企业家演讲 -->
         <div class="dh-video-card" style="background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 30px rgba(212,40,47,0.1); border: 1px solid rgba(212,40,47,0.08); transition: transform 0.3s, box-shadow 0.3s;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 16px 48px rgba(212,40,47,0.18)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
           <div style="position: relative; aspect-ratio: 16/9; background: #1a1a2e;">
-            <div class="dh-video-wrapper" style="position:relative;width:100%;height:100%;cursor:pointer;" onclick="this.querySelector('video').play();this.querySelector('.dh-play-btn').style.display='none';">
-              <video preload="none" poster="images/digital_human_speaking.jpg" style="width: 100%; height: 100%; object-fit: cover;" muted loop playsinline>
+            <video preload="auto" style="width: 100%; height: 100%; object-fit: cover;" muted loop playsinline autoplay>
                 <source src="videos/digital_human_4.mp4" type="video/mp4">
               </video>
-              <div class="dh-play-btn" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:56px;height:56px;background:rgba(212,40,47,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(212,40,47,0.4);">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
-              </div>
-            </div>
             <div style="position: absolute; bottom: 12px; left: 12px; background: rgba(255,122,69,0.9); color: #fff; font-size: 11px; padding: 4px 10px; border-radius: 20px; font-weight: 600;" data-i18n="dh_badge">AI数字人</div>
           </div>
           <div style="padding: 18px 20px 20px;">
@@ -5365,6 +5349,23 @@ setInterval(function() {
     }
   });
 }, 500);
+</script>
+
+<script>
+// 数字人视频进入视口自动播放
+document.addEventListener('DOMContentLoaded', function() {
+  var dhVideos = document.querySelectorAll('.dh-video-card video');
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.play().catch(function(){});
+      }
+    });
+  }, { threshold: 0.3 });
+  dhVideos.forEach(function(video) {
+    observer.observe(video);
+  });
+});
 </script>
 </body>
 </html>
