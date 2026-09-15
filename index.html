@@ -4447,7 +4447,7 @@ function switchLanguage(lang) {
       var dot = dots[i];
       var breathe = Math.sin(t * 1.5 + dot.phase) * 0.15 + 0.85;
       var baseSize = 1.5;
-      var baseAlpha = 0.9;
+      var baseAlpha = 0.95;
       
       var mouseFactor = 1;
       var mouseAlpha = 1;
@@ -4462,6 +4462,10 @@ function switchLanguage(lang) {
       
       var size = baseSize * breathe * mouseFactor;
       var alpha = Math.min(1, baseAlpha * (0.7 + breathe * 0.3) * mouseAlpha);
+      
+      // 外发光
+      ctx.fillStyle = 'rgba(' + dot.r + ',' + dot.g + ',' + dot.b + ',' + (alpha * 0.2) + ')';
+      ctx.fillRect(dot.x - size * 2, dot.y - size * 2, size * 4, size * 4);
       
       // 核心方块
       ctx.fillStyle = 'rgba(' + dot.r + ',' + dot.g + ',' + dot.b + ',' + alpha + ')';
